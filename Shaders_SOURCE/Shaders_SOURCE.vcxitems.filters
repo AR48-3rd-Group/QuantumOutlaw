@@ -20,4 +20,12 @@
       <UniqueIdentifier>{f4c63185-6450-4d15-a9a9-b7e93bfea05e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl">
+      <Filter>VS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl">
+      <Filter>PS</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

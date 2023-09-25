@@ -3,14 +3,14 @@
 
 #include "framework.h"
 #include "Client.h"
-//#include "qoApplication.h"
-//#include "..\\Engine_Windows\\qoLoadScene.h"
+#include "qoApplication.h"
+#include "..\\Engine_Windows\\qoLoadScene.h"
 
-//#ifdef  _DEBUG
-//#pragma comment(lib, "..\\x64\\Debug\\YamYamEngine_Windows.lib")
-//#else
-//#pragma comment(lib, "..\\x64\\Release\\YamYamEngine_Windows.lib")
-//#endif 
+#ifdef  _DEBUG
+#pragma comment(lib, "..\\x64\\Debug\\Engine_Windows.lib")
+#else
+#pragma comment(lib, "..\\x64\\Release\\Engine_Windows.lib")
+#endif 
 
 #define MAX_LOADSTRING 100
 
@@ -18,7 +18,7 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
-//qo::Application application;
+qo::Application application;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -70,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // Engine 매 프레임마다 실행
-            //application.Run();
+            application.Run();
         }
     }
 
@@ -130,9 +130,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
-    //application.SetWindow(hWnd, 1600, 900);
-    //application.Initialize();
-    //qo::InitializeScenes();
+    application.SetWindow(hWnd, 1600, 900);
+    application.Initialize();
+    qo::InitializeScenes();
 
 
     return TRUE;

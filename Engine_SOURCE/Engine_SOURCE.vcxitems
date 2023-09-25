@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -12,5 +12,55 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEngine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphicsDevice_DX11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphicsDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCanvas.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoGraphicsDevice_DX11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoTransform.cpp" />
   </ItemGroup>
 </Project>
