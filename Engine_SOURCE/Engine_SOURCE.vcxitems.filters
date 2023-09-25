@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a8a61328-52c6-4fa7-a80f-2c809b4ba1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{414deb1f-4b63-4a08-a893-26ee51b6ee43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{15e7fe3c-4a66-4aa3-a9a1-99d89165d1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{5f2de134-e3ff-4fe3-b5c6-258dd7ff2681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{d1a331a4-0433-43a0-ad28-675579d3c898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Helpers">
+      <UniqueIdentifier>{227d2733-9d93-4208-ae2e-fd68a2efb4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High Level Interface">
+      <UniqueIdentifier>{9e537ebe-e73b-4bbc-a6a6-8cddd1479c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{7effd67f-00b5-4220-a9da-d7519ca25047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{a31c154c-2bf9-48a1-ac1f-507d049d6e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\System">
+      <UniqueIdentifier>{87602762-23c3-41e7-af59-fa98bdd7373f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\API">
+      <UniqueIdentifier>{c889ae37-a8c1-4a3c-ae69-835f51fff1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Helpers\Input">
+      <UniqueIdentifier>{2648e1de-7cc8-4df4-bcbb-c5586cc1ec05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Helpers\Mathatics">
+      <UniqueIdentifier>{044a188f-1f14-40c9-98c7-5299335340a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Helpers\Time">
+      <UniqueIdentifier>{69b3fddb-7b8e-4126-8234-b3524b86d603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{2fd59eaa-6ada-4cde-8ef9-0101959510ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\MeshRenderer">
+      <UniqueIdentifier>{b10a0550-bdee-477f-abd1-dc587b370699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Script">
+      <UniqueIdentifier>{6bcf8be2-b8b6-4f9e-a944-66880771f590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Manager">
+      <UniqueIdentifier>{80e37171-7fbb-43f2-9904-4832a15f1df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Mesh">
+      <UniqueIdentifier>{5756e139-a85c-48f3-9421-73b6b6fe1ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Shader">
+      <UniqueIdentifier>{a83c62b2-92fa-4672-84b1-2ffe00586106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\Manager">
+      <UniqueIdentifier>{3c9f1a57-9b1c-42e0-9ea2-2892f133a86a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoApplication.cpp">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoRenderer.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoGraphicsDevice_DX11.cpp">
+      <Filter>Engine\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoTime.cpp">
+      <Filter>Engine\Helpers\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoInput.cpp">
+      <Filter>Engine\Helpers\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMath.cpp">
+      <Filter>Engine\Helpers\Mathatics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoEntity.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoGameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoTransform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoScript.cpp">
+      <Filter>Engine\Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMeshRenderer.cpp">
+      <Filter>Engine\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoResource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoResources.cpp">
+      <Filter>Engine\Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoMesh.cpp">
+      <Filter>Engine\Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoShader.cpp">
+      <Filter>Engine\Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoConstantBuffer.cpp">
+      <Filter>Engine\Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoScene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoLayer.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoSceneManager.cpp">
+      <Filter>Engine\Scene\Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoApplication.h">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoRenderer.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEnums.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEngine.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphics.h">
+      <Filter>Engine\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphicsDevice.h">
+      <Filter>Engine\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphicsDevice_DX11.h">
+      <Filter>Engine\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoTime.h">
+      <Filter>Engine\Helpers\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoInput.h">
+      <Filter>Engine\Helpers\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMath.h">
+      <Filter>Engine\Helpers\Mathatics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoEntity.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoGameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoTransform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoScript.h">
+      <Filter>Engine\Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMeshRenderer.h">
+      <Filter>Engine\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoResource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoResources.h">
+      <Filter>Engine\Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoMesh.h">
+      <Filter>Engine\Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoShader.h">
+      <Filter>Engine\Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoConstantBuffer.h">
+      <Filter>Engine\Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCanvas.h">
+      <Filter>Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoScene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoLayer.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoSceneManager.h">
+      <Filter>Engine\Scene\Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
