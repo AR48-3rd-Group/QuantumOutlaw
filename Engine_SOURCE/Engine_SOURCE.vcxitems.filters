@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a8a61328-52c6-4fa7-a80f-2c809b4ba1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{414deb1f-4b63-4a08-a893-26ee51b6ee43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{15e7fe3c-4a66-4aa3-a9a1-99d89165d1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{5f2de134-e3ff-4fe3-b5c6-258dd7ff2681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{d1a331a4-0433-43a0-ad28-675579d3c898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Helpers">
+      <UniqueIdentifier>{227d2733-9d93-4208-ae2e-fd68a2efb4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High Level Interface">
+      <UniqueIdentifier>{9e537ebe-e73b-4bbc-a6a6-8cddd1479c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{7effd67f-00b5-4220-a9da-d7519ca25047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{a31c154c-2bf9-48a1-ac1f-507d049d6e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\System">
+      <UniqueIdentifier>{87602762-23c3-41e7-af59-fa98bdd7373f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
