@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="소스.cpp" />
+    <ClInclude Include="qoPlayerScript.h" />
+    <ClInclude Include="qoPlayScene.h" />
+    <ClInclude Include="qoLoadScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="qoPlayerScript.cpp" />
+    <ClCompile Include="qoPlayScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
