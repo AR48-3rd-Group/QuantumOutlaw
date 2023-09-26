@@ -5,7 +5,7 @@
 namespace qo
 {
 	class Resource;
-	class Resources
+	class ResourceManager
 	{
 	public:
 		template <typename T>
@@ -26,7 +26,7 @@ namespace qo
 		static T* Load(const std::wstring& key, const std::wstring& path)
 		{
 			// 키값으로 탐색
-			T* resource = Resources::Find<T>(key);
+			T* resource = ResourceManager::Find<T>(key);
 			if (nullptr != resource)
 			{
 				// 해당키로 이미 로딩된게 있으면 해당 리소스를 반환
@@ -57,8 +57,8 @@ namespace qo
 		static void Release();
 
 	private:
-		Resources() = delete;
-		~Resources() = delete;
+		ResourceManager() = delete;
+		~ResourceManager() = delete;
 
 	private:
 		static std::map<std::wstring, Resource*> mResources;

@@ -3,12 +3,12 @@
 namespace qo
 {
 	Entity::Entity()
-		: mID(reinterpret_cast<UINT32>(this))
+		: mID(PtrToUint(this))
 	{
 	}
 
 	Entity::Entity(const Entity& other)
-		: mID(reinterpret_cast<UINT32>(this))
+		: mID(PtrToUint(this))
 		, mName(other.mName)
 	{
 	}

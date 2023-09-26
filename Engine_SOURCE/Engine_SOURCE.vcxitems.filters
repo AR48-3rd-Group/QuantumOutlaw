@@ -105,7 +105,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)qoResource.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)qoResources.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoResourceManager.cpp">
       <Filter>Engine\Resource\Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)qoMesh.cpp">
@@ -182,7 +182,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)qoResource.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)qoResources.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoResourceManager.h">
       <Filter>Engine\Resource\Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)qoMesh.h">
