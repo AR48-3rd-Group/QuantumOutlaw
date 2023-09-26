@@ -1,17 +1,22 @@
 #pragma once
-#include "..\\Engine_SOURCE\\qoScript.h"
+#include "qoScript.h"
 
 namespace qo
 {
-	class PlayerScript : public Script
+	class GunScript : public Script
 	{
 	public:
-		PlayerScript();
-		virtual ~PlayerScript();
+		GunScript();
+		virtual ~GunScript();
 
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
 		void Render() override;
+
+	private:
+		void Shoot();
+
 	};
 }
+

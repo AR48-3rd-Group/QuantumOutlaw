@@ -19,12 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="qoBullet.h" />
+    <ClInclude Include="qoBulletScript.h" />
+    <ClInclude Include="qoGun.h" />
+    <ClInclude Include="qoGunScript.h" />
     <ClInclude Include="qoPlayer.h" />
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
     <ClInclude Include="qoLoadScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="qoBullet.cpp" />
+    <ClCompile Include="qoBulletScript.cpp" />
+    <ClCompile Include="qoGun.cpp" />
+    <ClCompile Include="qoGunScript.cpp" />
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
