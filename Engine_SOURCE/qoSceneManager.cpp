@@ -1,6 +1,6 @@
 #include "qoSceneManager.h"
 
-#include "qoResources.h"
+#include "qoResourceManager.h"
 
 #include "qoGameObject.h"
 #include "qoTransform.h"
@@ -24,8 +24,8 @@ namespace qo
 		//	object->AddComponent(tr);
 
 		//	MeshRenderer* meshRenderer = new MeshRenderer();
-		//	meshRenderer->SetMesh(Resources::Find<Mesh>(L"TriangleMesh"));
-		//	meshRenderer->SetShader(Resources::Find<Shader>(L"TriangleShader"));
+		//	meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TriangleMesh"));
+		//	meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
 		//	object->AddComponent(meshRenderer);
 
 		//	mActiveScene->AddGameObject(object, LAYER::NONE);

@@ -14,7 +14,7 @@ namespace qo::graphics
 
 	bool ConstantBuffer::Create(size_t size)
 	{
-		desc.ByteWidth = size; // 16 의 배수로
+		desc.ByteWidth = static_cast<UINT>(size); // 16 의 배수로
 		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;

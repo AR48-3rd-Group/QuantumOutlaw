@@ -77,8 +77,8 @@ namespace qo
 			POINT mousePos = {};
 			GetCursorPos(&mousePos);
 			ScreenToClient(application.GetHwnd(), &mousePos);
-			mMousPosition.x = mousePos.x;
-			mMousPosition.y = mousePos.y;
+			mMousPosition.x = static_cast<float>(mousePos.x);
+			mMousPosition.y = static_cast<float>(mousePos.y);
 		}
 		else
 		{
