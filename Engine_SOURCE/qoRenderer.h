@@ -30,7 +30,8 @@ namespace qo::renderer
 		int padd2;
 	};
 
-	extern Mesh* mesh;
+	extern Mesh* TriangleMesh;
+	extern Mesh* RectangleMesh;
 	extern Shader* shader;
 	extern ConstantBuffer* constantBuffers[];
 
