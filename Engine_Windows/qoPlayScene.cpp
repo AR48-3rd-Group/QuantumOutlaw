@@ -1,5 +1,5 @@
 #include "qoPlayScene.h"
-#include "qoResources.h"
+#include "qoResourceManager.h"
 
 #include "qoGameObject.h"
 #include "qoTransform.h"
@@ -27,8 +27,8 @@ namespace qo
 			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 
 			MeshRenderer* meshRenderer = object->AddComponent<MeshRenderer>();
-			meshRenderer->SetMesh(Resources::Find<Mesh>(L"TriangleMesh"));
-			meshRenderer->SetShader(Resources::Find<Shader>(L"TriangleShader"));
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TriangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
 
 			AddGameObject(object, LAYER::NONE);
 			object->AddComponent<PlayerScript>();

@@ -1,6 +1,6 @@
 #include "qoRenderer.h"
 #include "qoApplication.h"
-#include "qoResources.h"
+#include "qoResourceManager.h"
 
 extern qo::Application application;
 
@@ -41,8 +41,8 @@ namespace qo::renderer
 
 		// Triangle Vertex Buffer
 		mesh->CreateVertexBuffer(vertexes.data(), 3);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
-		Resources::Insert(L"TriangleMesh", mesh);
+		mesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"TriangleMesh", mesh);
 
 		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer();
 		constantBuffers[(UINT)graphics::eCBType::Transform]->Create(sizeof(TransformCB));
@@ -53,7 +53,7 @@ namespace qo::renderer
 	{
 		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Test");
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
-		Resources::Insert(L"TriangleShader", shader);
+		ResourceManager::Insert(L"TriangleShader", shader);
 		//GetDevice()->CreateShader(eShaderStage::NONE);
 		//GetDevice()->CreateVertexShader();`
 				// Input layout 정점 구조 정보

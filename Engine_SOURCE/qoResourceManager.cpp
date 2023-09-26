@@ -1,10 +1,11 @@
-#include "qoResources.h"
+#include "qoResourceManager.h"
+#include "qoResource.h"
 
 namespace qo
 {
-	std::map<std::wstring, Resource*> Resources::mResources;
+	std::map<std::wstring, Resource*> ResourceManager::mResources;
 
-	void Resources::Release()
+	void ResourceManager::Release()
 	{
 		std::map<std::wstring, Resource*>::iterator iter = mResources.begin();
 		for (; iter != mResources.end(); ++iter)
