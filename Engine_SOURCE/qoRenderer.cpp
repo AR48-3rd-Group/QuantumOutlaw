@@ -8,7 +8,8 @@ namespace qo::renderer
 {
 
 	D3D11_INPUT_ELEMENT_DESC InputLayouts[2];
-	Mesh* mesh = nullptr;
+	Mesh* TriangleMesh = nullptr;
+	Mesh* RectangleMesh = nullptr;
 	Shader* shader = nullptr;
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
@@ -19,18 +20,20 @@ namespace qo::renderer
 
 	void LoadBuffer()
 	{
-		std::vector<Vertex> vertexes;
-		vertexes.resize(3);
-		vertexes[0].pos = Vector3(0.f, 0.5f, 0.f);
-		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
-
-		vertexes[1].pos = Vector3(0.5f, -0.5f, 0.f);
-		vertexes[1].color = Vector4(1.f, 0.f, 0.f, 1.f);
-
-		vertexes[2].pos = Vector3(-0.5f, -0.5f, 0.f);
-		vertexes[2].color = Vector4(0.f, 0.f, 1.f, 1.f);
-
+		std::vector<Vertex> vertices;
 		std::vector<UINT> indexes;
+
+		// Triangle Vertex Buffer
+		vertices.resize(3);
+		vertices[0].pos = Vector3(0.f, 0.5f, 0.f);
+		vertices[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
+
+		vertices[1].pos = Vector3(0.5f, -0.5f, 0.f);
+		vertices[1].color = Vector4(1.f, 0.f, 0.f, 1.f);
+
+		vertices[2].pos = Vector3(-0.5f, -0.5f, 0.f);
+		vertices[2].color = Vector4(0.f, 0.f, 1.f, 1.f);
+
 		indexes.push_back(0);
 		indexes.push_back(2);
 		indexes.push_back(3);
@@ -39,14 +42,44 @@ namespace qo::renderer
 		indexes.push_back(1);
 		indexes.push_back(2);
 
-		// Triangle Vertex Buffer
-		mesh->CreateVertexBuffer(vertexes.data(), 3);
-		mesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
-		ResourceManager::Insert(L"TriangleMesh", mesh);
+		TriangleMesh->CreateVertexBuffer(vertices.data(), 3);
+		TriangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"TriangleMesh", TriangleMesh);
+
+		vertices.clear();
+		indexes.clear();
+
+		// RectangleMesh Vertex Buffer
+		vertices.resize(4);
+		vertices[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		vertices[0].color = Vector4(1.f, 0.f, 0.f, 1.f);
+
+		vertices[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertices[1].color = Vector4(0.f, 1.f, 0.f, 1.f);
+
+		vertices[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertices[2].color = Vector4(0.f, 0.f, 1.f, 1.f);
+
+		vertices[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertices[3].color = Vector4(0.f, 1.f, 0.f, 1.f);
+
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+
+		indexes.push_back(0);
+		indexes.push_back(2);
+		indexes.push_back(3);
+
+		RectangleMesh->CreateVertexBuffer(vertices.data(), 4);
+		RectangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"RectangleMesh", RectangleMesh);
+
+		vertices.clear();
+		indexes.clear();
 
 		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer();
 		constantBuffers[(UINT)graphics::eCBType::Transform]->Create(sizeof(TransformCB));
-		//mesh->CreateConstantBuffer(nullptr, sizeof(Vector4));
 	}
 
 	void LoadShader()
@@ -79,7 +112,8 @@ namespace qo::renderer
 
 	void Initialize()
 	{
-		mesh = new Mesh();
+		TriangleMesh = new Mesh();
+		RectangleMesh = new Mesh();
 		shader = new Shader();
 
 		LoadShader();
@@ -89,7 +123,8 @@ namespace qo::renderer
 
 	void Release()
 	{
-		delete mesh;
+		delete TriangleMesh;
+		delete RectangleMesh;
 		delete shader;
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];

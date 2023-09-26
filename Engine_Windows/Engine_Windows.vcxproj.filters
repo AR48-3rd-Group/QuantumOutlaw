@@ -10,6 +10,9 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{e62976ab-da0e-4c02-898b-003c11271af4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -17,6 +20,9 @@
     </ClCompile>
     <ClCompile Include="qoPlayerScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="qoPlayer.cpp">
+      <Filter>GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +32,9 @@
     <ClInclude Include="qoLoadScene.h" />
     <ClInclude Include="qoPlayerScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="qoPlayer.h">
+      <Filter>GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
