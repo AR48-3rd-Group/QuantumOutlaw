@@ -13,7 +13,7 @@ namespace qo
 
 	void CollisionManager::Update()
 	{
-		Scene* curscene = SceneManager::GetCurScene();
+		Scene* curscene = SceneManager::GetActiveScene();
 		for (UINT row = 0;row < (UINT)LAYER::MAX;row++)
 		{
 			for (UINT col = 0;col < (UINT)LAYER::MAX;col++)

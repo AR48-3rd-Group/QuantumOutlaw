@@ -20,11 +20,11 @@ namespace qo
 		virtual void LateUpdate() = 0;
 		virtual void Render() = 0;
 
-		GameObject* GetOwner() { return mOwner; }
-		void SetOwner(GameObject* obj) { mOwner = obj; }
+		GameObject* GetOwner() { return mPlayer; }
+		void SetOwner(GameObject* obj) { mPlayer = obj; }
 
 	private:
-		GameObject* mOwner;
+		GameObject* mPlayer;
 	};
 }
 

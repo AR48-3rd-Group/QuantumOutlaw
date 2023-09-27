@@ -1,13 +1,13 @@
 #pragma once
-#include "..\\Engine_SOURCE\\qoScript.h"
+#include "qoScript.h"
 
 namespace qo
 {
-	class PlayerScript : public Script
+	class BulletScript : public Script
 	{
 	public:
-		PlayerScript();
-		virtual ~PlayerScript();
+		BulletScript();
+		virtual ~BulletScript();
 
 		void Initialize() override;
 		void Update() override;
@@ -15,3 +15,4 @@ namespace qo
 		void Render() override;
 	};
 }
+

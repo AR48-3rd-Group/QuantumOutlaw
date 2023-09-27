@@ -10,75 +10,70 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{e62976ab-da0e-4c02-898b-003c11271af4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Enemy">
-      <UniqueIdentifier>{08c57463-6f61-45e5-b467-fa795b9cc224}</UniqueIdentifier>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\Enemy Script">
-      <UniqueIdentifier>{0e9e1635-dacd-49cf-8ab8-dfe48894a124}</UniqueIdentifier>
+    <Filter Include="GameObjects\Bullet">
+      <UniqueIdentifier>{eaabd28c-4994-4e0c-a77a-a47e776139b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Player">
+      <UniqueIdentifier>{ccafaabc-d91c-4508-8c87-3314d47e76a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Bullet">
+      <UniqueIdentifier>{489da6cb-700e-474c-b357-dcb24700d5e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Gun">
+      <UniqueIdentifier>{d804c58b-04bc-4509-b58e-fcf3bbaa82aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Gun">
+      <UniqueIdentifier>{8bd03dcb-c902-4f59-ac75-618962997f29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="qoEnemy.cpp">
-      <Filter>GameObjects\Enemy</Filter>
+    <ClCompile Include="qoPlayer.cpp">
+      <Filter>GameObjects\Player</Filter>
     </ClCompile>
-    <ClCompile Include="qoLabGuard.cpp">
-      <Filter>GameObjects\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="qoLabTurret.cpp">
-      <Filter>GameObjects\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="qoLabGuardScript.cpp">
-      <Filter>Scripts\Enemy Script</Filter>
-    </ClCompile>
-    <ClCompile Include="qoLabTurretScript.cpp">
-      <Filter>Scripts\Enemy Script</Filter>
+    <ClCompile Include="qoBullet.cpp">
+      <Filter>GameObjects\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="qoPlayerScript.cpp">
-      <Filter>Scripts</Filter>
+      <Filter>Scripts\Player</Filter>
     </ClCompile>
-    <ClCompile Include="qoGuardScript.cpp">
-      <Filter>Scripts</Filter>
+    <ClCompile Include="qoBulletScript.cpp">
+      <Filter>Scripts\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine_SOURCE\qoGuard.cpp">
-      <Filter>GameObjects</Filter>
+    <ClCompile Include="qoGun.cpp">
+      <Filter>GameObjects\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="qoGunScript.cpp">
+      <Filter>Scripts\Gun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="qoEnemy.h">
-      <Filter>GameObjects\Enemy</Filter>
+    <ClInclude Include="qoLoadScene.h" />
+    <ClInclude Include="qoPlayer.h">
+      <Filter>GameObjects\Player</Filter>
     </ClInclude>
-    <ClInclude Include="qoLabGuard.h">
-      <Filter>GameObjects\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="qoLabTurret.h">
-      <Filter>GameObjects\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="qoLabTurretScript.h">
-      <Filter>Scripts\Enemy Script</Filter>
-    </ClInclude>
-    <ClInclude Include="qoLabGuardScript.h">
-      <Filter>Scripts\Enemy Script</Filter>
-    </ClInclude>
-    <ClInclude Include="qoLoadScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ES_CommonInclude.h">
-      <Filter>Scripts\Enemy Script</Filter>
+    <ClInclude Include="qoBullet.h">
+      <Filter>GameObjects\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="qoPlayerScript.h">
-      <Filter>Scripts</Filter>
+      <Filter>Scripts\Player</Filter>
     </ClInclude>
-    <ClInclude Include="qoGuardScript.h">
-      <Filter>Scripts</Filter>
+    <ClInclude Include="qoBulletScript.h">
+      <Filter>Scripts\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine_SOURCE\qoGuard.h">
-      <Filter>GameObjects</Filter>
+    <ClInclude Include="qoGun.h">
+      <Filter>GameObjects\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="qoGunScript.h">
+      <Filter>Scripts\Gun</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

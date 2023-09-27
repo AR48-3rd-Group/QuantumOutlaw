@@ -4,11 +4,9 @@ namespace qo
 {
 	Script::Script()
 	{
-
 	}
 
 	Script::~Script()
 	{
-
 	}
 }

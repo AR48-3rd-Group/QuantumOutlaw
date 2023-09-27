@@ -28,7 +28,7 @@ namespace qo
 		}
 		static Scene* LoadScene(const std::wstring name);
 
-		static Scene* GetCurScene() { return mActiveScene; }
+		static Scene* GetActiveScene() { return mActiveScene; }
 
 	private:
 		static Scene* mActiveScene;
