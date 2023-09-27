@@ -19,12 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
+=======
+    <ClInclude Include="qoGround.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="qoPlayer.h" />
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
     <ClInclude Include="qoLoadScene.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
+=======
+    <ClCompile Include="qoGround.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />

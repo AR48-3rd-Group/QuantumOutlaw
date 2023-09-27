@@ -1,6 +1,7 @@
 #include "qoTransform.h"
 #include "qoGraphicsDevice_DX11.h"
 #include "qoRenderer.h"
+#include "qoCamera.h"
 
 namespace qo
 {
@@ -36,7 +37,13 @@ namespace qo
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)graphics::eCBType::Transform];
 
 		renderer::TransformCB data = {};
-		data.pos = mPosition;
+		math::Vector3 temp;
+		temp.x = mPosition.x;
+		temp.y = mPosition.y;
+		temp.z = mPosition.z;
+		temp = Camera::CaculatePos(temp);
+
+		data.pos = temp;
 		data.scale = mScale;
 		cb->SetData(&data);
 
