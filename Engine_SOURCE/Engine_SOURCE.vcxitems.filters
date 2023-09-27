@@ -64,6 +64,18 @@
     <Filter Include="Engine\Scene\Manager">
       <UniqueIdentifier>{3c9f1a57-9b1c-42e0-9ea2-2892f133a86a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{08767bab-c502-43a3-8f7f-aa08165c34a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Collider">
+      <UniqueIdentifier>{34d0a5d0-b279-41a3-af16-d9f7b78b0aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionManager">
+      <UniqueIdentifier>{44ad6c4f-2f51-4461-b173-833d2af74b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Rigidbody">
+      <UniqueIdentifier>{da4fd1bb-cf64-46c9-a18d-2228dd2b4c8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)qoApplication.cpp">
@@ -125,6 +137,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)qoSceneManager.cpp">
       <Filter>Engine\Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCollider.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCamera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCollisionManager.cpp">
+      <Filter>Engine\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoRigidbody.cpp">
+      <Filter>Engine\Component\Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +229,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)qoSceneManager.h">
       <Filter>Engine\Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCollider.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCollisionManager.h">
+      <Filter>Engine\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoRigidbody.h">
+      <Filter>Engine\Component\Rigidbody</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
