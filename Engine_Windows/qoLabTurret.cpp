@@ -3,17 +3,12 @@
 namespace qo
 {
     LabTurret::LabTurret()
-        : myTYPE(eRanged)
-        , mySTAGE(eSearch)
-        , myHP(80)
-        , mySPEED(0)
-        , myATK(15)
     {
-        SetType(myTYPE);
-        SetStage(mySTAGE);
-        SetHP(myHP);
-        SetMovementSpeed(mySPEED);
-        SetATK(myATK);
+        SetType(eRanged);
+        SetStage(eSearch);
+        SetHP(80);
+        SetMovementSpeed(0);
+        SetATK(15);
     }
 
     LabTurret::~LabTurret()
@@ -37,7 +32,9 @@ namespace qo
 
     void LabTurret::Hit(int damage)
     {
-        myHP -= damage;
+        int currentHP = GetHP();
+        currentHP -= damage;
+        SetHP(currentHP);
     }
 
     void LabTurret::Dead()
