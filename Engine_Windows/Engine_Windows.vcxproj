@@ -19,15 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="qoGround.h" />
-    <ClInclude Include="qoPlayer.h" />
+    <ClInclude Include="qoEnemy.h" />
+    <ClInclude Include="ES_CommonInclude.h" />
+    <ClInclude Include="qoLabGuard.h" />
+    <ClInclude Include="qoLabGuardScript.h" />
+    <ClInclude Include="qoLabTurret.h" />
+    <ClInclude Include="qoLabTurretScript.h" />
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
     <ClInclude Include="qoLoadScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="qoGround.cpp" />
-    <ClCompile Include="qoPlayer.cpp" />
+    <ClCompile Include="qoEnemy.cpp" />
+    <ClCompile Include="qoLabGuard.cpp" />
+    <ClCompile Include="qoLabGuardScript.cpp" />
+    <ClCompile Include="qoLabTurret.cpp" />
+    <ClCompile Include="qoLabTurretScript.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
   </ItemGroup>
