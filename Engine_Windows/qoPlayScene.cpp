@@ -57,7 +57,7 @@ namespace qo
 
 		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
 		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader")); 
 
 		Collider* GroundCollider = ground->AddComponent<Collider>();
 		GroundCollider->SetScale(Vector3(1.f, 0.25f, 0.f));

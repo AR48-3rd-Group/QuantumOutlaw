@@ -11,6 +11,7 @@ namespace qo::renderer
 	Mesh* TriangleMesh = nullptr;
 	Mesh* RectangleMesh = nullptr;
 	Shader* shader = nullptr;
+	Shader* ColorTestShader = nullptr;
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
 	void SetUpStates()
@@ -91,8 +92,11 @@ namespace qo::renderer
 		vertices.clear();
 		indexes.clear();
 
-		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer();
+		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[(UINT)graphics::eCBType::Transform]->Create(sizeof(TransformCB));
+
+		constantBuffers[(UINT)graphics::eCBType::Color_Test] = new ConstantBuffer(eCBType::Color_Test);
+		constantBuffers[(UINT)graphics::eCBType::Color_Test]->Create(sizeof(ColorTestCB));
 	}
 
 	void LoadShader()
@@ -121,6 +125,17 @@ namespace qo::renderer
 			shader->GetVSCode()->GetBufferPointer()
 			, shader->GetVSCode()->GetBufferSize()
 			, shader->GetInputLayoutAddressOf());
+
+
+		// Color Test Shader 쉐이더 코드 컴파일 InputLayouts은 위와 같으므로 설정안함
+		ColorTestShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Color_Test");
+		ColorTestShader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
+		ResourceManager::Insert(L"ColorTestShader", ColorTestShader);
+
+		GetDevice()->CreateInputLayout(InputLayouts, 2,
+			ColorTestShader->GetVSCode()->GetBufferPointer()
+			, ColorTestShader->GetVSCode()->GetBufferSize()
+			, ColorTestShader->GetInputLayoutAddressOf());
 	}
 
 	void Initialize()
@@ -128,6 +143,7 @@ namespace qo::renderer
 		TriangleMesh = new Mesh();
 		RectangleMesh = new Mesh();
 		shader = new Shader();
+		ColorTestShader = new Shader();
 
 		LoadShader();
 		SetUpStates();
@@ -139,8 +155,10 @@ namespace qo::renderer
 		delete TriangleMesh;
 		delete RectangleMesh;
 		delete shader;
+		delete ColorTestShader;
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];
+		delete constantBuffers[(UINT)graphics::eCBType::Color_Test];
 		//triangleVertexBuffer->Release();
 		//errorBlob->Release();
 		//triangleVSBlob->Release();

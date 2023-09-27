@@ -16,7 +16,8 @@
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name
 
 #define CBSLOT_TRANSFORM		0
-#define CBSLOT_GRID				1
+#define CBSLOT_ColorTest		1
+//#define CBSLOT_GRID				1
 
 namespace qo::graphics
 {
@@ -35,6 +36,7 @@ namespace qo::graphics
 	enum class eCBType
 	{
 		Transform,
+		Color_Test,
 		Test,
 		End,
 	};
