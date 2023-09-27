@@ -1,11 +1,18 @@
 #include "qoPlayScene.h"
 #include "qoResourceManager.h"
+#include "qoCollisionManager.h"
 
 #include "qoGameObject.h"
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
+#include "qoCollider.h"
+#include "qoRigidbody.h"
 #include "qoPlayerScript.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
 #include "qoPlayer.h"
+
+#include "qoGuard.h"
 
 namespace qo
 {

@@ -5,6 +5,7 @@
 #include "qoTime.h"
 #include "qoRenderer.h"
 #include "qoSceneManager.h"
+#include "qoCollisionManager.h"
 
 using namespace qo::graphics;
 
@@ -28,6 +29,7 @@ namespace qo
 		Input::Initialize();
 
 		renderer::Initialize();
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -35,7 +37,7 @@ namespace qo
 	{
 		Time::Update();
 		Input::Update();
-
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 

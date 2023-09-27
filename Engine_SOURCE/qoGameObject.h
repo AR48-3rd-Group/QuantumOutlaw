@@ -60,6 +60,10 @@ namespace qo
 		virtual void LateUpdate();
 		virtual void Render();
 
+		virtual void OnCollisionEnter(class Collider* other);
+		virtual void OnCollisionStay(class Collider* other);
+		virtual void OnCollisionExit(class Collider* other);
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;

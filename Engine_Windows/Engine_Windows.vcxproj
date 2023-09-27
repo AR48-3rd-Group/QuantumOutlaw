@@ -21,8 +21,13 @@
   <ItemGroup>
     <ClInclude Include="qoBullet.h" />
     <ClInclude Include="qoBulletScript.h" />
+    <ClInclude Include="qoEnemy.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
+    <ClInclude Include="qoLabGuard.h" />
+    <ClInclude Include="qoLabGuardScript.h" />
+    <ClInclude Include="qoLabTurret.h" />
+    <ClInclude Include="qoLabTurretScript.h" />
     <ClInclude Include="qoPlayer.h" />
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
@@ -31,8 +36,13 @@
   <ItemGroup>
     <ClCompile Include="qoBullet.cpp" />
     <ClCompile Include="qoBulletScript.cpp" />
+    <ClCompile Include="qoEnemy.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
+    <ClCompile Include="qoLabGuard.cpp" />
+    <ClCompile Include="qoLabGuardScript.cpp" />
+    <ClCompile Include="qoLabTurret.cpp" />
+    <ClCompile Include="qoLabTurretScript.cpp" />
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
