@@ -10,6 +10,9 @@ namespace qo
 	Player::Player()
 		: mGuns{}
 		, mActiveGun(nullptr)
+		, mState(ePlayerState::Idle)
+		, mHp(100)
+		, mSpeed(1.f)
 	{
 	}
 
@@ -62,6 +65,10 @@ namespace qo
 		{
 			mActiveGun->Render();
 		}
+	}
+
+	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
+	{
 	}
 
 	void Player::AddGun()

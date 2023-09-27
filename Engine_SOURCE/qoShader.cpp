@@ -7,6 +7,7 @@ namespace qo::graphics
 	Shader::Shader()
 		: mTopology(D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	{
+		//mTopology(D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINELIST)
 	}
 
 	Shader::~Shader()

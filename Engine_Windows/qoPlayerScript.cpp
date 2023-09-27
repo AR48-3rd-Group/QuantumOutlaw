@@ -3,10 +3,13 @@
 #include "qoGameObject.h"
 #include "qoTime.h"
 #include "qoInput.h"
+#include "qoPlayer.h"
+#include "qoRigidbody.h"
 
 namespace qo
 {
 	PlayerScript::PlayerScript()
+		: mPlayer(nullptr)
 	{
 	}
 
@@ -16,25 +19,30 @@ namespace qo
 
 	void PlayerScript::Initialize()
 	{
+		mPlayer = dynamic_cast<Player*>(GetOwner());
+
+		assert(mPlayer);
 	}
 
 	void PlayerScript::Update()
-	{
-		GameObject* obj = GetOwner();
-		Transform* tr = obj->GetComponent<Transform>();
-		Vector3 pos = tr->GetPosition();
-
-		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
+	{		
+		switch (mPlayer->mState)
 		{
-			pos.x -= 1.f * Time::DeltaTime();
+		case ePlayerState::Idle :
+			Idle();
+			break;
+		case ePlayerState::Walk:
+			Walk();
+			break;
+		case ePlayerState::Jump:
+			Jump();
+			break;
+		case ePlayerState::Dead:
+			Dead();
+			break;
+		default:
+			break;
 		}
-
-		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
-		{
-			pos.x += 1.f * Time::DeltaTime();
-		}
-
-		tr->SetPosition(pos);
 	}
 
 	void PlayerScript::LateUpdate()
@@ -42,6 +50,87 @@ namespace qo
 	}
 
 	void PlayerScript::Render()
+	{
+	}
+
+	void PlayerScript::Idle()
+	{
+		// Walk
+		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::DOWN
+			|| Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED
+			|| Input::GetKeyState(KEY_CODE::D) == KEY_STATE::DOWN
+			|| Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
+		{
+			mPlayer->mState = ePlayerState::Walk;
+		}
+
+		// Jump
+		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
+		{
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+
+			rigidbody->SetGround(false);
+			rigidbody->SetVeclocity(Vector3(0.f, 0.5f, 0.f));
+			mPlayer->mState = ePlayerState::Jump;
+		}
+	}
+
+	void PlayerScript::Walk()
+	{
+		// ÁÂ¿ì ÀÌµ¿
+		Transform* tranform = mPlayer->GetComponent<Transform>();
+		Vector3 pos = tranform->GetPosition();
+
+		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
+		{
+			pos.x -= mPlayer->mSpeed * Time::DeltaTime();
+		}
+
+		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
+		{
+			pos.x += mPlayer->mSpeed * Time::DeltaTime();
+		}
+		tranform->SetPosition(pos);
+
+		// Jump
+		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
+		{
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+
+			rigidbody->SetGround(false);
+			rigidbody->SetVeclocity(Vector3(0.f, 0.5f, 0.f));
+			mPlayer->mState = ePlayerState::Jump;
+		}
+	}
+
+	void PlayerScript::Jump()
+	{
+		// ÁÂ¿ì ÀÌµ¿
+		Transform* tranform = mPlayer->GetComponent<Transform>();
+		Vector3 pos = tranform->GetPosition();
+
+		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
+		{
+			pos.x -= mPlayer->mSpeed * Time::DeltaTime();
+		}
+
+		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
+		{
+			pos.x += mPlayer->mSpeed * Time::DeltaTime();
+		}
+		tranform->SetPosition(pos);
+
+
+		// Idle
+		Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+
+		if (rigidbody->GetGround())
+		{
+			mPlayer->mState = ePlayerState::Idle;
+		}
+	}
+
+	void PlayerScript::Dead()
 	{
 	}
 

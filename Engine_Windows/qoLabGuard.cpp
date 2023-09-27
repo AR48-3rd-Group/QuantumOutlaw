@@ -30,15 +30,11 @@ namespace qo
         // 肺流 累己
     }
 
-    void LabGuard::Hit(int damage)
-    {
-        int currentHP = GetHP();
-        currentHP -= damage;
-        SetHP(currentHP);
-    }
-
     void LabGuard::Dead()
     {
-        // 肺流 累己
+    }
+
+    void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
+    {
     }
 }

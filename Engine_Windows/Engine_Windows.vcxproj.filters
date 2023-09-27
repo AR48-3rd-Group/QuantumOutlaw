@@ -28,6 +28,15 @@
     <Filter Include="GameObjects\Gun">
       <UniqueIdentifier>{8bd03dcb-c902-4f59-ac75-618962997f29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Enemy">
+      <UniqueIdentifier>{ad950399-752e-49b7-97c8-c576f662e320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Enemy">
+      <UniqueIdentifier>{7f3dcec3-e602-4abb-8fd7-a02413336045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Ground">
+      <UniqueIdentifier>{3caf6517-03eb-4aab-b2d2-5a90f0c0fb86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -50,6 +59,24 @@
     </ClCompile>
     <ClCompile Include="qoGunScript.cpp">
       <Filter>Scripts\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="qoEnemy.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabGuard.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabTurret.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabGuardScript.cpp">
+      <Filter>Scripts\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabTurretScript.cpp">
+      <Filter>Scripts\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoGround.cpp">
+      <Filter>GameObjects\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +101,24 @@
     </ClInclude>
     <ClInclude Include="qoGunScript.h">
       <Filter>Scripts\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="qoEnemy.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabGuard.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabTurret.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabGuardScript.h">
+      <Filter>Scripts\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabTurretScript.h">
+      <Filter>Scripts\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoGround.h">
+      <Filter>GameObjects\Ground</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

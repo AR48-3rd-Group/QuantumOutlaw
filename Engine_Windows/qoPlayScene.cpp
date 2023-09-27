@@ -8,11 +8,10 @@
 #include "qoCollider.h"
 #include "qoRigidbody.h"
 #include "qoPlayerScript.h"
-#include "qoLabGuard.h"
-#include "qoLabGuardScript.h"
 #include "qoPlayer.h"
+#include "qoGround.h"
+#include "qoRigidbody.h"
 
-#include "qoGuard.h"
 
 namespace qo
 {
@@ -29,14 +28,19 @@ namespace qo
 	void PlayScene::Initialize()
 	{		
 		Player* player = new Player();
-		Transform* tr = player->AddComponent<Transform>();
-		tr->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-		tr->SetScale(Vector3(0.3f, 0.3f, 0.3f));
+		Transform* PlayerTransform = player->AddComponent<Transform>();
+		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+		PlayerTransform->SetScale(Vector3(0.3f, 0.3f, 0.f));
 
-		MeshRenderer* meshRenderer = player->AddComponent<MeshRenderer>();
-		meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
+		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
 
+		Collider* PlayerCollider = player->AddComponent<Collider>();
+		PlayerCollider->SetScale(Vector3(0.3f, 0.3f, 0.f));
+					 
+		player->AddComponent<Rigidbody>();
+		
 		player->AddComponent<PlayerScript>();
 
 		// ÃÑ ÇÏ³ª »ý¼º
@@ -44,8 +48,23 @@ namespace qo
 
 		player->Initialize();
 
-		AddGameObject(player, LAYER::NONE);
+		AddGameObject(player, LAYER::PLAYER);
 
+		Ground* ground = new Ground();
+		Transform* GroundTransform = ground->AddComponent<Transform>();
+		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
+		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
+
+		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
+		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+
+		Collider* GroundCollider = ground->AddComponent<Collider>();
+		GroundCollider->SetScale(Vector3(1.f, 0.25f, 0.f));
+
+		AddGameObject(ground, LAYER::GROUND);
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::GROUND, TRUE);
 	}
 
 	void PlayScene::Update()
