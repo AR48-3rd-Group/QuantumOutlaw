@@ -39,6 +39,12 @@
     <ClCompile Include="qoPlayerScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="qoGuardScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine_SOURCE\qoGuard.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
@@ -67,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="qoPlayerScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="qoGuardScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine_SOURCE\qoGuard.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
