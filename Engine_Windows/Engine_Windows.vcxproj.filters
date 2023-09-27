@@ -10,50 +10,63 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{e62976ab-da0e-4c02-898b-003c11271af4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Player">
-<<<<<<< Updated upstream
-      <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
-=======
-      <UniqueIdentifier>{948a0d55-b402-463d-9334-7a4c05eb2264}</UniqueIdentifier>
+    <Filter Include="GameObjects\Enemy">
+      <UniqueIdentifier>{08c57463-6f61-45e5-b467-fa795b9cc224}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Ground">
-      <UniqueIdentifier>{9f59e4a2-5c3a-4b81-9cdc-5cb50d641a44}</UniqueIdentifier>
->>>>>>> Stashed changes
+    <Filter Include="Scripts\Enemy Script">
+      <UniqueIdentifier>{0e9e1635-dacd-49cf-8ab8-dfe48894a124}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="qoEnemy.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabGuard.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabTurret.cpp">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabGuardScript.cpp">
+      <Filter>Scripts\Enemy Script</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLabTurretScript.cpp">
+      <Filter>Scripts\Enemy Script</Filter>
+    </ClCompile>
     <ClCompile Include="qoPlayerScript.cpp">
       <Filter>Scripts</Filter>
-    </ClCompile>
-<<<<<<< Updated upstream
-=======
-    <ClCompile Include="qoGround.cpp">
-      <Filter>GameObjects\Ground</Filter>
-    </ClCompile>
->>>>>>> Stashed changes
-    <ClCompile Include="qoPlayer.cpp">
-      <Filter>GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="qoLoadScene.h" />
+    <ClInclude Include="qoEnemy.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabGuard.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabTurret.h">
+      <Filter>GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabTurretScript.h">
+      <Filter>Scripts\Enemy Script</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLabGuardScript.h">
+      <Filter>Scripts\Enemy Script</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLoadScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ES_CommonInclude.h">
+      <Filter>Scripts\Enemy Script</Filter>
+    </ClInclude>
     <ClInclude Include="qoPlayerScript.h">
       <Filter>Scripts</Filter>
-    </ClInclude>
-<<<<<<< Updated upstream
-=======
-    <ClInclude Include="qoGround.h">
-      <Filter>GameObjects\Ground</Filter>
-    </ClInclude>
->>>>>>> Stashed changes
-    <ClInclude Include="qoPlayer.h">
-      <Filter>GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
