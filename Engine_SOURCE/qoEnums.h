@@ -5,7 +5,8 @@ namespace qo::enums
 	enum LAYER
 	{
 		NONE = 0,
-
+		PLAYER,
+		GROUND,
 		MAX = 16,
 	};
 
@@ -134,6 +135,8 @@ namespace qo::enums
 		COMPONENT = 0,
 		TRANSFORM,
 		CAMERA,
+		COLLIDER,
+		RIGIDBODY,
 
 		//render
 		MESH,

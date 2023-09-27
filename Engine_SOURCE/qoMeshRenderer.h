@@ -18,7 +18,7 @@ namespace qo
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetMesh(Mesh* mesh) { mMesh = mesh; }
+		void SetMesh(Mesh* TriangleMesh) { mMesh = TriangleMesh; }
 		void SetShader(Shader* shader) { mShader = shader; }
 
 	private:

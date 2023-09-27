@@ -343,6 +343,11 @@ namespace qo::math
     Vector3 operator/ (const Vector3& V, float S) noexcept;
     Vector3 operator* (float S, const Vector3& V) noexcept;
 
+    inline float Dot(Vector3& vec1, Vector3& vec2)
+    {
+        return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+    }
+
     //------------------------------------------------------------------------------
     // 4D vector
     struct Vector4 : public XMFLOAT4

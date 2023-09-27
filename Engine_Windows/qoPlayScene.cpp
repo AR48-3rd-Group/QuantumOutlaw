@@ -1,10 +1,18 @@
 #include "qoPlayScene.h"
 #include "qoResourceManager.h"
+#include "qoCollisionManager.h"
 
 #include "qoGameObject.h"
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
+#include "qoCollider.h"
+#include "qoRigidbody.h"
 #include "qoPlayerScript.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
+#include "qoPlayer.h"
+
+#include "qoGuard.h"
 
 namespace qo
 {
@@ -19,21 +27,25 @@ namespace qo
 	}
 
 	void PlayScene::Initialize()
-	{
-		{
-			GameObject* object = new GameObject();
-			Transform* tr = object->AddComponent<Transform>();
-			tr->SetPosition(Vector3(0.5f, 0.2f, 0.0f));
-			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+	{		
+		Player* player = new Player();
+		Transform* tr = player->AddComponent<Transform>();
+		tr->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+		tr->SetScale(Vector3(0.3f, 0.3f, 0.3f));
 
-			MeshRenderer* meshRenderer = object->AddComponent<MeshRenderer>();
-			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TriangleMesh"));
-			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+		MeshRenderer* meshRenderer = player->AddComponent<MeshRenderer>();
+		meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
 
-			AddGameObject(object, LAYER::NONE);
-			object->AddComponent<PlayerScript>();
-			//object->AddComponent<PlayerScript2>();
-		}
+		player->AddComponent<PlayerScript>();
+
+		// ÃÑ ÇÏ³ª »ý¼º
+		player->AddGun();
+
+		player->Initialize();
+
+		AddGameObject(player, LAYER::NONE);
+
 	}
 
 	void PlayScene::Update()

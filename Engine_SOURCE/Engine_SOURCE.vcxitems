@@ -14,6 +14,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoMesh.h" />
@@ -33,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)qoGraphicsDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoResourceManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)qoRigidbody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)qoScript.h" />
@@ -42,6 +46,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)qoCanvas.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoMesh.cpp" />
@@ -56,6 +63,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)qoRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoResourceManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)qoRigidbody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)qoScript.cpp" />

@@ -1,5 +1,5 @@
 #include "qoGameObject.h"
-
+#include "qoCollider.h"
 
 namespace qo
 {
@@ -86,5 +86,17 @@ namespace qo
 
 			script->Render();
 		}
+	}
+
+	void GameObject::OnCollisionEnter(Collider* other)
+	{
+	}
+
+	void GameObject::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void GameObject::OnCollisionExit(Collider* other)
+	{
 	}
 }

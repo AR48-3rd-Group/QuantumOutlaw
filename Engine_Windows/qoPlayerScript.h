@@ -14,5 +14,4 @@ namespace qo
 		void LateUpdate() override;
 		void Render() override;
 	};
-
 }
