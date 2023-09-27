@@ -51,6 +51,23 @@ namespace qo
 		{
 			mGameObjects[i]->LateUpdate();
 		}
+
+		std::vector<GameObject*>::iterator iter = mGameObjects.begin();
+
+		for (;iter != mGameObjects.end();)
+		{
+			if ((*iter)->GetGameObjectState() == GameObject::eState::Dead)
+			{
+				GameObject* obj = *iter;
+				iter = mGameObjects.erase(iter);
+				delete obj;
+				obj = nullptr;
+			}
+			else
+			{
+				iter++;
+			}
+		}
 	}
 
 	void Layer::Render()

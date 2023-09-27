@@ -26,7 +26,12 @@ namespace qo
 		void SetOffset(math::Vector3 offset) { mOffset = offset; }
 		math::Vector3 GetOffset() { return mOffset; }
 
+		UINT GetCollisionNumber() const { return mCollisionNumber; }
+
 	private:
+		static UINT mCollisionCount;
+		UINT mCollisionNumber;
+
 		math::Vector3 mScale;
 		math::Vector3 mOffset;
 		bool mbisCollision;
