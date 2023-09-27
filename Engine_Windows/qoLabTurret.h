@@ -16,12 +16,6 @@ namespace qo
 		virtual void Dead() override;
 
 	private:
-		eType myTYPE;
-		eStage mySTAGE;
-
-		int myHP;
-		int mySPEED;
-		int myATK;
 	};
 }
 
