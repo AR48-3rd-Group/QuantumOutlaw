@@ -12,16 +12,10 @@ namespace qo
 		virtual void Search() override;
 		virtual void Chase() override;
 		virtual void Attack() override;
-		virtual void Hit(int damage) override;
 		virtual void Dead() override;
+		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
 
 	private:
-		eType myTYPE;
-		eStage mySTAGE;
-
-		int myHP;
-		int mySPEED;
-		int myATK;
 	};
 }
 

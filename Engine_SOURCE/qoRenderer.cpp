@@ -62,6 +62,7 @@ namespace qo::renderer
 		vertices[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertices[3].color = Vector4(0.f, 1.f, 0.f, 1.f);
 
+		// 인덱스
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
@@ -69,6 +70,19 @@ namespace qo::renderer
 		indexes.push_back(0);
 		indexes.push_back(2);
 		indexes.push_back(3);
+
+		//// 테두리 사각형 인덱스
+		//indexes.push_back(0);
+		//indexes.push_back(1);
+
+		//indexes.push_back(0);
+		//indexes.push_back(3);
+
+		//indexes.push_back(3);
+		//indexes.push_back(2);
+
+		//indexes.push_back(2);
+		//indexes.push_back(1);
 
 		RectangleMesh->CreateVertexBuffer(vertices.data(), 4);
 		RectangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));

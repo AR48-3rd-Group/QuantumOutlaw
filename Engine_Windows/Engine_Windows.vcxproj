@@ -22,6 +22,7 @@
     <ClInclude Include="qoBullet.h" />
     <ClInclude Include="qoBulletScript.h" />
     <ClInclude Include="qoEnemy.h" />
+    <ClInclude Include="qoGround.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
     <ClInclude Include="qoLabGuard.h" />
@@ -37,6 +38,7 @@
     <ClCompile Include="qoBullet.cpp" />
     <ClCompile Include="qoBulletScript.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
+    <ClCompile Include="qoGround.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
     <ClCompile Include="qoLabGuard.cpp" />
