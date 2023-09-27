@@ -4,6 +4,11 @@ namespace qo
 {
     LabTurret::LabTurret()
     {
+        SetType(eRanged);
+        SetStage(eSearch);
+        SetHP(80);
+        SetMovementSpeed(0);
+        SetATK(15);
     }
 
     LabTurret::~LabTurret()
@@ -27,7 +32,6 @@ namespace qo
 
     void LabTurret::Dead()
     {
-        // 로직 작성
     }
 
     void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)

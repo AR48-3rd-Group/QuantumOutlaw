@@ -4,6 +4,11 @@ namespace qo
 {
     LabGuard::LabGuard()
     {
+        SetType(eMelee);
+        SetStage(eSearch);
+        SetHP(50);
+        SetMovementSpeed(50);
+        SetATK(10);
     }
 
     LabGuard::~LabGuard()
@@ -27,7 +32,6 @@ namespace qo
 
     void LabGuard::Dead()
     {
-        // 로직 작성
     }
 
     void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
