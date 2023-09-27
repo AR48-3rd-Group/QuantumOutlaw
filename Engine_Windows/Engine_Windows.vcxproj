@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine_SOURCE\qoGuard.h" />
     <ClInclude Include="qoEnemy.h" />
-    <ClInclude Include="ES_CommonInclude.h" />
+    <ClInclude Include="qoGuardScript.h" />
     <ClInclude Include="qoLabGuard.h" />
     <ClInclude Include="qoLabGuardScript.h" />
     <ClInclude Include="qoLabTurret.h" />
@@ -30,7 +31,9 @@
     <ClInclude Include="qoLoadScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine_SOURCE\qoGuard.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
+    <ClCompile Include="qoGuardScript.cpp" />
     <ClCompile Include="qoLabGuard.cpp" />
     <ClCompile Include="qoLabGuardScript.cpp" />
     <ClCompile Include="qoLabTurret.cpp" />
