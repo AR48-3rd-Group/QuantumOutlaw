@@ -43,7 +43,7 @@ namespace qo
 
 	void Application::LateUpdate()
 	{
-
+		SceneManager::LateUpdate();
 	}
 
 	void Application::Render()
