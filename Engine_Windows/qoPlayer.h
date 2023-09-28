@@ -12,6 +12,13 @@ namespace qo
         Dead,
     };
 
+    enum class eGunType
+    {
+        Superposition,
+        Entanglement,
+        Teleportation,
+    };
+
     class Gun;
     class Player : public GameObject
     {
@@ -25,7 +32,7 @@ namespace qo
         virtual void LateUpdate() override;
         virtual void Render() override;
 
-        void AddGun();
+        void AddGun(eGunType type);
         virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero);
 
     private:

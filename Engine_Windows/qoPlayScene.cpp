@@ -44,8 +44,8 @@ namespace qo
 		
 		player->AddComponent<PlayerScript>();
 
-		// 총 하나 생성
-		player->AddGun();
+		// 총 생성
+		player->AddGun(eGunType::Superposition);
 
 		player->Initialize();
 
@@ -67,6 +67,24 @@ namespace qo
 		AddGameObject(ground, LAYER::GROUND);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::GROUND, TRUE);
+
+		// 벽 오브젝트 생성
+		Ground* Wall = new Ground();
+		Transform* WallTransform = Wall->AddComponent<Transform>();
+		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
+		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
+		WallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
+
+		MeshRenderer* WallMeshRenderer = Wall->AddComponent<MeshRenderer>();
+		WallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		WallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* WallCollider = Wall->AddComponent<Collider>();
+		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
+
+		AddGameObject(Wall, LAYER::GROUND);
+
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::GROUND, TRUE);
 	}
 
 	void PlayScene::Update()

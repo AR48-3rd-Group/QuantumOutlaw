@@ -7,6 +7,7 @@ namespace qo::enums
 		NONE = 0,
 		PLAYER,
 		GROUND,
+		BULLET,
 		MAX = 16,
 	};
 

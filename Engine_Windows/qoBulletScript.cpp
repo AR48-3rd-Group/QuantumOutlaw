@@ -21,17 +21,17 @@ namespace qo
 	{
 		Bullet* bullet = dynamic_cast<Bullet*>(GetOwner());
 		
-		// Bullet이 갖고있는 방향으로 초당 1.f 의 속도로 이동
+		// Bullet이 갖고있는 방향으로 초당 2.f 의 속도로 이동
 		if (bullet != nullptr)
 		{
 			Transform* tr = bullet->GetComponent<Transform>();
-			Vector3 dir = bullet->mDir;
+			Vector3 dir = bullet->GetDirection();
 
 			Vector3 pos = tr->GetPosition();
 
 			dir.Normalize();
 
-			pos += dir * 1.f * Time::DeltaTime();
+			pos += dir * 2.f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 	}
