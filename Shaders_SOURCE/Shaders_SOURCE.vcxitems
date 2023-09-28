@@ -16,5 +16,8 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ConstantBuffer.hlsli" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CircleVS.hlsl" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CirclePS.hlsl" />
   </ItemGroup>
 </Project>

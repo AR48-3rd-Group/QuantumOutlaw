@@ -21,7 +21,7 @@ namespace qo
 	{
 		Bullet* bullet = dynamic_cast<Bullet*>(GetOwner());
 		
-		// Bullet이 갖고있는 방향으로 초당 5.f 의 속도로 이동
+		// Bullet이 갖고있는 방향으로 초당 1.f 의 속도로 이동
 		if (bullet != nullptr)
 		{
 			Transform* tr = bullet->GetComponent<Transform>();
@@ -31,7 +31,7 @@ namespace qo
 
 			dir.Normalize();
 
-			pos += dir * 5.f * Time::DeltaTime();
+			pos += dir * 1.f * Time::DeltaTime();
 			tr->SetPosition(pos);
 		}
 	}

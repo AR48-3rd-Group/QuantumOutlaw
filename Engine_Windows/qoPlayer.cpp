@@ -81,14 +81,17 @@ namespace qo
 		// ÃÑ °´Ã¼ »ý¼º
 		// ============
 		Gun* gun = new Gun(this, 50);
+		Vector3 GunPos = PlayerPos + Vector3(0.1f, 0.f,0.f);
+
 
 		Transform* GunTransform = gun->AddComponent<Transform>();
-		GunTransform->SetPosition(PlayerPos);
-		GunTransform->SetScale(Vector3(0.3f, 0.3f, 0.3f));
+		GunTransform->SetPosition(GunPos);
+		GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+		GunTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
 
 		MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
 		meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
 		gun->AddComponent<GunScript>();
 		

@@ -8,6 +8,7 @@ namespace qo
 
 	Transform::Transform()
 		: Component(COMPONENTTYPE::TRANSFORM)
+		, mColor(math::Vector4(1.f, 1.f, 1.f, 0.f))
 	{
 
 	}
@@ -66,8 +67,7 @@ namespace qo
 
 			data.pos = math::Vector4(temp.x, temp.y, temp.z, 0.f);
 			data.scale = math::Vector4(mScale.x, mScale.y, mScale.z, 0.f);
-			// 이 Color 값을 클래스 or 객체 마다 멤버변수로 보유하고 셋팅해주는 방식
-			data.color = math::Vector4(1.f, 1.f, 1.f, 0.f);
+			data.color = mColor;
 			Register1Cb->SetData(&data);
 
 			Register1Cb->Bind(graphics::eShaderStage::VS);

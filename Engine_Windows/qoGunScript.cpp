@@ -36,7 +36,9 @@ namespace qo
 		Transform* GunTransform = owner->GetComponent<Transform>();		
 		Transform* PlayerTransform = owner->mPlayer->GetComponent<Transform>();
 
-		GunTransform->SetPosition(PlayerTransform->GetPosition());
+		Vector3 GunPos = PlayerTransform->GetPosition() + Vector3(0.2f, 0.f, 0.f);
+
+		GunTransform->SetPosition(GunPos);
 
 		// ÃÑ¾Ë ¹ß»ç
 		if (Input::GetKeyState(KEY_CODE::LBTN) == KEY_STATE::DOWN)
@@ -93,8 +95,8 @@ namespace qo
 			tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
 
 			MeshRenderer* meshRenderer = bullet->AddComponent<MeshRenderer>();
-			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"CircleShader"));
 
 			bullet->AddComponent<BulletScript>();
 

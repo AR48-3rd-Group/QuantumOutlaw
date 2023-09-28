@@ -30,11 +30,12 @@ namespace qo
 		Player* player = new Player();
 		Transform* PlayerTransform = player->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-		PlayerTransform->SetScale(Vector3(0.3f, 0.3f, 0.f));
+		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
+		PlayerTransform->SetColor(Vector4(0.f, 1.f, 0.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
 		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
 
 		Collider* PlayerCollider = player->AddComponent<Collider>();
 		PlayerCollider->SetScale(Vector3(0.3f, 0.3f, 0.f));
@@ -54,6 +55,7 @@ namespace qo
 		Transform* GroundTransform = ground->AddComponent<Transform>();
 		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
 		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
+		GroundTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
 		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
