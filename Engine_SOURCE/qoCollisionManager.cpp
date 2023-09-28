@@ -79,8 +79,8 @@ namespace qo
 	void CollisionManager::ColliderCollision(Collider* left, Collider* right)
 	{
 		ColliderID id = {};
-		id.left = (UINT)left;
-		id.right = (UINT)right;
+		id.left = (UINT)left->GetCollisionNumber();
+		id.right = (UINT)right->GetCollisionNumber();
 
 		std::map<UINT64, bool>::iterator iter = mCollisionMap.find(id.id);
 
