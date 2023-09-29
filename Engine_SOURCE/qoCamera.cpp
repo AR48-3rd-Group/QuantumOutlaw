@@ -15,6 +15,7 @@ namespace qo
 		mLookAt.y = 0.f;
 		mLookAt.z = 0.f;
 	}
+
 	void Camera::Update()
 	{
 		if (Input::GetKeyState(KEY_CODE::LEFT) == KEY_STATE::PRESSED)

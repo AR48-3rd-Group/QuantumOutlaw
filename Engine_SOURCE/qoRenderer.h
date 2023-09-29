@@ -43,11 +43,16 @@ namespace qo::renderer
 	extern Mesh* TriangleMesh;
 	extern Mesh* RectangleMesh;
 	extern Mesh* CircleMesh;
-
+	
 	extern Shader* shader;
 	extern Shader* ColorTestShader;
 	extern Shader* CircleShader;
 
+	// Basic Collider
+	extern Mesh* BasicRectangleMesh;
+	extern Shader* ColorTestShader2;
+
+	// Constant Buffer
 	extern ConstantBuffer* constantBuffers[];
 
 	// Initialize the renderer

@@ -1,8 +1,11 @@
 #pragma once
 #include "qoComponent.h" 
+#include "qoMesh.h"
+#include "qoShader.h"
 
 namespace qo
 {
+	using namespace graphics;
 	class Collider : public Component
 	{
 	public:
@@ -34,8 +37,12 @@ namespace qo
 
 		math::Vector3 mScale;
 		math::Vector3 mOffset;
-		bool mbisCollision;
+		bool mbIsCollision;
 		bool mAffectedCamera;
+
+		// Collider Render
+		Mesh* mMesh;
+		Shader* mShader;
 	};
 }
 
