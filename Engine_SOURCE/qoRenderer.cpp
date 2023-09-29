@@ -8,9 +8,15 @@ namespace qo::renderer
 {
 
 	D3D11_INPUT_ELEMENT_DESC InputLayouts[2];
+
 	Mesh* TriangleMesh = nullptr;
 	Mesh* RectangleMesh = nullptr;
+	Mesh* CircleMesh = nullptr;
+
 	Shader* shader = nullptr;
+	Shader* ColorTestShader = nullptr;
+	Shader* CircleShader = nullptr;
+
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
 	void SetUpStates()
@@ -91,8 +97,37 @@ namespace qo::renderer
 		vertices.clear();
 		indexes.clear();
 
-		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer();
+		// CircleMesh Vertex Buffer
+		Vertex center = {};
+		center.pos = Vector3(0.0f, 0.0f, 0.0f);
+		center.color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertices.push_back(center);
+
+		int degree = 360;
+		float radian = XM_2PI / (float)degree;
+		float radius = 0.5f;
+
+		for (int i = 0; i < degree; ++i)
+		{
+			center.pos = Vector3(radius * cosf(radian * (float)i), radius * sinf(radian * (float)i), 0.0f);
+			center.color = Vector4(0.0f, 1.0f, 0.0f, 1.f);
+			vertices.push_back(center);
+		}
+
+		for (int i = 0; i < vertices.size() - 2; ++i)
+			indexes.push_back(i + 1);
+
+		indexes.push_back(1);
+
+		CircleMesh->CreateVertexBuffer(vertices.data(), static_cast<UINT>(vertices.size()));
+		CircleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"CircleMesh", CircleMesh);
+
+		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[(UINT)graphics::eCBType::Transform]->Create(sizeof(TransformCB));
+
+		constantBuffers[(UINT)graphics::eCBType::Color_Test] = new ConstantBuffer(eCBType::Color_Test);
+		constantBuffers[(UINT)graphics::eCBType::Color_Test]->Create(sizeof(ColorTestCB));
 	}
 
 	void LoadShader()
@@ -121,13 +156,38 @@ namespace qo::renderer
 			shader->GetVSCode()->GetBufferPointer()
 			, shader->GetVSCode()->GetBufferSize()
 			, shader->GetInputLayoutAddressOf());
+
+		// Color Test Shader 쉐이더 코드 컴파일 InputLayouts은 위와 같으므로 설정안함
+		ColorTestShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Color_Test");
+		ColorTestShader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
+		ResourceManager::Insert(L"ColorTestShader", ColorTestShader);
+
+		GetDevice()->CreateInputLayout(InputLayouts, 2,
+			ColorTestShader->GetVSCode()->GetBufferPointer()
+			, ColorTestShader->GetVSCode()->GetBufferSize()
+			, ColorTestShader->GetInputLayoutAddressOf());
+
+		// Circle Shader
+		CircleShader->Create(eShaderStage::VS, L"CircleVS.hlsl", "VS");
+		CircleShader->Create(eShaderStage::PS, L"CirclePS.hlsl", "PS");
+		CircleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST); // TOPOLOGY LINELIST 설정
+		ResourceManager::Insert(L"CircleShader", CircleShader);
+
+		GetDevice()->CreateInputLayout(InputLayouts, 2,
+			CircleShader->GetVSCode()->GetBufferPointer()
+			, CircleShader->GetVSCode()->GetBufferSize()
+			, CircleShader->GetInputLayoutAddressOf());
 	}
 
 	void Initialize()
 	{
 		TriangleMesh = new Mesh();
 		RectangleMesh = new Mesh();
+		CircleMesh = new Mesh();
+
 		shader = new Shader();
+		ColorTestShader = new Shader();
+		CircleShader = new Shader();
 
 		LoadShader();
 		SetUpStates();
@@ -138,9 +198,14 @@ namespace qo::renderer
 	{
 		delete TriangleMesh;
 		delete RectangleMesh;
+		delete CircleMesh;
+
 		delete shader;
+		delete ColorTestShader;
+		delete CircleShader;
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];
+		delete constantBuffers[(UINT)graphics::eCBType::Color_Test];
 		//triangleVertexBuffer->Release();
 		//errorBlob->Release();
 		//triangleVSBlob->Release();

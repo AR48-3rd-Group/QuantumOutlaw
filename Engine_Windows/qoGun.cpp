@@ -1,10 +1,10 @@
 #include "qoGun.h"
 
-
 namespace qo
 {
-	Gun::Gun(Player* owner, UINT bulletCount)
-		: mPlayer(owner)
+	Gun::Gun(eGunType type, Player* owner, UINT bulletCount)
+		: mGunType(type)
+		, mPlayer(owner)
 		, mBulletCount(bulletCount)
 	{
 	}
@@ -13,23 +13,13 @@ namespace qo
 	{
 	}
 
-	void Gun::Initialize()
+	bool Gun::BulletConsumption(UINT amount)
 	{
-		GameObject::Initialize();
-	}
+		// 소모되는 양이 남아있는 탄알보다 많다면 실패처리
+		if(mBulletCount - amount < 0)
+			return false;
 
-	void Gun::Update()
-	{
-		GameObject::Update();
-	}
-
-	void Gun::LateUpdate()
-	{
-		GameObject::LateUpdate();
-	}
-
-	void Gun::Render()
-	{
-		GameObject::Render();
+		mBulletCount -= amount;
+		return true;
 	}
 }

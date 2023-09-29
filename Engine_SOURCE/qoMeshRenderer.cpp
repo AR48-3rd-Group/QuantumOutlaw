@@ -19,9 +19,6 @@ namespace qo
 
 	void MeshRenderer::Update()
 	{
-		//fhwlr
-
-		//
 	}
 
 	void MeshRenderer::LateUpdate()

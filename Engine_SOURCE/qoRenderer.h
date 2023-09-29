@@ -28,11 +28,26 @@ namespace qo::renderer
 
 		Vector3 scale;
 		int padd2;
+
+		Vector4 color;
+	};
+
+	// Color Test ¿ëµµ
+	CBUFFER(ColorTestCB, CBSLOT_ColorTest)
+	{
+		Vector4 pos;
+		Vector4 scale;
+		Vector4 color;
 	};
 
 	extern Mesh* TriangleMesh;
 	extern Mesh* RectangleMesh;
+	extern Mesh* CircleMesh;
+
 	extern Shader* shader;
+	extern Shader* ColorTestShader;
+	extern Shader* CircleShader;
+
 	extern ConstantBuffer* constantBuffers[];
 
 	// Initialize the renderer

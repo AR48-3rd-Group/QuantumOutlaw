@@ -33,6 +33,9 @@
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
     <ClInclude Include="qoLoadScene.h" />
+    <ClInclude Include="qoSuperpositionBullet.h" />
+    <ClInclude Include="qoSuperpositionGun.h" />
+    <ClInclude Include="qoSuperpositionGunScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoBullet.cpp" />
@@ -48,6 +51,9 @@
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
+    <ClCompile Include="qoSuperpositionBullet.cpp" />
+    <ClCompile Include="qoSuperpositionGun.cpp" />
+    <ClCompile Include="qoSuperpositionGunScript.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

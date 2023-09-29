@@ -3,16 +3,20 @@
 
 namespace qo
 {
-	class GunScript : public Script
+	class SuperpositionGunScript : public Script
 	{
 	public:
-		GunScript();
-		virtual ~GunScript();
+		SuperpositionGunScript();
+		virtual ~SuperpositionGunScript();
 
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
 		void Render() override;
+
+	private:
+		void Shoot();
+
 	};
 }
 

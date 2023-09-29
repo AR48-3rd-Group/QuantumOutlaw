@@ -1,24 +1,30 @@
 #pragma once
 #include "qoGameObject.h"
+#include "qoPlayer.h"
 
 namespace qo
 {
 	class Player;
 	class Gun : public GameObject
 	{
-		friend class GunScript;
 	public:
-		Gun(Player* owner, UINT bulletCount);
+		Gun(eGunType type, Player* owner, UINT bulletCount);
 		virtual ~Gun();
 
-		virtual void Initialize() override;
-		virtual void Update() override;
-		virtual void LateUpdate() override;
-		virtual void Render() override;
+		virtual void Initialize() = 0;
+		virtual void Update() = 0;
+		virtual void LateUpdate()  = 0;
+		virtual void Render() = 0;
+
+		UINT GetBulletCount() const { return mBulletCount; }
+		bool BulletConsumption(UINT amount);
+
+		Player* GetPlayer() const { return mPlayer; }
 
 	private:
-		Player* mPlayer;
-		UINT	mBulletCount;
+		eGunType	mGunType;
+		Player*		mPlayer;
+		UINT		mBulletCount;
 	};
 }
 

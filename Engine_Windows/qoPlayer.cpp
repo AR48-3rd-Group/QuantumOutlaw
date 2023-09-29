@@ -1,9 +1,11 @@
 #include "qoPlayer.h"
 #include "qoGun.h"
 #include "qoGunScript.h"
+#include "qoSuperpositionGunScript.h"
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
 #include "qoResourceManager.h"
+#include "qoSuperpositionGun.h"
 
 namespace qo
 {
@@ -67,34 +69,48 @@ namespace qo
 		}
 	}
 
-	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
-	{
-	}
-
-	void Player::AddGun()
+	void Player::AddGun(eGunType type)
 	{
 		// ÇÃ·¹ÀÌ¾î °´Ã¼ Á¤º¸
 		Transform* PlayerTransform = GetComponent<Transform>();
 		Vector3 PlayerPos = PlayerTransform->GetPosition();
 
-		// ============
+		// ================================
 		// ÃÑ °´Ã¼ »ý¼º
-		// ============
-		Gun* gun = new Gun(this, 50);
+		// ================================
+		if (type == eGunType::Superposition)
+		{
+			SuperpositionGun* gun = new SuperpositionGun(type, this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
-		Transform* GunTransform = gun->AddComponent<Transform>();
-		GunTransform->SetPosition(PlayerPos);
-		GunTransform->SetScale(Vector3(0.3f, 0.3f, 0.3f));
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
 
-		MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
-		meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		gun->AddComponent<GunScript>();
-		
-		gun->Initialize();
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<SuperpositionGunScript>();
 
-		mGuns.push_back(gun);
-		mActiveGun = gun;		
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
+		}
+		else if(type == eGunType::Entanglement)
+		{
+
+		}
+		else if (type == eGunType::Teleportation)
+		{
+
+		}
+	}
+
+	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
+	{
 	}
 }
