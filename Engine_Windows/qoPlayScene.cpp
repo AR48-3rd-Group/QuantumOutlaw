@@ -9,7 +9,7 @@
 #include "qoRigidbody.h"
 #include "qoPlayerScript.h"
 #include "qoPlayer.h"
-#include "qoGround.h"
+#include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 
@@ -58,7 +58,7 @@ namespace qo
 
 
 		// 바닥 객체 생성
-		Ground* ground = new Ground();
+		Floor* ground = new Floor();
 		Transform* GroundTransform = ground->AddComponent<Transform>();
 		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
 		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
@@ -71,12 +71,12 @@ namespace qo
 		Collider* GroundCollider = ground->AddComponent<Collider>();
 		GroundCollider->SetScale(Vector3(1.f, 0.3f, 0.f));
 
-		AddGameObject(ground, LAYER::GROUND);
+		AddGameObject(ground, LAYER::FLOOR);
 
-		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::GROUND, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
 		// 벽 오브젝트 생성
-		Ground* Wall = new Ground();
+		Floor* Wall = new Floor();
 		Transform* WallTransform = Wall->AddComponent<Transform>();
 		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
 		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
@@ -89,9 +89,9 @@ namespace qo
 		Collider* WallCollider = Wall->AddComponent<Collider>();
 		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
 
-		AddGameObject(Wall, LAYER::GROUND);
+		AddGameObject(Wall, LAYER::FLOOR);
 
-		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::GROUND, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 	}
 
 	void PlayScene::Update()

@@ -32,6 +32,7 @@ namespace qo
 		UINT GetCollisionNumber() const { return mCollisionNumber; }
 
 		void SetActive(bool active) { mIsActive = active; }
+		bool GetActive() { return mIsActive; }
 
 	private:
 		static UINT mCollisionCount;
