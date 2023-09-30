@@ -119,11 +119,11 @@ namespace qo
 
 	bool CollisionManager::Intersect(Collider* left, Collider* right)
 	{
-		/*	if (!left->GetEnabled() || !right->GetEnabled())
-			{
-				return false;
-			}*/
-		
+		if (!left->GetActive() || !right->GetActive())
+		{
+			return false;
+		}
+
 		math::Vector3 leftpos = left->GetOwner()->GetComponent<Transform>()->GetPosition();
 		math::Vector3 leftscale = left->GetScale();
 		math::Vector3 rightpos = right->GetOwner()->GetComponent<Transform>()->GetPosition();

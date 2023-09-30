@@ -1,7 +1,7 @@
 #include "qoSuperpositionBullet.h"
 #include "qoGameObject.h"
-#include "qoGround.h"
 #include "qoCollider.h"
+#include "qoFloor.h"
 
 namespace qo
 {
@@ -36,7 +36,7 @@ namespace qo
 
 	void SuperpositionBullet::OnCollisionEnter(Collider* other)
 	{
-		Ground* Test = dynamic_cast<Ground*>(other->GetOwner());
+		Floor* Test = dynamic_cast<Floor*>(other->GetOwner());
 
 		if (Test == nullptr)
 			return;

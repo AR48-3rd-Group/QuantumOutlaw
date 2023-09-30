@@ -42,7 +42,7 @@ namespace qo
 
 	void Collider::Render()
 	{
-		if (!mIsActive) return;
+		//if (!mIsActive) return;
 
 		if (mbIsCollision)
 		{
@@ -89,20 +89,20 @@ namespace qo
 
 	void Collider::OnCollisionEnter(Collider* other)
 	{
-		if (!mIsActive) return;
+		//if (!mIsActive) return;
 		GetOwner()->OnCollisionEnter(other);
 		mbIsCollision = true;
 	}
 
 	void Collider::OnCollisionStay(Collider* other)
 	{
-		if (!mIsActive) return;
+		//if (!mIsActive) return;
 		GetOwner()->OnCollisionStay(other);
 	}
 
 	void Collider::OnCollisionExit(Collider* other)
 	{
-		if (!mIsActive) return;
+		//if (!mIsActive) return;
 		GetOwner()->OnCollisionExit(other);
 		mbIsCollision = false;
 	}
