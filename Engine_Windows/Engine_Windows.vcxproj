@@ -22,6 +22,9 @@
     <ClInclude Include="qoBullet.h" />
     <ClInclude Include="qoBulletScript.h" />
     <ClInclude Include="qoEnemy.h" />
+    <ClInclude Include="qoEntanglementBullet.h" />
+    <ClInclude Include="qoEntanglementGun.h" />
+    <ClInclude Include="qoEntanglementGunScript.h" />
     <ClInclude Include="qoGround.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
@@ -36,11 +39,17 @@
     <ClInclude Include="qoSuperpositionBullet.h" />
     <ClInclude Include="qoSuperpositionGun.h" />
     <ClInclude Include="qoSuperpositionGunScript.h" />
+    <ClInclude Include="qoTeleportationBullet.h" />
+    <ClInclude Include="qoTeleportationGun.h" />
+    <ClInclude Include="qoTeleportationGunScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoBullet.cpp" />
     <ClCompile Include="qoBulletScript.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
+    <ClCompile Include="qoEntanglementBullet.cpp" />
+    <ClCompile Include="qoEntanglementGun.cpp" />
+    <ClCompile Include="qoEntanglementGunScript.cpp" />
     <ClCompile Include="qoGround.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
@@ -54,6 +63,9 @@
     <ClCompile Include="qoSuperpositionBullet.cpp" />
     <ClCompile Include="qoSuperpositionGun.cpp" />
     <ClCompile Include="qoSuperpositionGunScript.cpp" />
+    <ClCompile Include="qoTeleportationBullet.cpp" />
+    <ClCompile Include="qoTeleportationGun.cpp" />
+    <ClCompile Include="qoTeleportationGunScript.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -4,8 +4,8 @@
 
 namespace qo
 {
-	SuperpositionGun::SuperpositionGun(eGunType type, Player* owner, UINT bulletCount)
-		: Gun(type, owner, bulletCount)
+	SuperpositionGun::SuperpositionGun(Player* owner, UINT bulletCount)
+		: Gun(eGunType::Superposition, owner, bulletCount)
 	{
 	}
 

@@ -1,11 +1,15 @@
 #include "qoPlayer.h"
 #include "qoGun.h"
 #include "qoGunScript.h"
-#include "qoSuperpositionGunScript.h"
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
 #include "qoResourceManager.h"
 #include "qoSuperpositionGun.h"
+#include "qoEntanglementGun.h"
+#include "qoTeleportationGun.h"
+#include "qoSuperpositionGunScript.h"
+#include "qoEntanglementGunScript.h"
+#include "qoTeleportationGunScript.h"
 
 namespace qo
 {
@@ -80,7 +84,7 @@ namespace qo
 		// ================================
 		if (type == eGunType::Superposition)
 		{
-			SuperpositionGun* gun = new SuperpositionGun(type, this, 10);
+			SuperpositionGun* gun = new SuperpositionGun(this, 10);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -102,12 +106,63 @@ namespace qo
 		}
 		else if(type == eGunType::Entanglement)
 		{
+			EntanglementGun* gun = new EntanglementGun(this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
+
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<EntanglementGunScript>();
+
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
 		}
 		else if (type == eGunType::Teleportation)
 		{
+			TeleportationGun* gun = new TeleportationGun(this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
+
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<TeleportationGunScript>();
+
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
 		}
+	}
+
+	bool Player::ChangeActiveGun(eGunType type)
+	{
+		for (Gun* gun : mGuns)
+		{
+			if (type != gun->GetGunType())
+				continue;
+
+			mActiveGun = gun;
+			return true;
+		}
+
+		// 해당타입의 총을 찾지 못했다
+		return false;
 	}
 
 	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)

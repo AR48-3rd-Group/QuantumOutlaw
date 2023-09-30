@@ -18,7 +18,7 @@ namespace qo
 		{
 			mGunColor = Vector4(0.f, 1.f, 0.f, 0.f);
 		}
-		else if (mGunType == eGunType::Entanglement)
+		else if (mGunType == eGunType::Teleportation)
 		{
 			mGunColor = Vector4(0.f, 0.f, 1.f, 0.f);
 		}

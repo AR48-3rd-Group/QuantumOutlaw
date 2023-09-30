@@ -46,6 +46,10 @@ namespace qo
 
 		// ÃÑ »ý¼º
 		player->AddGun(eGunType::Superposition);
+		player->AddGun(eGunType::Entanglement);
+		player->AddGun(eGunType::Teleportation);
+
+		player->ChangeActiveGun(eGunType::Superposition);
 
 		player->Initialize();
 

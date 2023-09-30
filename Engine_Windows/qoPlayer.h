@@ -32,8 +32,10 @@ namespace qo
         virtual void LateUpdate() override;
         virtual void Render() override;
 
-        void AddGun(eGunType type);
         virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero);
+        
+        void AddGun(eGunType type);
+        bool ChangeActiveGun(eGunType type);
 
     private:
         Gun*                mActiveGun; // 현재 활성화된 총
