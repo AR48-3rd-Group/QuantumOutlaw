@@ -73,4 +73,37 @@ namespace qo
 			Register1Cb->Bind(graphics::eShaderStage::VS);
 		}		
 	}
+
+	void Transform::SetPositionInPixels(float xPixels, float yPixels, float z)
+	{
+		// Calculate the conversion factor based on your rendering setup.
+		// This factor maps pixels to your 3D world coordinates.
+		float pixelToWorldFactor = 0.001f; // Adjust this as needed.
+
+		// Convert pixel coordinates to world coordinates
+		float xWorld = xPixels * pixelToWorldFactor;
+		float yWorld = yPixels * pixelToWorldFactor;
+
+		// Set the position in 3D world coordinates
+		SetPosition(Vector3(xWorld, yWorld, z));
+	}
+
+	void Transform::SetScaleInPixels(float widthInPixels, float heightInPixels, float z)
+	{
+		//const float referenceScreenWidth = 1600.0f;
+		//const float referenceScreenHeight = 900.0f;
+
+		float pixelToWorldFactor = 0.001f; // Adjust this as needed.
+
+		// Convert pixel coordinates to world coordinates
+		float scaleX = widthInPixels * pixelToWorldFactor;
+		float scaleY = heightInPixels * pixelToWorldFactor;
+
+		// Calculate the scaling factors in the X and Y directions
+		//float scaleX = widthInPixels / referenceScreenWidth; // Adjust referenceScreenWidth as needed
+		//float scaleY = heightInPixels / referenceScreenHeight; // Adjust referenceScreenHeight as needed
+
+		// Apply the calculated scaling factors
+		mScale = Vector3(scaleX, scaleY, 1.0f);
+	}
 }

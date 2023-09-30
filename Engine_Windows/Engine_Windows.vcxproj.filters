@@ -64,6 +64,9 @@
     <Filter Include="GameObjects\Bullet\TeleportationBullet">
       <UniqueIdentifier>{57a21c91-82a9-4e10-8599-e0c56171c24f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Architecture">
+      <UniqueIdentifier>{03bbad7c-7d92-4469-a7f6-6e5dd424ef70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -99,9 +102,6 @@
     <ClCompile Include="qoLabTurretScript.cpp">
       <Filter>Scripts\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="qoGround.cpp">
-      <Filter>GameObjects\Ground</Filter>
-    </ClCompile>
     <ClCompile Include="qoSuperpositionGun.cpp">
       <Filter>GameObjects\Gun\SuperpositionGun</Filter>
     </ClCompile>
@@ -132,12 +132,29 @@
     <ClCompile Include="qoTeleportationBullet.cpp">
       <Filter>GameObjects\Bullet\TeleportationBullet</Filter>
     </ClCompile>
+    <ClCompile Include="qoBarrier.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoDestructibleWall.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoDoorSwitch.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoFloor.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoLockedDoor.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoWall.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="qoLoadScene.h" />
     <ClInclude Include="qoPlayer.h">
       <Filter>GameObjects\Player</Filter>
     </ClInclude>
@@ -171,9 +188,6 @@
     <ClInclude Include="qoLabTurretScript.h">
       <Filter>Scripts\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="qoGround.h">
-      <Filter>GameObjects\Ground</Filter>
-    </ClInclude>
     <ClInclude Include="qoSuperpositionGun.h">
       <Filter>GameObjects\Gun\SuperpositionGun</Filter>
     </ClInclude>
@@ -200,6 +214,30 @@
     </ClInclude>
     <ClInclude Include="qoTeleportationBullet.h">
       <Filter>GameObjects\Bullet\TeleportationBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="qoWall.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchitectureInclude.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoBarrier.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoDestructibleWall.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoDoorSwitch.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoFloor.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLoadScene.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLockedDoor.h">
+      <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

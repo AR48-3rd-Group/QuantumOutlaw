@@ -6,7 +6,8 @@ namespace qo::enums
 	{
 		NONE = 0,
 		PLAYER,
-		GROUND,
+		FLOOR,
+		WALL,
 		BULLET,
 		MAX = 16,
 	};

@@ -31,6 +31,8 @@ namespace qo
 
 		UINT GetCollisionNumber() const { return mCollisionNumber; }
 
+		void SetActive(bool active) { mIsActive = active; }
+
 	private:
 		static UINT mCollisionCount;
 		UINT mCollisionNumber;
@@ -39,6 +41,9 @@ namespace qo
 		math::Vector3 mOffset;
 		bool mbIsCollision;
 		bool mAffectedCamera;
+
+		// 충돌 상자 작동 여부
+		bool mIsActive;
 
 		// Collider Render
 		Mesh* mMesh;
