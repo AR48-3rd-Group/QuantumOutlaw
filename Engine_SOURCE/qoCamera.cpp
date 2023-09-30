@@ -1,6 +1,7 @@
 #include "qoCamera.h"
 #include "qoInput.h"
 #include "qoTime.h"
+#include "qoTransform.h"
 
 namespace qo
 {
@@ -18,7 +19,7 @@ namespace qo
 
 	void Camera::Update()
 	{
-		if (Input::GetKeyState(KEY_CODE::LEFT) == KEY_STATE::PRESSED)
+		/*if (Input::GetKeyState(KEY_CODE::LEFT) == KEY_STATE::PRESSED)
 		{
 			mLookAt.x -= 1.f * Time::DeltaTime();
 		}
@@ -33,6 +34,12 @@ namespace qo
 		if (Input::GetKeyState(KEY_CODE::RIGHT) == KEY_STATE::PRESSED)
 		{
 			mLookAt.x += 1.f * Time::DeltaTime();
+		}*/
+
+		if (mTarget != nullptr)
+		{
+			Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
+			mLookAt = TargetPosition;
 		}
 
 		mDiffDistance = mLookAt - math::Vector3(0.f, 0.f, 0.f);
