@@ -12,7 +12,6 @@
 #include "qoGround.h"
 #include "qoRigidbody.h"
 
-
 namespace qo
 {
 	PlayScene::PlayScene()
