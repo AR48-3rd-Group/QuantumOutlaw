@@ -16,15 +16,22 @@ namespace qo
 		virtual void LateUpdate()  = 0;
 		virtual void Render() = 0;
 
-		UINT GetBulletCount() const { return mBulletCount; }
-		bool BulletConsumption(UINT amount);
+		eGunType GetGunType() const { return mGunType; }
 
 		Player* GetPlayer() const { return mPlayer; }
+
+		UINT GetCurBulletCount() const { return mCurBulletCount; }
+		bool BulletConsumption(UINT amount);
+		void ReLoad();
+
+		Vector4 GetGunColor() const { return mGunColor; }
 
 	private:
 		eGunType	mGunType;
 		Player*		mPlayer;
-		UINT		mBulletCount;
+		UINT		mMaxBulletCount;
+		UINT		mCurBulletCount;
+		Vector4		mGunColor;
 	};
 }
 

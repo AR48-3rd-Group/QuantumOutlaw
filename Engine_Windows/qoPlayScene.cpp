@@ -11,7 +11,7 @@
 #include "qoPlayer.h"
 #include "qoGround.h"
 #include "qoRigidbody.h"
-#include "ArchitectureInclude.h"
+#include "qoCamera.h"
 
 namespace qo
 {
@@ -29,8 +29,7 @@ namespace qo
 	{		
 		Player* player = new Player();
 		Transform* PlayerTransform = player->AddComponent<Transform>();
-		//PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-		PlayerTransform->SetPositionInPixels(0, 500, 0);
+		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
@@ -47,58 +46,52 @@ namespace qo
 
 		// 총 생성
 		player->AddGun(eGunType::Superposition);
+		player->AddGun(eGunType::Entanglement);
+		player->AddGun(eGunType::Teleportation);
+
+		player->ChangeActiveGun(eGunType::Superposition);
 
 		player->Initialize();
 
 		AddGameObject(player, LAYER::PLAYER);
+		Camera::SetTarget(player);
 
-		// 바닥 오브젝트 생성
-		Floor* floor = new Floor();
-		Transform* FloorTransform = floor->AddComponent<Transform>();
-		FloorTransform->SetPositionInPixels(0, 0, 1);
-		FloorTransform->SetScaleInPixels(1990, 100, 1);
-		FloorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* FloorMeshRenderer = floor->AddComponent<MeshRenderer>();
-		FloorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		FloorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		// 바닥 객체 생성
+		Ground* ground = new Ground();
+		Transform* GroundTransform = ground->AddComponent<Transform>();
+		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
+		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
+		GroundTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		Collider* GroundCollider = floor->AddComponent<Collider>();
-		GroundCollider->SetScale(FloorTransform->GetScale());
+		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
+		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader")); 
 
-		AddGameObject(floor, LAYER::FLOOR);
+		Collider* GroundCollider = ground->AddComponent<Collider>();
+		GroundCollider->SetScale(Vector3(1.f, 0.3f, 0.f));
 
-		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
+		AddGameObject(ground, LAYER::GROUND);
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::GROUND, TRUE);
 
 		// 벽 오브젝트 생성
-		Wall* wall = new Wall();
-		DestuctibleWall* dWall = new DestuctibleWall();
-		Transform* WallTransform = wall->AddComponent<Transform>();
-		Transform* dWallTransform = dWall->AddComponent<Transform>();
-		WallTransform->SetPositionInPixels(500, 400, 1);
-		dWallTransform->SetPositionInPixels(-500, 400, 1);
-		WallTransform->SetScaleInPixels(400, 800, 1);
-		dWallTransform->SetScaleInPixels(400, 800, 1);
+		Ground* Wall = new Ground();
+		Transform* WallTransform = Wall->AddComponent<Transform>();
+		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
+		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
 		WallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
-		dWallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
 
-		MeshRenderer* WallMeshRenderer = wall->AddComponent<MeshRenderer>();
-		MeshRenderer* dWallMeshRenderer = dWall->AddComponent<MeshRenderer>();
+		MeshRenderer* WallMeshRenderer = Wall->AddComponent<MeshRenderer>();
 		WallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		dWallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		WallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-		dWallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* WallCollider = wall->AddComponent<Collider>();
-		Collider* dWallCollider = dWall->AddComponent<Collider>();
-		WallCollider->SetScale(WallTransform->GetScale());
-		dWallCollider->SetScale(dWallTransform->GetScale());
+		Collider* WallCollider = Wall->AddComponent<Collider>();
+		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
 
-		AddGameObject(wall, LAYER::WALL);
-		AddGameObject(dWall, LAYER::WALL);
+		AddGameObject(Wall, LAYER::GROUND);
 
-		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
-		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::GROUND, TRUE);
 	}
 
 	void PlayScene::Update()

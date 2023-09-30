@@ -34,17 +34,35 @@
     <Filter Include="Scripts\Enemy">
       <UniqueIdentifier>{7f3dcec3-e602-4abb-8fd7-a02413336045}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Ground">
+      <UniqueIdentifier>{3caf6517-03eb-4aab-b2d2-5a90f0c0fb86}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameObjects\Gun\SuperpositionGun">
       <UniqueIdentifier>{b262c602-c1b2-4b34-8740-a45e7ba63fd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\Gun\Superposition">
-      <UniqueIdentifier>{5bb61431-bab3-4a75-bbeb-99a9a50cbb1b}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects\Bullet\SuperpositionBullet">
       <UniqueIdentifier>{859634ca-0bce-4995-8a77-9a1f93ec8422}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Architecture">
-      <UniqueIdentifier>{ea943054-6f8e-429f-acf2-d683e3eaae3f}</UniqueIdentifier>
+    <Filter Include="GameObjects\Gun\EntanglementGun">
+      <UniqueIdentifier>{f2dc72ae-a9a1-41b9-8655-140f661c3063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Gun\TeleportationGun">
+      <UniqueIdentifier>{ef608fc5-8ea3-4018-9205-c28edd0d3d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Gun\Entanglement">
+      <UniqueIdentifier>{80fea26f-f3a6-4dbf-9e08-c7cc3160d566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Gun\Teleportation">
+      <UniqueIdentifier>{33eaee0b-0391-4c33-9b3a-7ac609622c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Gun\Superposition">
+      <UniqueIdentifier>{5bb61431-bab3-4a75-bbeb-99a9a50cbb1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Bullet\EntanglementBullet">
+      <UniqueIdentifier>{38c508b5-13ef-433d-9cfd-00ad1390a555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Bullet\TeleportationBullet">
+      <UniqueIdentifier>{57a21c91-82a9-4e10-8599-e0c56171c24f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +99,9 @@
     <ClCompile Include="qoLabTurretScript.cpp">
       <Filter>Scripts\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="qoGround.cpp">
+      <Filter>GameObjects\Ground</Filter>
+    </ClCompile>
     <ClCompile Include="qoSuperpositionGun.cpp">
       <Filter>GameObjects\Gun\SuperpositionGun</Filter>
     </ClCompile>
@@ -93,26 +114,23 @@
     <ClCompile Include="qoSuperpositionBullet.cpp">
       <Filter>GameObjects\Bullet\SuperpositionBullet</Filter>
     </ClCompile>
-    <ClCompile Include="qoGround.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoTeleportationGun.cpp">
+      <Filter>GameObjects\Gun\TeleportationGun</Filter>
     </ClCompile>
-    <ClCompile Include="qoWall.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoEntanglementGun.cpp">
+      <Filter>GameObjects\Gun\EntanglementGun</Filter>
     </ClCompile>
-    <ClCompile Include="qoFloor.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoTeleportationGunScript.cpp">
+      <Filter>Scripts\Gun\Teleportation</Filter>
     </ClCompile>
-    <ClCompile Include="qoLockedDoor.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoEntanglementGunScript.cpp">
+      <Filter>Scripts\Gun\Entanglement</Filter>
     </ClCompile>
-    <ClCompile Include="qoDoorSwitch.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoEntanglementBullet.cpp">
+      <Filter>GameObjects\Bullet\EntanglementBullet</Filter>
     </ClCompile>
-    <ClCompile Include="qoBarrier.cpp">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClCompile>
-    <ClCompile Include="qoDestructibleWall.cpp">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClCompile Include="qoTeleportationBullet.cpp">
+      <Filter>GameObjects\Bullet\TeleportationBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +171,9 @@
     <ClInclude Include="qoLabTurretScript.h">
       <Filter>Scripts\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="qoGround.h">
+      <Filter>GameObjects\Ground</Filter>
+    </ClInclude>
     <ClInclude Include="qoSuperpositionGun.h">
       <Filter>GameObjects\Gun\SuperpositionGun</Filter>
     </ClInclude>
@@ -162,29 +183,23 @@
     <ClInclude Include="qoSuperpositionBullet.h">
       <Filter>GameObjects\Bullet\SuperpositionBullet</Filter>
     </ClInclude>
-    <ClInclude Include="qoGround.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoTeleportationGun.h">
+      <Filter>GameObjects\Gun\TeleportationGun</Filter>
     </ClInclude>
-    <ClInclude Include="qoWall.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoEntanglementGun.h">
+      <Filter>GameObjects\Gun\EntanglementGun</Filter>
     </ClInclude>
-    <ClInclude Include="qoFloor.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoTeleportationGunScript.h">
+      <Filter>Scripts\Gun\Teleportation</Filter>
     </ClInclude>
-    <ClInclude Include="qoLockedDoor.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoEntanglementGunScript.h">
+      <Filter>Scripts\Gun\Entanglement</Filter>
     </ClInclude>
-    <ClInclude Include="qoDoorSwitch.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoEntanglementBullet.h">
+      <Filter>GameObjects\Bullet\EntanglementBullet</Filter>
     </ClInclude>
-    <ClInclude Include="qoBarrier.h">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClInclude>
-    <ClInclude Include="qoDestructibleWall.h">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClInclude>
-    <ClInclude Include="ArchitectureInclude.h">
-      <Filter>GameObjects\Architecture</Filter>
+    <ClInclude Include="qoTeleportationBullet.h">
+      <Filter>GameObjects\Bullet\TeleportationBullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

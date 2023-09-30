@@ -19,14 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArchitectureInclude.h" />
-    <ClInclude Include="qoBarrier.h" />
     <ClInclude Include="qoBullet.h" />
     <ClInclude Include="qoBulletScript.h" />
-    <ClInclude Include="qoDestructibleWall.h" />
-    <ClInclude Include="qoDoorSwitch.h" />
     <ClInclude Include="qoEnemy.h" />
-    <ClInclude Include="qoFloor.h" />
+    <ClInclude Include="qoEntanglementBullet.h" />
+    <ClInclude Include="qoEntanglementGun.h" />
+    <ClInclude Include="qoEntanglementGunScript.h" />
     <ClInclude Include="qoGround.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
@@ -34,7 +32,6 @@
     <ClInclude Include="qoLabGuardScript.h" />
     <ClInclude Include="qoLabTurret.h" />
     <ClInclude Include="qoLabTurretScript.h" />
-    <ClInclude Include="qoLockedDoor.h" />
     <ClInclude Include="qoPlayer.h" />
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
@@ -42,16 +39,17 @@
     <ClInclude Include="qoSuperpositionBullet.h" />
     <ClInclude Include="qoSuperpositionGun.h" />
     <ClInclude Include="qoSuperpositionGunScript.h" />
-    <ClInclude Include="qoWall.h" />
+    <ClInclude Include="qoTeleportationBullet.h" />
+    <ClInclude Include="qoTeleportationGun.h" />
+    <ClInclude Include="qoTeleportationGunScript.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="qoBarrier.cpp" />
     <ClCompile Include="qoBullet.cpp" />
     <ClCompile Include="qoBulletScript.cpp" />
-    <ClCompile Include="qoDestructibleWall.cpp" />
-    <ClCompile Include="qoDoorSwitch.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
-    <ClCompile Include="qoFloor.cpp" />
+    <ClCompile Include="qoEntanglementBullet.cpp" />
+    <ClCompile Include="qoEntanglementGun.cpp" />
+    <ClCompile Include="qoEntanglementGunScript.cpp" />
     <ClCompile Include="qoGround.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
@@ -59,14 +57,15 @@
     <ClCompile Include="qoLabGuardScript.cpp" />
     <ClCompile Include="qoLabTurret.cpp" />
     <ClCompile Include="qoLabTurretScript.cpp" />
-    <ClCompile Include="qoLockedDoor.cpp" />
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
     <ClCompile Include="qoSuperpositionBullet.cpp" />
     <ClCompile Include="qoSuperpositionGun.cpp" />
     <ClCompile Include="qoSuperpositionGunScript.cpp" />
-    <ClCompile Include="qoWall.cpp" />
+    <ClCompile Include="qoTeleportationBullet.cpp" />
+    <ClCompile Include="qoTeleportationGun.cpp" />
+    <ClCompile Include="qoTeleportationGunScript.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

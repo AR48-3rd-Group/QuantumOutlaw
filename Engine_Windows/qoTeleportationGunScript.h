@@ -3,11 +3,11 @@
 
 namespace qo
 {
-	class SuperpositionGunScript : public Script
+	class TeleportationGunScript : public Script
 	{
 	public:
-		SuperpositionGunScript();
-		virtual ~SuperpositionGunScript();
+		TeleportationGunScript();
+		virtual ~TeleportationGunScript();
 
 		void Initialize() override;
 		void Update() override;

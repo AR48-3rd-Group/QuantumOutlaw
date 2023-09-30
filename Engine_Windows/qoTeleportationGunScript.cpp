@@ -1,38 +1,39 @@
-#include "qoSuperpositionGunScript.h"
+#include "qoTeleportationGunScript.h"
 #include "qoInput.h"
 #include "qoApplication.h"
 #include "qoGun.h"
 #include "qoTransform.h"
-#include "qoSuperpositionBullet.h"
 #include "qoMeshRenderer.h"
 #include "qoSceneManager.h"
 #include "qoResourceManager.h"
 #include "qoBulletScript.h"
 #include "qoCollider.h"
+#include "qoTeleportationBullet.h"
 
 extern qo::Application application;
 
+
 namespace qo
 {
-	SuperpositionGunScript::SuperpositionGunScript()
+	TeleportationGunScript::TeleportationGunScript()
 	{
 	}
 
-	SuperpositionGunScript::~SuperpositionGunScript()
+	TeleportationGunScript::~TeleportationGunScript()
 	{
 	}
 
-	void SuperpositionGunScript::Initialize()
+	void TeleportationGunScript::Initialize()
 	{
 	}
 
-	void SuperpositionGunScript::Update()
+	void TeleportationGunScript::Update()
 	{
 		Gun* owner = dynamic_cast<Gun*>(GetOwner());
 
 		if (owner == nullptr)
 			return;
-		
+
 		// ÃÑ¾Ë ¹ß»ç
 		if (Input::GetKeyState(KEY_CODE::LBTN) == KEY_STATE::DOWN)
 		{
@@ -43,18 +44,18 @@ namespace qo
 					Shoot();
 				}
 			}
-		}		
+		}
 	}
 
-	void SuperpositionGunScript::LateUpdate()
+	void TeleportationGunScript::LateUpdate()
 	{
 	}
 
-	void SuperpositionGunScript::Render()
+	void TeleportationGunScript::Render()
 	{
 	}
 
-	void SuperpositionGunScript::Shoot()
+	void TeleportationGunScript::Shoot()
 	{
 		Gun* owner = dynamic_cast<Gun*>(GetOwner());
 
@@ -84,7 +85,7 @@ namespace qo
 			// ================================================
 			// ÃÑ¾Ë »ý¼º
 			// ================================================
-			SuperpositionBullet* bullet = new SuperpositionBullet(Dir);
+			TeleportationBullet* bullet = new TeleportationBullet(Dir);
 			Transform* tr = bullet->AddComponent<Transform>();
 			tr->SetPosition(GunPos); // ÃÑ¾Ë ½ÃÀÛÀ§Ä¡´Â ÃÑÀ§Ä¡·Î ¼³Á¤
 			tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
