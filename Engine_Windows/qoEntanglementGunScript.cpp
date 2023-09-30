@@ -1,38 +1,39 @@
-#include "qoSuperpositionGunScript.h"
+#include "qoEntanglementGunScript.h"
 #include "qoInput.h"
 #include "qoApplication.h"
 #include "qoGun.h"
 #include "qoTransform.h"
-#include "qoSuperpositionBullet.h"
 #include "qoMeshRenderer.h"
 #include "qoSceneManager.h"
 #include "qoResourceManager.h"
 #include "qoBulletScript.h"
 #include "qoCollider.h"
+#include "qoEntanglementBullet.h"
 
 extern qo::Application application;
 
+
 namespace qo
 {
-	SuperpositionGunScript::SuperpositionGunScript()
+	EntanglementGunScript::EntanglementGunScript()
 	{
 	}
 
-	SuperpositionGunScript::~SuperpositionGunScript()
+	EntanglementGunScript::~EntanglementGunScript()
 	{
 	}
 
-	void SuperpositionGunScript::Initialize()
+	void EntanglementGunScript::Initialize()
 	{
 	}
 
-	void SuperpositionGunScript::Update()
+	void EntanglementGunScript::Update()
 	{
 		Gun* owner = dynamic_cast<Gun*>(GetOwner());
 
 		if (owner == nullptr)
 			return;
-		
+
 		// ÃÑ¾Ë ¹ß»ç
 		if (Input::GetKeyState(KEY_CODE::LBTN) == KEY_STATE::DOWN)
 		{
@@ -43,18 +44,18 @@ namespace qo
 					Shoot();
 				}
 			}
-		}		
+		}
 	}
 
-	void SuperpositionGunScript::LateUpdate()
+	void EntanglementGunScript::LateUpdate()
 	{
 	}
 
-	void SuperpositionGunScript::Render()
+	void EntanglementGunScript::Render()
 	{
 	}
 
-	void SuperpositionGunScript::Shoot()
+	void EntanglementGunScript::Shoot()
 	{
 		Gun* owner = dynamic_cast<Gun*>(GetOwner());
 
@@ -84,7 +85,7 @@ namespace qo
 			// ================================================
 			// ÃÑ¾Ë »ý¼º
 			// ================================================
-			SuperpositionBullet* bullet = new SuperpositionBullet(Dir);
+			EntanglementBullet* bullet = new EntanglementBullet(Dir);
 			Transform* tr = bullet->AddComponent<Transform>();
 			tr->SetPosition(GunPos); // ÃÑ¾Ë ½ÃÀÛÀ§Ä¡´Â ÃÑÀ§Ä¡·Î ¼³Á¤
 			tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));

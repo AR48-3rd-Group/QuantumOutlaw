@@ -43,6 +43,22 @@ namespace qo
 		default:
 			break;
 		}
+
+		// =========================================================
+		// 총 변경 이벤트
+		// =========================================================
+		if (Input::GetKeyState(KEY_CODE::N_1) == KEY_STATE::DOWN)
+		{
+			mPlayer->ChangeActiveGun(eGunType::Superposition);
+		}
+		else if (Input::GetKeyState(KEY_CODE::N_2) == KEY_STATE::DOWN)
+		{
+			mPlayer->ChangeActiveGun(eGunType::Entanglement);
+		}
+		else if (Input::GetKeyState(KEY_CODE::N_3) == KEY_STATE::DOWN)
+		{
+			mPlayer->ChangeActiveGun(eGunType::Teleportation);
+		}
 	}
 
 	void PlayerScript::LateUpdate()

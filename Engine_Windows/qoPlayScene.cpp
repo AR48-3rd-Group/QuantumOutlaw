@@ -11,6 +11,7 @@
 #include "qoPlayer.h"
 #include "qoGround.h"
 #include "qoRigidbody.h"
+#include "qoCamera.h"
 
 namespace qo
 {
@@ -45,11 +46,18 @@ namespace qo
 
 		// 醚 积己
 		player->AddGun(eGunType::Superposition);
+		player->AddGun(eGunType::Entanglement);
+		player->AddGun(eGunType::Teleportation);
+
+		player->ChangeActiveGun(eGunType::Superposition);
 
 		player->Initialize();
 
 		AddGameObject(player, LAYER::PLAYER);
+		Camera::SetTarget(player);
 
+
+		// 官蹿 按眉 积己
 		Ground* ground = new Ground();
 		Transform* GroundTransform = ground->AddComponent<Transform>();
 		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));

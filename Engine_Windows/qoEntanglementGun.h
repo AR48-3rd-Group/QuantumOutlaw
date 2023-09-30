@@ -3,11 +3,11 @@
 
 namespace qo
 {
-	class SuperpositionGun : public Gun
+	class EntanglementGun : public Gun
 	{
 	public:
-		SuperpositionGun(Player* owner, UINT bulletCount);
-		virtual ~SuperpositionGun();
+		EntanglementGun(Player* owner, UINT bulletCount);
+		virtual ~EntanglementGun();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
