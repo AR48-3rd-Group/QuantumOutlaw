@@ -36,7 +36,7 @@ namespace qo
 		// ÃÑ¾Ë ¹ß»ç
 		if (Input::GetKeyState(KEY_CODE::LBTN) == KEY_STATE::DOWN)
 		{
-			if (owner->GetBulletCount() > 0)
+			if (owner->GetCurBulletCount() > 0)
 			{
 				if (owner->BulletConsumption(1))
 				{

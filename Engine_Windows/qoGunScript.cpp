@@ -1,6 +1,7 @@
 #include "qoGunScript.h"
 #include "qoGun.h"
 #include "qoTransform.h"
+#include "qoInput.h"
 
 namespace qo
 {
@@ -31,10 +32,20 @@ namespace qo
 
 		GunTransform->SetPosition(GunPos);
 
-
-		if (owner->GetBulletCount() <= 0)
+		// =======================
+		// 탄알 전부 소모시 색상변경
+		// =======================
+		if (owner->GetCurBulletCount() <= 0)
 		{
-			GunTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+			GunTransform->SetColor(Vector4::Zero);
+		}
+
+		// =======================
+		// 탄알 재장전
+		// =======================
+		if (Input::GetKeyState(KEY_CODE::R) == KEY_STATE::DOWN)
+		{
+			owner->ReLoad();
 		}
 	}
 

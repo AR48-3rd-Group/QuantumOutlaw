@@ -80,13 +80,13 @@ namespace qo
 		// ================================
 		if (type == eGunType::Superposition)
 		{
-			SuperpositionGun* gun = new SuperpositionGun(type, this, 30);
+			SuperpositionGun* gun = new SuperpositionGun(type, this, 10);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
 			GunTransform->SetPosition(GunPos);
 			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
-			GunTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
 
 			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
 			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
