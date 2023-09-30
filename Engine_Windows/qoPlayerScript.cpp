@@ -70,7 +70,7 @@ namespace qo
 			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 
 			rigidbody->SetGround(false);
-			rigidbody->SetVeclocity(Vector3(0.f, 0.5f, 0.f));
+			rigidbody->SetVelocity(Vector3(0.f, 1.5f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
@@ -98,7 +98,7 @@ namespace qo
 			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 
 			rigidbody->SetGround(false);
-			rigidbody->SetVeclocity(Vector3(0.f, 0.5f, 0.f));
+			rigidbody->SetVelocity(Vector3(0.f, 0.5f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}

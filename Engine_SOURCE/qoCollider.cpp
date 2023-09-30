@@ -18,6 +18,7 @@ namespace qo
 		, mAffectedCamera(true)
 		, mbIsCollision(false)
 		, mCollisionNumber(mCollisionCount++)
+		, mIsActive(true)
 	{
 		mMesh = ResourceManager::Find<Mesh>(L"BasicRectangleMesh");
 		mShader = ResourceManager::Find<Shader>(L"ColorTestShader2");
@@ -41,6 +42,8 @@ namespace qo
 
 	void Collider::Render()
 	{
+		if (!mIsActive) return;
+
 		if (mbIsCollision)
 		{
 			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::Color_Test];
@@ -86,17 +89,20 @@ namespace qo
 
 	void Collider::OnCollisionEnter(Collider* other)
 	{
+		if (!mIsActive) return;
 		GetOwner()->OnCollisionEnter(other);
 		mbIsCollision = true;
 	}
 
 	void Collider::OnCollisionStay(Collider* other)
 	{
+		if (!mIsActive) return;
 		GetOwner()->OnCollisionStay(other);
 	}
 
 	void Collider::OnCollisionExit(Collider* other)
 	{
+		if (!mIsActive) return;
 		GetOwner()->OnCollisionExit(other);
 		mbIsCollision = false;
 	}

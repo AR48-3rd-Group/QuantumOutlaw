@@ -31,6 +31,10 @@ namespace qo
 
 		void SetColor(math::Vector4 color) { mColor = color; }
 
+		// New function to set position in pixels
+		void SetPositionInPixels(float xPixels, float yPixels, float z);
+		void SetScaleInPixels(float widthInPixels, float heightInPixels, float z);
+
 	private:
 		Vector3 mPosition;
 		Vector3 mRotation;
