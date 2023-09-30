@@ -11,6 +11,7 @@
 #include "qoPlayer.h"
 #include "qoGround.h"
 #include "qoRigidbody.h"
+#include "qoCamera.h"
 
 namespace qo
 {
@@ -53,7 +54,10 @@ namespace qo
 		player->Initialize();
 
 		AddGameObject(player, LAYER::PLAYER);
+		Camera::SetTarget(player);
 
+
+		// ¹Ù´Ú °´Ã¼ »ý¼º
 		Ground* ground = new Ground();
 		Transform* GroundTransform = ground->AddComponent<Transform>();
 		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
