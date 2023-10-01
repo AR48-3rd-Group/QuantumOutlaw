@@ -86,7 +86,7 @@ namespace qo
 			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 
 			rigidbody->SetGround(false);
-			rigidbody->SetVelocity(Vector3(0.f, 1.5f, 0.f));
+			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
@@ -114,7 +114,7 @@ namespace qo
 			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 
 			rigidbody->SetGround(false);
-			rigidbody->SetVelocity(Vector3(0.f, 0.5f, 0.f));
+			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
@@ -143,6 +143,16 @@ namespace qo
 		if (rigidbody->GetGround())
 		{
 			mPlayer->mState = ePlayerState::Idle;
+		}
+
+		// 임시 더블 점프 
+		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
+		{
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+
+			rigidbody->SetGround(false);
+			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
+			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
 
