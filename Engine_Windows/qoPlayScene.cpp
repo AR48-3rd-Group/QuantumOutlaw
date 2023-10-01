@@ -13,6 +13,8 @@
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 
+#include "ArchitectureInclude.h"
+
 namespace qo
 {
 	PlayScene::PlayScene()
@@ -76,22 +78,24 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
 		// 벽 오브젝트 생성
-		Floor* Wall = new Floor();
-		Transform* WallTransform = Wall->AddComponent<Transform>();
+		Wall* wall = new Wall();
+		Transform* WallTransform = wall->AddComponent<Transform>();
 		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
 		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
 		WallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
 
-		MeshRenderer* WallMeshRenderer = Wall->AddComponent<MeshRenderer>();
+		MeshRenderer* WallMeshRenderer = wall->AddComponent<MeshRenderer>();
 		WallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		WallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* WallCollider = Wall->AddComponent<Collider>();
+		Collider* WallCollider = wall->AddComponent<Collider>();
 		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
 
-		AddGameObject(Wall, LAYER::FLOOR);
+		AddGameObject(wall, LAYER::WALL);
 
-		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 	}
 
 	void PlayScene::Update()

@@ -63,13 +63,6 @@ namespace qo
 				}
 			}
 		}
-		if (bullet != nullptr)
-		{
-			Collider* WallCollider = GetComponent<Collider>();
-
-			Destroy(bullet);
-			WallCollider->SetActive(false);
-		}
 	}
 
 	void DestuctibleWall::OnCollisionStay(Collider* other)
