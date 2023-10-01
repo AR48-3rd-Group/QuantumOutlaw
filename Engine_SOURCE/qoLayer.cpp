@@ -1,4 +1,5 @@
 #include "qoLayer.h"
+#include "qoCollisionManager.h"
 
 namespace qo
 {
@@ -44,6 +45,7 @@ namespace qo
 			if ((*iter)->GetGameObjectState() == GameObject::eState::Dead)
 			{
 				GameObject* obj = *iter;
+				CollisionManager::ForceCollisionExit(obj->GetComponent<Collider>());
 				iter = mGameObjects.erase(iter);
 				delete obj;
 				obj = nullptr;

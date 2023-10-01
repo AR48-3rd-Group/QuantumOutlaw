@@ -26,6 +26,8 @@ namespace qo
 		static void LayerCollision(class Scene* scene, LAYER left, LAYER right);
 		static void ColliderCollision(Collider* left, Collider* right);
 		static bool Intersect(Collider* left, Collider* right);
+		
+		static void ForceCollisionExit(Collider* deadcol);
 
 	private:
 		static std::map<UINT64, bool> mCollisionMap;
