@@ -142,4 +142,48 @@ namespace qo
 			return false;
 		}
 	}
+
+	void CollisionManager::ForceCollisionExit(Collider* deadcol)
+	{
+		std::map<UINT64, bool>::iterator iter = mCollisionMap.begin();
+		Scene* ActiveScene = SceneManager::GetActiveScene();
+
+		for (;iter != mCollisionMap.end() ;iter++)
+		{
+			ColliderID temp = {};
+			temp.id = iter->first;
+			if (temp.left == deadcol->GetCollisionNumber())
+			{
+				//mCollisionMap.erase(iter);
+				for (int layer = 0;layer != LAYER::MAX;layer++)
+				{
+					std::vector<GameObject*> GameObjects = ActiveScene->GetLayer((LAYER)layer)->GetGameObjects();
+					for (GameObject* obj : GameObjects)
+					{
+						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.right)
+						{
+							obj->GetComponent<Collider>()->OnCollisionExit(deadcol);
+							break;
+						}
+					}
+				}
+			}
+			else if (temp.right == deadcol->GetCollisionNumber())
+			{
+				//mCollisionMap.erase(iter);
+				for (int layer = 0;layer != LAYER::MAX;layer++)
+				{
+					std::vector<GameObject*> GameObjects = ActiveScene->GetLayer((LAYER)layer)->GetGameObjects();
+					for (GameObject* obj : GameObjects)
+					{
+						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.left)
+						{
+							obj->GetComponent<Collider>()->OnCollisionExit(deadcol);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }
