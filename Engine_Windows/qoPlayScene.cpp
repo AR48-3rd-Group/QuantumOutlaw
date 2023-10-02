@@ -13,7 +13,6 @@
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 
-#include "ArchitectureInclude.h"
 
 namespace qo
 {
@@ -40,7 +39,7 @@ namespace qo
 		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
 
 		Collider* PlayerCollider = player->AddComponent<Collider>();
-		PlayerCollider->SetScale(Vector3(0.1f, 0.3f, 0.f));
+		PlayerCollider->SetScale(PlayerTransform->GetScale());
 					 
 		player->AddComponent<Rigidbody>();
 		
@@ -60,47 +59,69 @@ namespace qo
 
 
 		// 바닥 객체 생성
-		Floor* ground = new Floor();
-		Transform* GroundTransform = ground->AddComponent<Transform>();
-		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
-		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
-		GroundTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		Floor* floor = new Floor();
+		Transform* FloorTransform = floor->AddComponent<Transform>();
+		FloorTransform->SetPositionInPixels(0, 0, 0);
+		FloorTransform->SetScaleInPixels(1990, 100, 0);
+		FloorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
-		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader")); 
+		MeshRenderer* FloorMeshRenderer = floor->AddComponent<MeshRenderer>();
+		FloorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		FloorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* GroundCollider = ground->AddComponent<Collider>();
-		GroundCollider->SetScale(Vector3(1.f, 0.3f, 0.f));
+		Collider* FloorCollider = floor->AddComponent<Collider>();
+		FloorCollider->SetScale(FloorTransform->GetScale());
 
-		AddGameObject(ground, LAYER::FLOOR);
+		AddGameObject(floor, LAYER::FLOOR);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
-		// 벽 오브젝트 생성
-		Wall* wall = new Wall();
-		Transform* WallTransform = wall->AddComponent<Transform>();
-		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
-		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
-		WallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
+		// 스위치 개체 생성
+		doorswitch = new DoorSwitch();
+		Transform* DSTransform = doorswitch->AddComponent<Transform>();
+		DSTransform->SetPositionInPixels(-500, 200, 0);
+		DSTransform->SetScaleInPixels(400, 400, 0);
+		DSTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* WallMeshRenderer = wall->AddComponent<MeshRenderer>();
-		WallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		WallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		MeshRenderer* DSMeshRenderer = doorswitch->AddComponent<MeshRenderer>();
+		DSMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		DSMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* WallCollider = wall->AddComponent<Collider>();
-		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
+		Collider* DSCollider = doorswitch->AddComponent<Collider>();
+		DSCollider->SetScale(DSTransform->GetScale());
 
-		AddGameObject(wall, LAYER::WALL);
+		AddGameObject(doorswitch, LAYER::WALL);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
-
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
+
+		// 잠긴 문 개체 생성
+		lockeddoor = new LockedDoor();
+		Transform* LockedDoorTransform = lockeddoor->AddComponent<Transform>();
+		LockedDoorTransform->SetPositionInPixels(500, 200, 0);
+		LockedDoorTransform->SetScaleInPixels(400, 400, 0);
+		LockedDoorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		MeshRenderer* LockedDoorMeshRenderer = lockeddoor->AddComponent<MeshRenderer>();
+		LockedDoorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LockedDoorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* LockedDoorCollider = lockeddoor->AddComponent<Collider>();
+		LockedDoorCollider->SetScale(LockedDoorTransform->GetScale());
+
+		AddGameObject(lockeddoor, LAYER::WALL);
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 	}
 
 	void PlayScene::Update()
 	{
 		Scene::Update();
+
+		if (doorswitch->GetSwitch())
+		{
+			lockeddoor->SetLocked(false);
+		}
 	}
 
 	void PlayScene::LateUpdate()
