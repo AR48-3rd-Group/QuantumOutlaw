@@ -9,6 +9,7 @@
 #include "qoBulletScript.h"
 #include "qoCollider.h"
 #include "qoEntanglementBullet.h"
+#include "qoCamera.h"
 
 extern qo::Application application;
 
@@ -67,17 +68,22 @@ namespace qo
 			Vector2 mousePos = Input::GetMousPosition();
 			Vector3 GunPos = owner->GetComponent<Transform>()->GetPosition();
 
-			// 윈도우 좌표계 → 왼손 좌표계 기준 변환
-			GunPos.x += application.GetWidth() / 2.f;
-			GunPos.y += application.GetHeight() / 2.f;
+			// 총위치 왼손 좌표계 좌표상의 위치로 변경
+			GunPos = Camera::CaculatePos(GunPos);
+
+			// 윈도우 좌표계 → 왼손 좌표계 정규화
+			mousePos.x -= application.GetWidth() / 2.f;
+			mousePos.y -= application.GetHeight() / 2.f;
+
+			mousePos.x /= (application.GetWidth() / 2.f);
+			mousePos.y /= (application.GetHeight() / 2.f);
+
+			mousePos.y *= -1.f;
 
 			// Gun 위치 → 현재 마우스 위치
 			Vector3 Dir = Vector3(0.f, 0.f, 0.f);
 			Dir.x = mousePos.x - GunPos.x;
 			Dir.y = mousePos.y - GunPos.y;
-			Dir.y *= -1.f; // Window 좌표계 → 왼손 좌표계 Y 방향 전환
-
-
 
 			// Gun 위치 재설정
 			GunPos = owner->GetComponent<Transform>()->GetPosition();
