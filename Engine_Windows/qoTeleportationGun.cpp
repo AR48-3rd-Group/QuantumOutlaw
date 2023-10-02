@@ -4,6 +4,7 @@ namespace qo
 {
 	TeleportationGun::TeleportationGun(Player* owner, UINT bulletCount)
 		: Gun(eGunType::Teleportation, owner, bulletCount)
+		, mTargetBullet(nullptr)
 	{
 	}
 
