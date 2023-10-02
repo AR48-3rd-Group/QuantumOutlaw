@@ -8,6 +8,7 @@ namespace qo
 {
 	LockedDoor::LockedDoor()
 		: mIsLocked(true)
+		, mTagNumber(0)
 	{
 	}
 
