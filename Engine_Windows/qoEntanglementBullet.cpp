@@ -62,8 +62,8 @@ namespace qo
 
 				// 이제 그 에너미와 가까운 에너미 탐색
 				Scene* ActiveScene = SceneManager::GetActiveScene();
-				std::vector<GameObject*> enemies = ActiveScene->GetLayer((UINT)LAYER::MONSETR)->GetGameObjects();
-				float min = 1.f;
+				std::vector<GameObject*> enemies = ActiveScene->GetLayer((UINT)LAYER::MONSTER)->GetGameObjects();
+				long double min = 1.f;
 
 				GameObject* target = nullptr;
 
