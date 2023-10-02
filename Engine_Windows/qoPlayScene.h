@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\Engine_SOURCE\\qoScene.h"
+#include "ArchitectureInclude.h"
 
 namespace qo
 {
@@ -15,5 +16,7 @@ namespace qo
 		void Render() override;
 
 	private:
+		DoorSwitch* doorswitch;
+		LockedDoor* lockeddoor;
 	};
 }
