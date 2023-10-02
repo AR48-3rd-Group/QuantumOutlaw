@@ -64,6 +64,21 @@
     <Filter Include="GameObjects\Architecture">
       <UniqueIdentifier>{03bbad7c-7d92-4469-a7f6-6e5dd424ef70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Test">
+      <UniqueIdentifier>{cb26fb3d-cb2d-4556-bcdf-996abd3839a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level1">
+      <UniqueIdentifier>{dfaa7c0e-cc4a-4d1f-8a49-c1d6c9e11a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level2">
+      <UniqueIdentifier>{2a46825f-3ef9-43c6-ba73-d5c7a2062b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level3">
+      <UniqueIdentifier>{4d0478d5-ca42-446b-9385-5f1b5adf87fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Level4">
+      <UniqueIdentifier>{65de5abb-9ef2-4d13-9c68-d1835a675f33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -146,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="qoWall.cpp">
       <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoStage1_1.cpp">
+      <Filter>Scenes\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="qoStage1_2.cpp">
+      <Filter>Scenes\Level1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="qoLockedDoor.h">
       <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoStage1_1.h">
+      <Filter>Scenes\Level1</Filter>
+    </ClInclude>
+    <ClInclude Include="qoStage1_2.h">
+      <Filter>Scenes\Level1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

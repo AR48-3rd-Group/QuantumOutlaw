@@ -41,6 +41,8 @@
     <ClInclude Include="qoPlayerScript.h" />
     <ClInclude Include="qoPlayScene.h" />
     <ClInclude Include="qoLoadScene.h" />
+    <ClInclude Include="qoStage1_1.h" />
+    <ClInclude Include="qoStage1_2.h" />
     <ClInclude Include="qoSuperpositionBullet.h" />
     <ClInclude Include="qoSuperpositionGun.h" />
     <ClInclude Include="qoSuperpositionGunScript.h" />
@@ -70,6 +72,8 @@
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
     <ClCompile Include="qoPlayScene.cpp" />
+    <ClCompile Include="qoStage1_1.cpp" />
+    <ClCompile Include="qoStage1_2.cpp" />
     <ClCompile Include="qoSuperpositionBullet.cpp" />
     <ClCompile Include="qoSuperpositionGun.cpp" />
     <ClCompile Include="qoSuperpositionGunScript.cpp" />
