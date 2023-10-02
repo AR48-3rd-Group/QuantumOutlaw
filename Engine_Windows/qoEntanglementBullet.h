@@ -17,6 +17,14 @@ namespace qo
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
+
+	public:
+		void SetEntangle(bool Entangle) { mIsEntangle = Entangle; }
+		void SetFirst(GameObject* first) { mFirst = first; }
+
+	private:
+		bool mIsEntangle;
+		GameObject* mFirst;
 	};
 }
 

@@ -79,6 +79,18 @@
     <Filter Include="Scenes\Level4">
       <UniqueIdentifier>{65de5abb-9ef2-4d13-9c68-d1835a675f33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\UI">
+      <UniqueIdentifier>{89b8d5c4-e209-431a-9998-3f886bc1e2c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\UI">
+      <UniqueIdentifier>{7dbc1df8-e6b9-4725-aecf-9c1a1329c63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\HP">
+      <UniqueIdentifier>{eb02e067-fd88-4163-99d6-7eae7a6353b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\UI\HP">
+      <UniqueIdentifier>{72fedc18-6e57-4d2f-9d85-534b7aca830e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -168,6 +180,18 @@
     <ClCompile Include="qoStage1_2.cpp">
       <Filter>Scenes\Level1</Filter>
     </ClCompile>
+    <ClCompile Include="qoUI.cpp">
+      <Filter>GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="qoUIScript.cpp">
+      <Filter>Scripts\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="qoHPUI.cpp">
+      <Filter>GameObjects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="qoHPUIScript.cpp">
+      <Filter>Scripts\UI\HP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
@@ -251,9 +275,6 @@
     <ClInclude Include="qoFloor.h">
       <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
-    <ClInclude Include="qoLoadScene.h">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClInclude>
     <ClInclude Include="qoLockedDoor.h">
       <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
@@ -263,5 +284,18 @@
     <ClInclude Include="qoStage1_2.h">
       <Filter>Scenes\Level1</Filter>
     </ClInclude>
+    <ClInclude Include="qoUI.h">
+      <Filter>GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="qoUIScript.h">
+      <Filter>Scripts\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="qoHPUI.h">
+      <Filter>GameObjects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="qoHPUIScript.h">
+      <Filter>Scripts\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="qoLoadScene.h" />
   </ItemGroup>
 </Project>

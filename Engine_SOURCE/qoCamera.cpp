@@ -10,6 +10,9 @@ namespace qo
 	math::Vector3 Camera::mDiffDistance = {};
 	GameObject* Camera::mTarget = nullptr;
 
+	CAM_EFFECT Camera::mCurCamEffect = CAM_EFFECT::None;
+	std::list<tCamEffect> Camera::m_listCamEffect = {};
+
 	void Camera::Initialize()
 	{
 		mLookAt.x = 0.f;
@@ -19,27 +22,44 @@ namespace qo
 
 	void Camera::Update()
 	{
-		/*if (Input::GetKeyState(KEY_CODE::LEFT) == KEY_STATE::PRESSED)
+		if (m_listCamEffect.empty())
 		{
-			mLookAt.x -= 1.f * Time::DeltaTime();
+			if (mTarget != nullptr)
+			{
+				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
+				mLookAt = TargetPosition;
+			}
 		}
-		if (Input::GetKeyState(KEY_CODE::UP) == KEY_STATE::PRESSED)
+		else
 		{
-			mLookAt.y += 1.f * Time::DeltaTime();
-		}
-		if (Input::GetKeyState(KEY_CODE::DOWN) == KEY_STATE::PRESSED)
-		{
-			mLookAt.y -= 1.f * Time::DeltaTime();
-		}
-		if (Input::GetKeyState(KEY_CODE::RIGHT) == KEY_STATE::PRESSED)
-		{
-			mLookAt.x += 1.f * Time::DeltaTime();
-		}*/
+			if (mTarget != nullptr)
+			{
+				tCamEffect& effect = m_listCamEffect.front();
 
-		if (mTarget != nullptr)
-		{
-			Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
-			mLookAt = TargetPosition;
+				mCurCamEffect = effect.eEffect;
+				effect.fCurTime += Time::DeltaTime();
+
+				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
+				if (effect.eShakeDir == ShakeDir::Horizontal)
+				{
+					mLookAt.x = TargetPosition.x + cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+				}
+				else if (effect.eShakeDir == ShakeDir::Vertical)
+				{
+					mLookAt.y = TargetPosition.y - sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+				}
+				else if (effect.eShakeDir == ShakeDir::Comprehensive)
+				{
+					mLookAt.x = TargetPosition.x + cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+					mLookAt.y = TargetPosition.y - sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+				}
+
+				if (effect.fCurTime > effect.fDuration)
+				{
+					mCurCamEffect = CAM_EFFECT::None;
+					m_listCamEffect.pop_front();
+				}
+			}
 		}
 
 		mDiffDistance = mLookAt - math::Vector3(0.f, 0.f, 0.f);

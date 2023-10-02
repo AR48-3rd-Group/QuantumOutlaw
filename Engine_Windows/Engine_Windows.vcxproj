@@ -32,6 +32,8 @@
     <ClInclude Include="qoFloor.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
+    <ClInclude Include="qoHPUI.h" />
+    <ClInclude Include="qoHPUIScript.h" />
     <ClInclude Include="qoLabGuard.h" />
     <ClInclude Include="qoLabGuardScript.h" />
     <ClInclude Include="qoLabTurret.h" />
@@ -49,6 +51,8 @@
     <ClInclude Include="qoTeleportationBullet.h" />
     <ClInclude Include="qoTeleportationGun.h" />
     <ClInclude Include="qoTeleportationGunScript.h" />
+    <ClInclude Include="qoUI.h" />
+    <ClInclude Include="qoUIScript.h" />
     <ClInclude Include="qoWall.h" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +68,8 @@
     <ClCompile Include="qoFloor.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
+    <ClCompile Include="qoHPUI.cpp" />
+    <ClCompile Include="qoHPUIScript.cpp" />
     <ClCompile Include="qoLabGuard.cpp" />
     <ClCompile Include="qoLabGuardScript.cpp" />
     <ClCompile Include="qoLabTurret.cpp" />
@@ -80,6 +86,8 @@
     <ClCompile Include="qoTeleportationBullet.cpp" />
     <ClCompile Include="qoTeleportationGun.cpp" />
     <ClCompile Include="qoTeleportationGunScript.cpp" />
+    <ClCompile Include="qoUI.cpp" />
+    <ClCompile Include="qoUIScript.cpp" />
     <ClCompile Include="qoWall.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
