@@ -1,6 +1,5 @@
 #include "qoWall.h"
 #include "qoPlayer.h"
-#include "qoBullet.h"
 #include "qoCollider.h"
 #include "qoTransform.h"
 #include "qoRigidbody.h"
@@ -38,7 +37,6 @@ namespace qo
 	void Wall::OnCollisionEnter(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		Bullet* bullet = dynamic_cast<Bullet*>(other->GetOwner());
 
 		if (player != nullptr)
 		{
@@ -101,7 +99,6 @@ namespace qo
 	void Wall::OnCollisionStay(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		Bullet* bullet = dynamic_cast<Bullet*>(other->GetOwner());
 
 		if (player != nullptr)
 		{
