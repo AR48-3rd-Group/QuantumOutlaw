@@ -35,6 +35,7 @@ namespace qo
 
 		if (teleportationGun == nullptr)
 			return;
+
 		// ==========================
 		// ÃÑ¾Ë ¹ß»ç
 		// ==========================
@@ -113,7 +114,7 @@ namespace qo
 			// ================================================
 			// ÃÑ¾Ë »ý¼º
 			// ================================================
-			TeleportationBullet* bullet = new TeleportationBullet(Dir);
+			TeleportationBullet* bullet = new TeleportationBullet(teleportationGun, Dir);
 			Transform* tr = bullet->AddComponent<Transform>();
 			tr->SetPosition(GunPos); // ÃÑ¾Ë ½ÃÀÛÀ§Ä¡´Â ÃÑÀ§Ä¡·Î ¼³Á¤
 			tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
