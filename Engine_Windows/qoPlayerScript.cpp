@@ -83,8 +83,12 @@ namespace qo
 		// Jump
 		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
 		{
-			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+			// 점프시 Colider Exit를 위해서 띄우기 추가
+			Transform* tranform = mPlayer->GetComponent<Transform>();
+			Vector3 pos = tranform->GetPosition();
+			tranform->SetPosition(Vector3(pos.x, pos.y + 0.05f, pos.z));
 
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 			rigidbody->SetGround(false);
 			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
@@ -111,8 +115,12 @@ namespace qo
 		// Jump
 		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
 		{
-			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+			// 점프시 Colider Exit를 위해서 띄우기 추가
+			Transform* tranform = mPlayer->GetComponent<Transform>();
+			Vector3 pos = tranform->GetPosition();
+			tranform->SetPosition(Vector3(pos.x, pos.y + 0.05f, pos.z));
 
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 			rigidbody->SetGround(false);
 			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
@@ -148,8 +156,12 @@ namespace qo
 		// 임시 더블 점프 
 		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
 		{
-			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
+			// 점프시 Colider Exit를 위해서 띄우기 추가
+			Transform* tranform = mPlayer->GetComponent<Transform>();
+			Vector3 pos = tranform->GetPosition();
+			tranform->SetPosition(Vector3(pos.x, pos.y + 0.05f, pos.z));
 
+			Rigidbody* rigidbody = mPlayer->GetComponent<Rigidbody>();
 			rigidbody->SetGround(false);
 			rigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
 			mPlayer->mState = ePlayerState::Jump;

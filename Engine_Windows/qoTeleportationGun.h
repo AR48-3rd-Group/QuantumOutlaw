@@ -3,6 +3,7 @@
 
 namespace qo
 {
+	class TeleportationBullet;
 	class TeleportationGun : public Gun
 	{
 	public:
@@ -13,6 +14,13 @@ namespace qo
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
+
+		void SetTargetBullet(TeleportationBullet* targetBullet) { mTargetBullet = targetBullet; };
+		TeleportationBullet* GetTargetBullet() const { return mTargetBullet; }
+
+	private:
+		TeleportationBullet* mTargetBullet;
+		
 	};
 }
 
