@@ -112,6 +112,23 @@ namespace qo
 		AddGameObject(lockeddoor, LAYER::WALL);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+
+		// 잠긴 문 개체 생성
+		LockedDoor* test = new LockedDoor();
+		LockedDoorTransform = test->AddComponent<Transform>();
+		LockedDoorTransform->SetPositionInPixels(900, 200, 0);
+		LockedDoorTransform->SetScaleInPixels(400, 400, 0);
+		LockedDoorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		LockedDoorMeshRenderer = test->AddComponent<MeshRenderer>();
+		LockedDoorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LockedDoorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		LockedDoorCollider = test->AddComponent<Collider>();
+		LockedDoorCollider->SetScale(LockedDoorTransform->GetScale());
+
+		AddGameObject(test, LAYER::WALL);
 	}
 
 	void PlayScene::Update()

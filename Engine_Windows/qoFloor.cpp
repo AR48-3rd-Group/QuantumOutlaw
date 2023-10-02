@@ -88,7 +88,7 @@ namespace qo
 				{
 					// 벽 상단 충돌
 					Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
-					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f) + 0.01f, 0);
+					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f), 0);
 					PlayerRigidbody->SetGround(true);
 				}
 			}
@@ -150,7 +150,7 @@ namespace qo
 				{
 					// 벽 상단 충돌
 					Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
-					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f) + 0.01f, 0);
+					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f), 0);
 					PlayerRigidbody->SetGround(true);
 				}
 			}
@@ -159,5 +159,12 @@ namespace qo
 
 	void Floor::OnCollisionExit(Collider* other)
 	{
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player != nullptr)
+		{
+			Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
+			PlayerRigidbody->SetGround(false);
+		}
 	}
 }
