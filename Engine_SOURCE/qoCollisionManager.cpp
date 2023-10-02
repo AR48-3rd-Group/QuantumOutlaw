@@ -143,7 +143,7 @@ namespace qo
 		}
 	}
 
-	void CollisionManager::ForceCollisionExit(Collider* deadcol)
+	void CollisionManager::ForceCollisionExit(Collider* DeadCol)
 	{
 		std::map<UINT64, bool>::iterator iter = mCollisionMap.begin();
 		Scene* ActiveScene = SceneManager::GetActiveScene();
@@ -152,7 +152,7 @@ namespace qo
 		{
 			ColliderID temp = {};
 			temp.id = iter->first;
-			if (temp.left == deadcol->GetCollisionNumber())
+			if (temp.left == DeadCol->GetCollisionNumber())
 			{
 				//mCollisionMap.erase(iter);
 				for (int layer = 0;layer != LAYER::MAX;layer++)
@@ -162,13 +162,14 @@ namespace qo
 					{
 						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.right)
 						{
-							obj->GetComponent<Collider>()->OnCollisionExit(deadcol);
+							obj->GetComponent<Collider>()->OnCollisionExit(DeadCol);
 							break;
 						}
 					}
 				}
+				iter->second == false;
 			}
-			else if (temp.right == deadcol->GetCollisionNumber())
+			else if (temp.right == DeadCol->GetCollisionNumber())
 			{
 				//mCollisionMap.erase(iter);
 				for (int layer = 0;layer != LAYER::MAX;layer++)
@@ -178,11 +179,12 @@ namespace qo
 					{
 						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.left)
 						{
-							obj->GetComponent<Collider>()->OnCollisionExit(deadcol);
+							obj->GetComponent<Collider>()->OnCollisionExit(DeadCol);
 							break;
 						}
 					}
 				}
+				iter->second == false;
 			}
 		}
 	}

@@ -8,6 +8,7 @@
 #include "qoResourceManager.h"
 #include "qoBulletScript.h"
 #include "qoCollider.h"
+#include "qoTeleportationGun.h"
 #include "qoTeleportationBullet.h"
 
 extern qo::Application application;
@@ -29,20 +30,41 @@ namespace qo
 
 	void TeleportationGunScript::Update()
 	{
-		Gun* owner = dynamic_cast<Gun*>(GetOwner());
+		TeleportationGun* teleportationGun = dynamic_cast<TeleportationGun*>(GetOwner());
 
-		if (owner == nullptr)
+		if (teleportationGun == nullptr)
 			return;
-
+		// ==========================
 		// 총알 발사
+		// ==========================
 		if (Input::GetKeyState(KEY_CODE::LBTN) == KEY_STATE::DOWN)
 		{
-			if (owner->GetCurBulletCount() > 0)
+			if (teleportationGun->GetCurBulletCount() > 0)
 			{
-				if (owner->BulletConsumption(1))
+				if (teleportationGun->BulletConsumption(1))
 				{
 					Shoot();
 				}
+			}
+		}
+
+		// ==========================
+		// TargetBullet 위치로 순간이동
+		// ==========================
+		if (Input::GetKeyState(KEY_CODE::RBTN) == KEY_STATE::DOWN)
+		{
+			TeleportationBullet* targetBullet = teleportationGun->GetTargetBullet();
+
+			if (targetBullet != nullptr)
+			{
+				Player* player = teleportationGun->GetPlayer();
+
+				Transform* playerTransform = player->GetComponent<Transform>();
+				playerTransform->SetPosition(targetBullet->GetComponent<Transform>()->GetPosition()); // 플레이어 위치를 총알의 위치로 설정
+
+				// 총알 삭제 및 TargetBullet 초기화
+				Destroy(targetBullet);
+				teleportationGun->SetTargetBullet(nullptr);
 			}
 		}
 	}
@@ -57,15 +79,15 @@ namespace qo
 
 	void TeleportationGunScript::Shoot()
 	{
-		Gun* owner = dynamic_cast<Gun*>(GetOwner());
+		TeleportationGun* teleportationGun = dynamic_cast<TeleportationGun*>(GetOwner());
 
-		if (owner != nullptr)
+		if (teleportationGun != nullptr)
 		{
 			// ==============================================
 			// 총알 방향 결정 Gun 위치 → 현재 마우스 위치로 발사
 			// ==============================================
 			Vector2 mousePos = Input::GetMousPosition();
-			Vector3 GunPos = owner->GetComponent<Transform>()->GetPosition();
+			Vector3 GunPos = teleportationGun->GetComponent<Transform>()->GetPosition();
 
 			// 윈도우 좌표계 → 왼손 좌표계 기준 변환
 			GunPos.x += application.GetWidth() / 2.f;
@@ -80,7 +102,7 @@ namespace qo
 
 
 			// Gun 위치 재설정
-			GunPos = owner->GetComponent<Transform>()->GetPosition();
+			GunPos = teleportationGun->GetComponent<Transform>()->GetPosition();
 
 			// ================================================
 			// 총알 생성
@@ -102,6 +124,9 @@ namespace qo
 			bullet->Initialize();
 
 			SceneManager::GetActiveScene()->AddGameObject(bullet, LAYER::BULLET);
+
+			// TargetBullet 설정
+			teleportationGun->SetTargetBullet(bullet);
 		}
 	}
 }
