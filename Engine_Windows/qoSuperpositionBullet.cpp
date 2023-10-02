@@ -1,7 +1,7 @@
 #include "qoSuperpositionBullet.h"
 #include "qoGameObject.h"
 #include "qoCollider.h"
-#include "qoFloor.h"
+#include "ArchitectureInclude.h"
 
 namespace qo
 {
@@ -36,9 +36,12 @@ namespace qo
 
 	void SuperpositionBullet::OnCollisionEnter(Collider* other)
 	{
-		Floor* Test = dynamic_cast<Floor*>(other->GetOwner());
+		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
+		DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
 
-		if (Test == nullptr)
+		// 충돌한 객체가 해당 객체면 Bullet 삭제
+		if (wall == nullptr
+			&& destuctibleWall == nullptr)
 			return;
 
 		Destroy(this);
