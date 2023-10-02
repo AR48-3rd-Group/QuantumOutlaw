@@ -18,7 +18,7 @@ namespace qo
 		void UnlockDoor(int tag);
 
 	private:
-		DoorSwitch* doorswitch;
-		LockedDoor* lockeddoor;
+		DoorSwitch* OpenSwitch;
+		LockedDoor* Goal;
 	};
 }
