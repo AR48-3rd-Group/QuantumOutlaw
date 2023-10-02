@@ -160,6 +160,9 @@ namespace qo
 					std::vector<GameObject*> GameObjects = ActiveScene->GetLayer((LAYER)layer)->GetGameObjects();
 					for (GameObject* obj : GameObjects)
 					{
+						if (obj->GetComponent<Collider>() == nullptr)
+							continue;
+
 						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.right)
 						{
 							obj->GetComponent<Collider>()->OnCollisionExit(DeadCol);
@@ -167,7 +170,7 @@ namespace qo
 						}
 					}
 				}
-				iter->second == false;
+				iter->second = false;
 			}
 			else if (temp.right == DeadCol->GetCollisionNumber())
 			{
@@ -177,6 +180,9 @@ namespace qo
 					std::vector<GameObject*> GameObjects = ActiveScene->GetLayer((LAYER)layer)->GetGameObjects();
 					for (GameObject* obj : GameObjects)
 					{
+						if (obj->GetComponent<Collider>() == nullptr)
+							continue;
+
 						if (obj->GetComponent<Collider>()->GetCollisionNumber() == temp.left)
 						{
 							obj->GetComponent<Collider>()->OnCollisionExit(DeadCol);
@@ -184,7 +190,7 @@ namespace qo
 						}
 					}
 				}
-				iter->second == false;
+				iter->second = false;
 			}
 		}
 	}

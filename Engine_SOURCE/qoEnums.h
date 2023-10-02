@@ -9,6 +9,7 @@ namespace qo::enums
 		FLOOR,
 		WALL,
 		BULLET,
+		MONSETR,
 		MAX = 16,
 	};
 

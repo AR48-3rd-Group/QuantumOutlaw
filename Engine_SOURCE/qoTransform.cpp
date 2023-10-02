@@ -8,7 +8,8 @@ namespace qo
 
 	Transform::Transform()
 		: Component(COMPONENTTYPE::TRANSFORM)
-		, mColor(math::Vector4(1.f, 1.f, 1.f, 0.f))
+		, mColor(math::Vector4(1.f, 1.f, 1.f, 0.f))\
+		, mbAffectedCamera(true)
 	{
 
 	}
@@ -44,7 +45,9 @@ namespace qo
 			temp.x = mPosition.x;
 			temp.y = mPosition.y;
 			temp.z = mPosition.z;
-			temp = Camera::CaculatePos(temp);
+
+			if(mbAffectedCamera)
+				temp = Camera::CaculatePos(temp);
 
 			data.pos = temp;
 			data.scale = mScale;
@@ -63,7 +66,9 @@ namespace qo
 			temp.x = mPosition.x;
 			temp.y = mPosition.y;
 			temp.z = mPosition.z;
-			temp = Camera::CaculatePos(temp);
+			
+			if (mbAffectedCamera)
+				temp = Camera::CaculatePos(temp);
 
 			data.pos = math::Vector4(temp.x, temp.y, temp.z, 0.f);
 			data.scale = math::Vector4(mScale.x, mScale.y, mScale.z, 0.f);

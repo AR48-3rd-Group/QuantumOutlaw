@@ -13,6 +13,9 @@
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 
+#include "qoLabTurret.h"
+#include "qoHPUI.h"
+#include "qoHPUIScript.h"
 
 namespace qo
 {
@@ -56,7 +59,6 @@ namespace qo
 
 		AddGameObject(player, LAYER::PLAYER);
 		Camera::SetTarget(player);
-
 
 		// ¹Ù´Ú °´Ã¼ »ý¼º
 		Floor* floor = new Floor();
