@@ -58,7 +58,6 @@ namespace qo
 	void SuperpositionGunScript::Shoot()
 	{
 		Gun* owner = dynamic_cast<Gun*>(GetOwner());
-
 		if (owner != nullptr)
 		{
 			// ==============================================

@@ -38,6 +38,7 @@ namespace qo
 		static math::Vector3 CaculatePos(math::Vector3 pos) { return pos - mDiffDistance; }
 		static void SetLookAt(math::Vector3 lookat) { mLookAt = lookat; }
 		static math::Vector3 GetLookAt() { return mLookAt; }
+		static void SetLimitLookAt(math::Vector3 limitlookat) { mLimitLookAt = limitlookat; }
 
 	public:
 		static void ShakeCam(float _fDuration, ShakeDir _eShakeDir, float _fDistance, float _fSpeed)
@@ -58,6 +59,9 @@ namespace qo
 		static math::Vector3 mLookAt;
 		static math::Vector3 mDiffDistance;
 		static GameObject* mTarget;
+
+		// ¸®¹ÌÆ®
+		static math::Vector3 mLimitLookAt;
 
 		static CAM_EFFECT mCurCamEffect;
 		static std::list<tCamEffect> m_listCamEffect;
