@@ -10,6 +10,8 @@ namespace qo
 	math::Vector3 Camera::mDiffDistance = {};
 	GameObject* Camera::mTarget = nullptr;
 
+	math::Vector3 Camera::mLimitLookAt = math::Vector3(6400.f,3600.f,0.f);
+
 	CAM_EFFECT Camera::mCurCamEffect = CAM_EFFECT::None;
 	std::list<tCamEffect> Camera::m_listCamEffect = {};
 
@@ -28,6 +30,29 @@ namespace qo
 			{
 				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
 				mLookAt = TargetPosition;
+
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 1.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 1.f;
+
+				if (mLookAt.x < 0.f)
+				{
+					mLookAt.x = 0.f;
+				}
+
+				if (mLookAt.y < 0.f)
+				{
+					mLookAt.y = 0.f;
+				}
+
+				if (mLookAt.x > limitnormalizedX)
+				{
+					mLookAt.x = limitnormalizedX;
+				}
+
+				if (mLookAt.y > limitnormalizedY)
+				{
+					mLookAt.y = limitnormalizedY;
+				}
 			}
 		}
 		else
@@ -40,18 +65,44 @@ namespace qo
 				effect.fCurTime += Time::DeltaTime();
 
 				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
+
+				mLookAt = TargetPosition;
+
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 1.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 1.f;
+
+				if (mLookAt.x < 0.f)
+				{
+					mLookAt.x = 0.f;
+				}
+
+				if (mLookAt.y < 0.f)
+				{
+					mLookAt.y = 0.f;
+				}
+
+				if (mLookAt.x > limitnormalizedX)
+				{
+					mLookAt.x = limitnormalizedX;
+				}
+
+				if (mLookAt.y > limitnormalizedY)
+				{
+					mLookAt.y = limitnormalizedY;
+				}
+
 				if (effect.eShakeDir == ShakeDir::Horizontal)
 				{
-					mLookAt.x = TargetPosition.x + cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+					mLookAt.x += cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
 				}
 				else if (effect.eShakeDir == ShakeDir::Vertical)
 				{
-					mLookAt.y = TargetPosition.y - sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+					mLookAt.y += - sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
 				}
 				else if (effect.eShakeDir == ShakeDir::Comprehensive)
 				{
-					mLookAt.x = TargetPosition.x + cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
-					mLookAt.y = TargetPosition.y - sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+					mLookAt.x += cosf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
+					mLookAt.y -= sinf(effect.fCurTime * effect.fSpeed) * effect.fDistance;
 				}
 
 				if (effect.fCurTime > effect.fDuration)
