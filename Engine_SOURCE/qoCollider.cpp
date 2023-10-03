@@ -46,10 +46,10 @@ namespace qo
 
 		if (mbIsCollision)
 		{
-			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::Color_Test];
+			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];
 			Vector3 OwnerPostion = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-			renderer::ColorTestCB data = {};
+			renderer::ColorSetCB data = {};
 			math::Vector3 temp;
 			temp.x = OwnerPostion.x;
 			temp.y = OwnerPostion.y;
@@ -65,10 +65,10 @@ namespace qo
 		}
 		else
 		{
-			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::Color_Test];
+			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];
 			Vector3 OwnerPostion = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-			renderer::ColorTestCB data = {};
+			renderer::ColorSetCB data = {};
 			math::Vector3 temp;
 			temp.x = OwnerPostion.x;
 			temp.y = OwnerPostion.y;

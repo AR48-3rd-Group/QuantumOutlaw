@@ -16,9 +16,9 @@ VTX_OUT VS(VTX_IN _in)
 {
 	VTX_OUT output = (VTX_OUT) 0.f;
     
-	output.vPos = float4(_in.vPos * Test_Scale.xyz, 1.f);
-	output.vPos.xyz += Test_Pos.xyz;
-	output.vColor = Test_Color; // 상수버퍼의 색상값으로 셋팅
+	output.vPos = float4(_in.vPos * cb1Scale.xyz, 1.f);
+    output.vPos.xyz += cb1Pos.xyz;
+    output.vColor = cb1Color; // 상수버퍼의 색상값으로 셋팅
     
 	return output;
 }
