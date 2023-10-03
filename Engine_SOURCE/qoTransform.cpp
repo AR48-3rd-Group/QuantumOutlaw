@@ -59,9 +59,9 @@ namespace qo
 
 		// 레지스터 1번 상수 버퍼 셋팅
 		{
-			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::Color_Test];
+			ConstantBuffer* Register1Cb = renderer::constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];
 
-			renderer::ColorTestCB data = {};
+			renderer::ColorSetCB data = {};
 			math::Vector3 temp;
 			temp.x = mPosition.x;
 			temp.y = mPosition.y;

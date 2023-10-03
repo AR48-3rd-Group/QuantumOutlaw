@@ -128,8 +128,8 @@ namespace qo::renderer
 		constantBuffers[(UINT)graphics::eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[(UINT)graphics::eCBType::Transform]->Create(sizeof(TransformCB));
 
-		constantBuffers[(UINT)graphics::eCBType::Color_Test] = new ConstantBuffer(eCBType::Color_Test);
-		constantBuffers[(UINT)graphics::eCBType::Color_Test]->Create(sizeof(ColorTestCB));
+		constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM] = new ConstantBuffer(eCBType::ColorSetTRANSFORM);
+		constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM]->Create(sizeof(ColorSetCB));
 
 		vertices.clear();
 		indexes.clear();
@@ -193,8 +193,8 @@ namespace qo::renderer
 
 	void LoadShader()
 	{
-		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Test");
-		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
+		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS");
+		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS");
 		ResourceManager::Insert(L"TriangleShader", shader);
 		//GetDevice()->CreateShader(eShaderStage::NONE);
 		//GetDevice()->CreateVertexShader();`
@@ -219,8 +219,8 @@ namespace qo::renderer
 			, shader->GetInputLayoutAddressOf());
 
 		// Color Test Shader 쉐이더 코드 컴파일 InputLayouts은 위와 같으므로 설정안함
-		ColorTestShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Color_Test");
-		ColorTestShader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
+		ColorTestShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "ColorSetVS");
+		ColorTestShader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS");
 		ResourceManager::Insert(L"ColorTestShader", ColorTestShader);
 
 		GetDevice()->CreateInputLayout(InputLayouts, 2,
@@ -229,8 +229,8 @@ namespace qo::renderer
 			, ColorTestShader->GetInputLayoutAddressOf());
 		
 		//
-		ColorTestShader2->Create(eShaderStage::VS, L"TriangleVS.hlsl", "VS_Color_Test");
-		ColorTestShader2->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS_Test");
+		ColorTestShader2->Create(eShaderStage::VS, L"TriangleVS.hlsl", "ColorSetVS");
+		ColorTestShader2->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS");
 		ColorTestShader2->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST);
 		ResourceManager::Insert(L"ColorTestShader2", ColorTestShader2);
 
@@ -281,7 +281,7 @@ namespace qo::renderer
 		delete ColorTestShader2;
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];
-		delete constantBuffers[(UINT)graphics::eCBType::Color_Test];
+		delete constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];
 		//triangleVertexBuffer->Release();
 		//errorBlob->Release();
 		//triangleVSBlob->Release();

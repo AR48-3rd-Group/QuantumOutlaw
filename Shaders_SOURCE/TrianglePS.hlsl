@@ -7,7 +7,7 @@ struct VTX_OUT
 };
 
 
-float4 PS_Test(VTX_OUT _in) : SV_Target
+float4 PS(VTX_OUT _in) : SV_Target
 {
 	return _in.vColor;
 }
