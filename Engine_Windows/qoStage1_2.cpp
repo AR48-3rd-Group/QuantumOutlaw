@@ -56,7 +56,9 @@ namespace qo
 		#pragma endregion
 
 		#pragma region Map Layout
-		// 바닥 개체
+		//--------------------------------------------------------
+		//						바닥 개체
+		//--------------------------------------------------------
 		const int FloorCount_1 = 3;
 		const int FloorCount_2 = 3;
 		const int FloorCount_3 = 4;
@@ -88,7 +90,7 @@ namespace qo
 		CreateAndSetUpGameObject(Floor_1[0], FLOOR, 1368, 824, 2736, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(Floor_1[1], FLOOR, 934, 1334, 1232, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(Floor_1[2], FLOOR, 2926, 1662, 1376, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_2[0], FLOOR, 1074, 2070, 2020, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[0], FLOOR, 1138, 2070, 2020, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(Floor_2[1], FLOOR, 3840, 2412, 2656, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(Floor_2[2], FLOOR, 3112, 3028, 1488, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(Floor_3[0], FLOOR, 4240, 824, 768, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
@@ -101,7 +103,9 @@ namespace qo
 		CreateAndSetUpGameObject(StepBlock[1], FLOOR, 4240, 1714, 256, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(StepBlock[2], FLOOR, 6144, 2220, 256, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		// 벽 개체
+		//--------------------------------------------------------
+		//						벽 개체
+		//--------------------------------------------------------
 		const int StartWallCount = 3;
 		const int WallCount = 4;
 		const int DoorWallCount = 3;
@@ -129,6 +133,62 @@ namespace qo
 		CreateAndSetUpGameObject(DoorWall[1], WALL, 6336, 636, 128, 120, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(DoorWall[2], WALL, 4048, 2880, 128, 168, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
+		//--------------------------------------------------------
+		//					파괴되는 벽 개체
+		//--------------------------------------------------------
+		const int BreakableWallCount = 2;
+
+		DestuctibleWall* BreakableWall[BreakableWallCount];
+
+		for (int i = 0; i < BreakableWallCount; i++)
+			BreakableWall[i] = new DestuctibleWall();
+
+		// 개체 생성
+		CreateAndSetUpGameObject(BreakableWall[0], WALL, 1536, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(BreakableWall[1], WALL, 2272, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		//--------------------------------------------------------
+		//					배리어 개체
+		//--------------------------------------------------------
+		const int BarrierCount = 2;
+
+		Barrier* barrier[BarrierCount];
+
+		for (int i = 0; i < BarrierCount; i++)
+			barrier[i] = new Barrier();
+
+		// 개체 생성
+		CreateAndSetUpGameObject(barrier[0], WALL, 4368, 1142, 96, 380, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(barrier[1], WALL, 3632, 3282, 96, 380, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		//--------------------------------------------------------
+		//					스위치 개체
+		//--------------------------------------------------------
+		for (int i = 0; i < BarrierCount; i++)
+			EventSwitch[i] = new DoorSwitch();
+
+		// 개체 생성
+		CreateAndSetUpGameObject(EventSwitch[0], WALL, 4144, 1142, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventSwitch[1], WALL, 3824, 3282, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		//--------------------------------------------------------
+		//					잠긴 문 개체
+		//--------------------------------------------------------
+		EventTrap = new LockedDoor();
+
+		for (int i = 0; i < EventDoorCount; i++)
+			EventDoor[i] = new LockedDoor();
+
+		EventTrap->SetTag(2);
+		EventDoor[0]->SetTag(2);
+		EventDoor[1]->SetTag(2);
+		EventDoor[2]->SetTag(1);
+
+		// 개체 생성
+		CreateAndSetUpGameObject(EventTrap, WALL, 5128, 824, 1008, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[0], WALL, 3920, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[1], WALL, 6336, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[2], WALL, 4048, 2636, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		#pragma endregion
 
@@ -142,6 +202,9 @@ namespace qo
 	void Stage1_2::Update()
 	{
 		Scene::Update();
+
+		if (EventSwitch[0]->GetSwitch())	UnlockDoor(2);
+		if (EventSwitch[1]->GetSwitch())	UnlockDoor(1);
 	}
 
 	void Stage1_2::LateUpdate()
@@ -156,6 +219,13 @@ namespace qo
 
 	void Stage1_2::UnlockDoor(int tag)
 	{
+		if (EventTrap->GetTag() == tag)			EventTrap->SetLocked(false);
+
+		for (int i = 0; i < EventDoorCount; i++)
+		{
+			if (EventDoor[i]->GetTag() == tag)	EventDoor[i]->SetLocked(false);
+		}
+
 	}
 
 	void Stage1_2::CreateAndSetUpGameObject(GameObject* object, LAYER objectLayer, float xPixels, float yPixels, float widthInPixels, float heightInPixels, const Vector4& color)

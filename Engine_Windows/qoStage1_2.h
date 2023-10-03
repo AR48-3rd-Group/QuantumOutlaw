@@ -22,7 +22,10 @@ namespace qo
 		void CreateAndSetUpGameObject(GameObject* object, LAYER objectLayer,float xPixels, float yPixels, float widthInPixels, float heightInPixels, const Vector4& color);
 
 	private:
-		DoorSwitch* OpenSwitch;
-		LockedDoor* Goal;
+		static const int EventSwitchCount = 2;
+		DoorSwitch* EventSwitch[EventSwitchCount];
+		static const int EventDoorCount = 3;
+		LockedDoor* EventTrap;
+		LockedDoor* EventDoor[EventDoorCount];
 	};
 }
