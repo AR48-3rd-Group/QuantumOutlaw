@@ -31,8 +31,8 @@ namespace qo
 				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
 				mLookAt = TargetPosition;
 
-				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 1.f;
-				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 1.f;
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 2.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 2.f;
 
 				if (mLookAt.x < 0.f)
 				{
@@ -68,8 +68,8 @@ namespace qo
 
 				mLookAt = TargetPosition;
 
-				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 1.f;
-				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 1.f;
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 2.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 2.f;
 
 				if (mLookAt.x < 0.f)
 				{
@@ -83,7 +83,7 @@ namespace qo
 
 				if (mLookAt.x > limitnormalizedX)
 				{
-					mLookAt.x = limitnormalizedX;
+					mLookAt.x = limitnormalizedX ;
 				}
 
 				if (mLookAt.y > limitnormalizedY)
