@@ -10,6 +10,7 @@ namespace qo::enums
 		WALL,
 		BULLET,
 		MONSTER,
+		ITEM,
 		MAX = 16,
 	};
 

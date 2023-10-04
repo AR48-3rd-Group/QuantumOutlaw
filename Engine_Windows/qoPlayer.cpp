@@ -76,6 +76,16 @@ namespace qo
 
 	void Player::AddGun(eGunType type)
 	{
+		// 이미 해당 타입의 총을 들고있다면 무효
+		for (Gun* gun : mGuns)
+		{
+			if (gun->GetGunType() == type)
+			{
+				return;
+			}
+		}
+
+
 		// 플레이어 객체 정보
 		Transform* PlayerTransform = GetComponent<Transform>();
 		Vector3 PlayerPos = PlayerTransform->GetPosition();
