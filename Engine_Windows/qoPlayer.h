@@ -41,6 +41,12 @@ namespace qo
 
         eDirection GetDirection() const { return mDir; }
 
+        void SetMaxHP(const int maxhp) { mMaxHp = maxhp; }
+        int GetMaxHP() const { return mMaxHp; }
+
+        void SetCurHP(const int curhp) { mCurHp = curhp; }  
+        int GetCurHP() const { return mCurHp; }
+
     private:
         Gun*                mActiveGun; // 현재 활성화된 총
         std::vector<Gun*>   mGuns;      // 플레이어가 보유하고있는 총
@@ -48,7 +54,8 @@ namespace qo
         ePlayerState        mState;
         eDirection          mDir;
 
-        int                 mHp;
+        int                 mCurHp;
+        int                 mMaxHp;
         float               mSpeed;
     };
 }

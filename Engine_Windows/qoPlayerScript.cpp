@@ -74,6 +74,15 @@ namespace qo
 
 	void PlayerScript::LateUpdate()
 	{
+		if (Input::GetKeyState(KEY_CODE::O) == KEY_STATE::DOWN)
+		{
+			mPlayer->mCurHp -= 1;
+		}
+
+		if (Input::GetKeyState(KEY_CODE::P) == KEY_STATE::DOWN)
+		{
+			mPlayer->mCurHp += 1;
+		}
 	}
 
 	void PlayerScript::Render()

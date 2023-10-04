@@ -5,6 +5,7 @@
 
 namespace qo
 {
+	class Player;
 	class Stage1_2 : public Scene
 	{
 	public:
@@ -19,11 +20,16 @@ namespace qo
 		// 특정 tag 값을 가진 잠긴 문을 열어주는 함수
 		void UnlockDoor(int tag);
 
+		void Enter() override;
+		void Exit() override;
+
 	private:
 		static const int EventSwitchCount = 2;
 		DoorSwitch* EventSwitch[EventSwitchCount];
 		static const int EventDoorCount = 3;
 		LockedDoor* EventTrap;
 		LockedDoor* EventDoor[EventDoorCount];
+		
+		Player* mPlayer;
 	};
 }

@@ -6,6 +6,8 @@
 #include "qoMeshRenderer.h"
 #include "qoResourceManager.h"
 #include "qoBulletScript.h"
+#include "qoTrackerBullet.h"
+#include "qoTrackerBulletScript.h"
 
 namespace qo
 {
@@ -49,8 +51,8 @@ namespace qo
 
 			// 이제 그 에너미와 가까운 에너미 탐색
 			Scene* ActiveScene = SceneManager::GetActiveScene();
-			std::vector<GameObject*> enemies = ActiveScene->GetLayer((UINT)LAYER::MONSTER)->GetGameObjects();
-			long double min = 1.f;
+			std::vector<GameObject*> enemies = ActiveScene->GetLayer((UINT)LAYER::ENEMY)->GetGameObjects();
+			long double min = 60.f;
 
 			GameObject* target = nullptr;
 
@@ -60,8 +62,10 @@ namespace qo
 					continue;
 
 				Vector3 compare = enemyobj->GetComponent<Transform>()->GetPosition();
+
 				long double Distance = sqrt(pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2) +
 					pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2));
+
 				if (static_cast<long double>(min) > Distance)
 				{
 					min = Distance;
@@ -72,28 +76,23 @@ namespace qo
 			// 타겟을 찾았다면 연쇄 반응
 			if (target != nullptr)
 			{
-				Vector3 Dir = Vector3(0.f, 0.f, 0.f);
-				Vector3 targetPosition = target->GetComponent<Transform>()->GetPosition();
-				Dir.x = targetPosition.x - first.x;
-				Dir.y = targetPosition.y - first.y;
-
-				EntanglementBullet* bullet = new EntanglementBullet(Dir);
-				Transform* tr = bullet->AddComponent<Transform>();
+				TrackerBullet* trackerBullet = new TrackerBullet(dynamic_cast<Enemy*>(target));
+				Transform* tr = trackerBullet->AddComponent<Transform>();
 				tr->SetPosition(first); // 총알 시작위치는 총위치로 설정
 				tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
 
-				MeshRenderer* meshRenderer = bullet->AddComponent<MeshRenderer>();
+				MeshRenderer* meshRenderer = trackerBullet->AddComponent<MeshRenderer>();
 				meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
 				meshRenderer->SetShader(ResourceManager::Find<Shader>(L"CircleShader"));
 
-				Collider* col = bullet->AddComponent<Collider>();
+				Collider* col = trackerBullet->AddComponent<Collider>();
 				col->SetScale(Vector3(0.1f, 0.1f, 0.1f));
 
-				bullet->AddComponent<BulletScript>();
+				trackerBullet->AddComponent<TrackerBulletScript>();
 
-				bullet->Initialize();
+				trackerBullet->Initialize();
 
-				SceneManager::GetActiveScene()->AddGameObject(bullet, LAYER::BULLET);
+				SceneManager::GetActiveScene()->AddGameObject(trackerBullet, LAYER::BULLET);
 			}
 
 			Destroy(this);
