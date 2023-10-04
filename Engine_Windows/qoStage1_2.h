@@ -18,8 +18,6 @@ namespace qo
 
 		// 특정 tag 값을 가진 잠긴 문을 열어주는 함수
 		void UnlockDoor(int tag);
-		// 개체의 Transform, MeshRenderer, Collider를 입력한 값에 따라서 자동생성 해주는 함수
-		void CreateAndSetUpGameObject(GameObject* object, LAYER objectLayer,float xPixels, float yPixels, float widthInPixels, float heightInPixels, const Vector4& color);
 
 	private:
 		static const int EventSwitchCount = 2;
