@@ -25,10 +25,18 @@ namespace qo
 		if (owner == nullptr)
 			return;
 
-		Transform* GunTransform = owner->GetComponent<Transform>();		
+		Transform* GunTransform = owner->GetComponent<Transform>();
 		Transform* PlayerTransform = owner->GetPlayer()->GetComponent<Transform>();
+		Vector3 GunPos = PlayerTransform->GetPosition();
 
-		Vector3 GunPos = PlayerTransform->GetPosition() + Vector3(0.2f, 0.f, 0.f);
+		if(owner->GetPlayer()->GetDirection() == eDirection::LEFT)
+		{
+			GunPos -= Vector3(0.1f, 0.f, 0.f);
+		}
+		else if (owner->GetPlayer()->GetDirection() == eDirection::RIGHT)
+		{
+			GunPos += Vector3(0.1f, 0.f, 0.f);
+		}		
 
 		GunTransform->SetPosition(GunPos);
 

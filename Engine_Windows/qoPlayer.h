@@ -8,7 +8,9 @@ namespace qo
     {
         Idle,
         Walk,
+        Fall,
         Jump,
+        Dash,
         Dead,
     };
 
@@ -37,11 +39,14 @@ namespace qo
         void AddGun(eGunType type);
         bool ChangeActiveGun(eGunType type);
 
+        eDirection GetDirection() const { return mDir; }
+
     private:
         Gun*                mActiveGun; // 현재 활성화된 총
         std::vector<Gun*>   mGuns;      // 플레이어가 보유하고있는 총
 
         ePlayerState        mState;
+        eDirection          mDir;
 
         int                 mHp;
         float               mSpeed;

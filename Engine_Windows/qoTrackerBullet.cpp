@@ -37,6 +37,7 @@ namespace qo
 
 	void TrackerBullet::OnCollisionEnter(Collider* other)
 	{
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
 		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());
@@ -45,7 +46,8 @@ namespace qo
 		Barrier* barrier = dynamic_cast<Barrier*> (other->GetOwner());
 
 		// 충돌한 객체가 해당 객체면 Bullet 삭제
-		if (floor == nullptr
+		if (enemy == nullptr
+			&& floor == nullptr
 			&& wall == nullptr
 			&& lockedDoor == nullptr
 			&& doorSwitch == nullptr

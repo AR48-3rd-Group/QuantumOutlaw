@@ -152,4 +152,10 @@ namespace qo::enums
 		SCRIPT,
 		END,
 	};
+
+	enum class eDirection
+	{
+		LEFT,
+		RIGHT,
+	};
 }

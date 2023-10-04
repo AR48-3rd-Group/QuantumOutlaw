@@ -28,7 +28,7 @@ namespace qo
 		Player* player = new Player();
 		Transform* PlayerTransform = player->AddComponent<Transform>();
 		PlayerTransform->SetPositionInPixels(800, 384, 0);
-		PlayerTransform->SetScaleInPixels(96, 192, 0);
+		PlayerTransform->SetScaleInPixels(64, 128, 0);
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
