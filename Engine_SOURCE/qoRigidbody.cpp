@@ -16,8 +16,8 @@ namespace qo
 		, mCoefficient(0.002f)
 		, mbGround(false)
 	{
-		mGravity = math::Vector3(0.f, 1.f,0.f);
-		mMaxGravity = math::Vector3(0.2f, 10.f,0.f);
+		mGravity = math::Vector3(0.f, 2.5f, 0.f);
+		mMaxGravity = math::Vector3(10.f, 10.f,0.f);
 	}
 
 	Rigidbody::~Rigidbody()

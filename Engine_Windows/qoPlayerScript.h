@@ -18,10 +18,16 @@ namespace qo
 		// FSM
 		void Idle();
 		void Walk();
+		void Fall();
 		void Jump();
+		void Dash();
 		void Dead();
 
 	private:
-		class Player*	mPlayer;
+		class Player*		mPlayer;
+		class Transform*	mTransform;
+		class Rigidbody*	mRigidbody;
+
+		float				mDuration;
 	};
 }

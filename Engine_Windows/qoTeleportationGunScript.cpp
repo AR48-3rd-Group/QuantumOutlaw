@@ -11,6 +11,7 @@
 #include "qoTeleportationGun.h"
 #include "qoTeleportationBullet.h"
 #include "qoCamera.h"
+#include "qoRigidbody.h"
 
 extern qo::Application application;
 
@@ -63,6 +64,9 @@ namespace qo
 
 				Transform* playerTransform = player->GetComponent<Transform>();
 				playerTransform->SetPosition(targetBullet->GetComponent<Transform>()->GetPosition()); // 플레이어 위치를 총알의 위치로 설정
+				
+				Rigidbody* playerRigidbody = player->GetComponent<Rigidbody>();
+				playerRigidbody->SetVelocity(Vector3::Zero);
 
 				// 총알 삭제 및 TargetBullet 초기화
 				Destroy(targetBullet);
