@@ -196,6 +196,7 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 		#pragma endregion
 	}
 

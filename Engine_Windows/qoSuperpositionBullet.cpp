@@ -36,12 +36,20 @@ namespace qo
 
 	void SuperpositionBullet::OnCollisionEnter(Collider* other)
 	{
+		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
-		DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
+		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());
+		DoorSwitch* doorSwitch = dynamic_cast<DoorSwitch*> (other->GetOwner());
+		
+		// SuperpositionBullet 특수효과 
+		//DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
+		//Barrier* barrier = dynamic_cast<Barrier*> (other->GetOwner());
 
 		// 충돌한 객체가 해당 객체면 Bullet 삭제
-		if (wall == nullptr
-			&& destuctibleWall == nullptr)
+		if (floor == nullptr
+			&& wall == nullptr
+			&& lockedDoor == nullptr
+			&& doorSwitch == nullptr)
 			return;
 
 		Destroy(this);
