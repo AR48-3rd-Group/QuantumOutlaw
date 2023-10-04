@@ -1,15 +1,15 @@
 
 cbuffer TRANSFORM : register(b0)
 {
-    float3 cbPos;
+    float3 cb0Pos;
     int padd1;
-    float3 cbScale;
+    float3 cb0Scale;
     int padd2;
 };
 
-cbuffer ColorTEST : register(b1)
+cbuffer ColorSetTRANSFORM: register(b1)
 {
-    float4 Test_Pos;
-    float4 Test_Scale;
-    float4 Test_Color;
+    float4 cb1Pos;
+    float4 cb1Scale;
+    float4 cb1Color;
 };

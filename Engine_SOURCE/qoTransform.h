@@ -35,7 +35,7 @@ namespace qo
 		void SetPositionInPixels(float xPixels, float yPixels, float z);
 		void SetScaleInPixels(float widthInPixels, float heightInPixels, float z);
 
-		void SetAffectedCamera(bool affectedcamera) { mbAffectedCamera = affectedcamera; }
+		void SetAffectedCamera(bool affectedcamera) { mAffectedCamera = affectedcamera; }
 
 	private:
 		Vector3 mPosition;
@@ -46,6 +46,6 @@ namespace qo
 		Vector4 mColor;
 
 		// Camera Affected
-		bool mbAffectedCamera;
+		bool mAffectedCamera;
 	};
 }
