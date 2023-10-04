@@ -91,6 +91,9 @@
     <Filter Include="Scripts\UI\HP">
       <UniqueIdentifier>{72fedc18-6e57-4d2f-9d85-534b7aca830e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Bullet\TrackerBullet">
+      <UniqueIdentifier>{33917cc8-c38c-4336-816c-9040020a27c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayScene.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="qoHPUIScript.cpp">
       <Filter>Scripts\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="qoTrackerBullet.cpp">
+      <Filter>GameObjects\Bullet\TrackerBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,5 +303,8 @@
       <Filter>Scripts\UI\HP</Filter>
     </ClInclude>
     <ClInclude Include="qoLoadScene.h" />
+    <ClInclude Include="qoTrackerBullet.h">
+      <Filter>GameObjects\Bullet\TrackerBullet</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
