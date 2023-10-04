@@ -10,6 +10,7 @@ namespace qo::enums
 		WALL,
 		BULLET,
 		ENEMY,
+		UI,
 		MAX = 16,
 	};
 

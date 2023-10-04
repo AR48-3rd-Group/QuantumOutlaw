@@ -21,6 +21,8 @@ namespace qo
 		Layer* GetLayer(UINT index) { return&mLayers[index]; }
 		void AddGameObject(GameObject* gameObject, UINT layerIndex);
 
+		virtual void Enter() = 0;
+		virtual void Exit() = 0;
 	private:
 		Layer mLayers[LAYER::MAX];
 	};

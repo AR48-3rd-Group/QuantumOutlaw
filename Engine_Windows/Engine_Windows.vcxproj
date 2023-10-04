@@ -33,6 +33,7 @@
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunScript.h" />
     <ClInclude Include="qoHPUI.h" />
+    <ClInclude Include="qoHPUIBackGround.h" />
     <ClInclude Include="qoHPUIScript.h" />
     <ClInclude Include="qoLabGuard.h" />
     <ClInclude Include="qoLabGuardScript.h" />
@@ -71,6 +72,7 @@
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
     <ClCompile Include="qoHPUI.cpp" />
+    <ClCompile Include="qoHPUIBackGround.cpp" />
     <ClCompile Include="qoHPUIScript.cpp" />
     <ClCompile Include="qoLabGuard.cpp" />
     <ClCompile Include="qoLabGuardScript.cpp" />

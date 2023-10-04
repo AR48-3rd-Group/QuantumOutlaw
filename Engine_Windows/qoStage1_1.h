@@ -17,6 +17,9 @@ namespace qo
 
 		void UnlockDoor(int tag);
 
+		void Enter() override;
+		void Exit() override;
+
 	private:
 		DoorSwitch* OpenSwitch;
 		LockedDoor* Goal;

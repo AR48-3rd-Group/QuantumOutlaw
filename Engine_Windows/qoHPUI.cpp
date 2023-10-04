@@ -2,7 +2,8 @@
 
 namespace qo
 {
-	HPUI::HPUI()
+	HPUI::HPUI(Player* player)
+		: mPlayer(player)
 	{
 	}
 

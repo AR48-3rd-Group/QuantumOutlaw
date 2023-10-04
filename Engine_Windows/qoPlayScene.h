@@ -15,6 +15,9 @@ namespace qo
 		void LateUpdate() override;
 		void Render() override;
 
+		void Enter() override;
+		void Exit() override;
+
 	private:
 		DoorSwitch* doorswitch;
 		LockedDoor* lockeddoor;

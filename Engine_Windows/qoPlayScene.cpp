@@ -18,6 +18,7 @@
 #include "qoLabGuardScript.h"
 #include "qoHPUI.h"
 #include "qoHPUIScript.h"
+#include "qoHPUIBackGround.h"
 
 namespace qo
 {
@@ -153,6 +154,37 @@ namespace qo
 
 
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
+
+		HPUI* hpui = new HPUI(player);
+		Transform* hpuiTransform = hpui->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
+		hpui->SetFixedPosition(Vector3(300.f, 830.f, 0));
+		hpui->SetFixedScale(Vector3(400.f, 50.f, 0));
+
+		MeshRenderer* hpuiMeshRenderer = hpui->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		hpui->AddComponent<HPUIScript>();
+
+		AddGameObject(hpui, LAYER::UI);
+
+		HPUIBackGround* hpuiBG = new HPUIBackGround();
+		hpuiTransform = hpuiBG->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
+
+		hpuiMeshRenderer = hpuiBG->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		
+		AddGameObject(hpuiBG, LAYER::UI);
+		
 	}
 
 	void PlayScene::Update()
