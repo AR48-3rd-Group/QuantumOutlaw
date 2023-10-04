@@ -1,46 +1,41 @@
-#include "qoTeleportationBullet.h"
-#include "qoCollider.h"
+#include "qoTrackerBullet.h"
+#include "qoEnemy.h"
 #include "ArchitectureInclude.h"
-#include "qoTeleportationGun.h"
+#include "qoCollider.h"
 
 namespace qo
 {
-	TeleportationBullet::TeleportationBullet(TeleportationGun* onwer, Vector3 Dir)
-		: Bullet(Dir)
-		, mOwner(onwer)
+	TrackerBullet::TrackerBullet(Enemy* target)
+		: Bullet(Vector3::Zero)
+		, mTarget(target)
 	{
 	}
 
-	TeleportationBullet::~TeleportationBullet()
+	TrackerBullet::~TrackerBullet()
 	{
-		// 총알 삭제시 Onwer 의 타겟이 이 총알이면 nullptr로 초기화
-		if (mOwner->GetTargetBullet() == this)
-		{
-			mOwner->SetTargetBullet(nullptr);
-		}
 	}
 
-	void TeleportationBullet::Initialize()
+	void TrackerBullet::Initialize()
 	{
 		GameObject::Initialize();
 	}
 
-	void TeleportationBullet::Update()
+	void TrackerBullet::Update()
 	{
 		GameObject::Update();
 	}
 
-	void TeleportationBullet::LateUpdate()
+	void TrackerBullet::LateUpdate()
 	{
 		GameObject::LateUpdate();
 	}
 
-	void TeleportationBullet::Render()
+	void TrackerBullet::Render()
 	{
 		GameObject::Render();
 	}
 
-	void TeleportationBullet::OnCollisionEnter(Collider* other)
+	void TrackerBullet::OnCollisionEnter(Collider* other)
 	{
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
@@ -61,11 +56,11 @@ namespace qo
 		Destroy(this);
 	}
 
-	void TeleportationBullet::OnCollisionStay(Collider* other)
+	void TrackerBullet::OnCollisionStay(Collider* other)
 	{
 	}
 
-	void TeleportationBullet::OnCollisionExit(Collider* other)
+	void TrackerBullet::OnCollisionExit(Collider* other)
 	{
 	}
 }
