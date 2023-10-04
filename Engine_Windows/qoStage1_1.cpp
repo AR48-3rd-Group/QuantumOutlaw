@@ -12,6 +12,7 @@
 #include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
+#include "qoGunItem.h"
 
 namespace qo
 {
@@ -44,17 +45,15 @@ namespace qo
 
 		player->AddComponent<PlayerScript>();
 
-		// ÃÑ »ý¼º
-		player->AddGun(eGunType::Superposition);
-		player->AddGun(eGunType::Entanglement);
-		player->AddGun(eGunType::Teleportation);
-
-		player->ChangeActiveGun(eGunType::Superposition);
-
 		player->Initialize();
 
 		AddGameObject(player, LAYER::PLAYER);
 		Camera::SetTarget(player);
+		#pragma endregion
+
+		#pragma region Item
+		GunItem* gunItem = new GunItem(eGunType::Superposition);
+		CreateAndSetUpGameObject(gunItem, ITEM, 1200, 300, 100, 100, gunItem->GetColor());
 		#pragma endregion
 
 		#pragma region Map Layout
@@ -280,7 +279,9 @@ namespace qo
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::ITEM, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 		#pragma endregion
 
 	}

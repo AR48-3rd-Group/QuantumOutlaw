@@ -11,6 +11,7 @@
 #include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
+#include "qoGunItem.h"
 
 namespace qo
 {
@@ -44,15 +45,17 @@ namespace qo
 
 		// ÃÑ »ý¼º
 		player->AddGun(eGunType::Superposition);
-		player->AddGun(eGunType::Entanglement);
-		player->AddGun(eGunType::Teleportation);
-
 		player->ChangeActiveGun(eGunType::Superposition);
 
 		player->Initialize();
 
 		AddGameObject(player, LAYER::PLAYER);
 		Camera::SetTarget(player);
+		#pragma endregion
+
+		#pragma region Item
+		GunItem* gunItem = new GunItem(eGunType::Entanglement);
+		CreateAndSetUpGameObject(gunItem, ITEM, 1200, 300, 100, 100, gunItem->GetColor());
 		#pragma endregion
 
 		#pragma region Map Layout
@@ -195,6 +198,7 @@ namespace qo
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::ITEM, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 		#pragma endregion
@@ -227,30 +231,5 @@ namespace qo
 			if (EventDoor[i]->GetTag() == tag)	EventDoor[i]->SetLocked(false);
 		}
 
-	}
-
-	void Stage1_2::CreateAndSetUpGameObject(GameObject* object, LAYER objectLayer, float xPixels, float yPixels, float widthInPixels, float heightInPixels, const Vector4& color)
-	{
-		Transform* objectTransform = object->AddComponent<Transform>();
-		MeshRenderer* objectMeshRenderer = object->AddComponent<MeshRenderer>();
-		Collider* objectCollider = object->AddComponent<Collider>();
-
-		objectTransform->SetPositionInPixels(xPixels, yPixels, 0);
-		objectTransform->SetScaleInPixels(widthInPixels, heightInPixels, 0);
-		objectTransform->SetColor(color);
-
-		objectMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		objectMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-
-		objectCollider->SetScale(objectTransform->GetScale());
-
-		switch (objectLayer) {
-		case LAYER::FLOOR:
-			AddGameObject(object, LAYER::FLOOR);
-			break;
-		case LAYER::WALL:
-			AddGameObject(object, LAYER::WALL);
-			break;
-		}
 	}
 }

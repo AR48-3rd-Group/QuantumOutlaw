@@ -31,10 +31,12 @@
     <ClInclude Include="qoEntanglementGunScript.h" />
     <ClInclude Include="qoFloor.h" />
     <ClInclude Include="qoGun.h" />
+    <ClInclude Include="qoGunItem.h" />
     <ClInclude Include="qoGunScript.h" />
     <ClInclude Include="qoHPUI.h" />
     <ClInclude Include="qoHPUIBackGround.h" />
     <ClInclude Include="qoHPUIScript.h" />
+    <ClInclude Include="qoItem.h" />
     <ClInclude Include="qoLabGuard.h" />
     <ClInclude Include="qoLabGuardScript.h" />
     <ClInclude Include="qoLabTurret.h" />
@@ -70,10 +72,12 @@
     <ClCompile Include="qoEntanglementGunScript.cpp" />
     <ClCompile Include="qoFloor.cpp" />
     <ClCompile Include="qoGun.cpp" />
+    <ClCompile Include="qoGunItem.cpp" />
     <ClCompile Include="qoGunScript.cpp" />
     <ClCompile Include="qoHPUI.cpp" />
     <ClCompile Include="qoHPUIBackGround.cpp" />
     <ClCompile Include="qoHPUIScript.cpp" />
+    <ClCompile Include="qoItem.cpp" />
     <ClCompile Include="qoLabGuard.cpp" />
     <ClCompile Include="qoLabGuardScript.cpp" />
     <ClCompile Include="qoLabTurret.cpp" />

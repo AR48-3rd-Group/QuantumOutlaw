@@ -11,6 +11,7 @@ namespace qo::enums
 		BULLET,
 		ENEMY,
 		UI,
+		ITEM,
 		MAX = 16,
 	};
 
