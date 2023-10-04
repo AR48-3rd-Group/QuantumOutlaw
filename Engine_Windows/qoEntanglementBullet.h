@@ -25,6 +25,7 @@ namespace qo
 	private:
 		bool mIsEntangle;
 		GameObject* mFirst;
+		GameObject* mTarget;
 	};
 }
 

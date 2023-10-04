@@ -104,7 +104,6 @@ namespace qo
 					col->SetScale(Vector3(0.1f, 0.1f, 0.1f));
 
 					bullet->AddComponent<BulletScript>();
-
 					bullet->Initialize();
 
 					SceneManager::GetActiveScene()->AddGameObject(bullet, LAYER::BULLET);
