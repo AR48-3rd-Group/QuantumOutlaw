@@ -25,7 +25,7 @@ namespace qo
 
 		Transform* tr = obj->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
-		pos.x -= 0.1f * Time::DeltaTime();
+		pos.x += 0.1f * Time::DeltaTime();
 		tr->SetPosition(pos);
 	}
 

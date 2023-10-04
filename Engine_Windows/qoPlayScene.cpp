@@ -14,6 +14,8 @@
 #include "qoCamera.h"
 
 #include "qoLabTurret.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
 #include "qoHPUI.h"
 #include "qoHPUIScript.h"
 
@@ -98,7 +100,7 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 
 		// 잠긴 문 개체 생성
-		lockeddoor = new LockedDoor();
+		/*lockeddoor = new LockedDoor();
 		Transform* LockedDoorTransform = lockeddoor->AddComponent<Transform>();
 		LockedDoorTransform->SetPositionInPixels(500, 200, 0);
 		LockedDoorTransform->SetScaleInPixels(400, 400, 0);
@@ -111,9 +113,46 @@ namespace qo
 		Collider* LockedDoorCollider = lockeddoor->AddComponent<Collider>();
 		LockedDoorCollider->SetScale(LockedDoorTransform->GetScale());
 
-		AddGameObject(lockeddoor, LAYER::WALL);
+		AddGameObject(lockeddoor, LAYER::WALL);*/
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+		LabTurret* enemy1 = new LabTurret();
+		Transform* EnemyTransform = enemy1->AddComponent<Transform>();
+		EnemyTransform->SetPositionInPixels(300, 400, 0);
+		EnemyTransform->SetScaleInPixels(50, 50, 0);
+		EnemyTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		MeshRenderer* EnemyMeshRenderer = enemy1->AddComponent<MeshRenderer>();
+		EnemyMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		EnemyMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* EnemyCollider = enemy1->AddComponent<Collider>();
+		EnemyCollider->SetScale(EnemyTransform->GetScale());
+
+		AddGameObject(enemy1, LAYER::ENEMY);
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+		LabGuard* enemy2 = new LabGuard();
+		EnemyTransform = enemy2->AddComponent<Transform>();
+		EnemyTransform->SetPositionInPixels(300, 600, 0);
+		EnemyTransform->SetScaleInPixels(50, 50, 0);
+		EnemyTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		EnemyMeshRenderer = enemy2->AddComponent<MeshRenderer>();
+		EnemyMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		EnemyMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		EnemyCollider = enemy2->AddComponent<Collider>();
+		EnemyCollider->SetScale(EnemyTransform->GetScale());
+
+		enemy2->AddComponent<LabGuardScript>();
+
+		AddGameObject(enemy2, LAYER::ENEMY);
+
+
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
 	}
 
 	void PlayScene::Update()

@@ -52,6 +52,7 @@
     <ClInclude Include="qoTeleportationGun.h" />
     <ClInclude Include="qoTeleportationGunScript.h" />
     <ClInclude Include="qoTrackerBullet.h" />
+    <ClInclude Include="qoTrackerBulletScript.h" />
     <ClInclude Include="qoUI.h" />
     <ClInclude Include="qoUIScript.h" />
     <ClInclude Include="qoWall.h" />
@@ -88,6 +89,7 @@
     <ClCompile Include="qoTeleportationGun.cpp" />
     <ClCompile Include="qoTeleportationGunScript.cpp" />
     <ClCompile Include="qoTrackerBullet.cpp" />
+    <ClCompile Include="qoTrackerBulletScript.cpp" />
     <ClCompile Include="qoUI.cpp" />
     <ClCompile Include="qoUIScript.cpp" />
     <ClCompile Include="qoWall.cpp" />

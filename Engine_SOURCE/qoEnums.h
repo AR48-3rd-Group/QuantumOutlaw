@@ -9,7 +9,7 @@ namespace qo::enums
 		FLOOR,
 		WALL,
 		BULLET,
-		MONSTER,
+		ENEMY,
 		MAX = 16,
 	};
 

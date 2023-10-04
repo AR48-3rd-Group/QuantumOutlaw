@@ -198,6 +198,9 @@
     <ClCompile Include="qoTrackerBullet.cpp">
       <Filter>GameObjects\Bullet\TrackerBullet</Filter>
     </ClCompile>
+    <ClCompile Include="qoTrackerBulletScript.cpp">
+      <Filter>Scripts\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayScene.h">
@@ -305,6 +308,9 @@
     <ClInclude Include="qoLoadScene.h" />
     <ClInclude Include="qoTrackerBullet.h">
       <Filter>GameObjects\Bullet\TrackerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="qoTrackerBulletScript.h">
+      <Filter>Scripts\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

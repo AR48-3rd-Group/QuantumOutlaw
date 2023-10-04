@@ -20,6 +20,8 @@ namespace qo
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		Enemy* GetTarget() { return mTarget; }
+
 	private:
 		Enemy* mTarget;
     };
