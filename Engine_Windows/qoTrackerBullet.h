@@ -3,11 +3,13 @@
 
 namespace qo
 {
-	class EntanglementBullet : public Bullet
-	{
+	class Enemy;
+
+    class TrackerBullet : public Bullet
+    {
 	public:
-		EntanglementBullet(Vector3 Dir);
-		virtual ~EntanglementBullet();
+		TrackerBullet(Enemy* target);
+		virtual ~TrackerBullet();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -17,6 +19,9 @@ namespace qo
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
-	};
+
+	private:
+		Enemy* mTarget;
+    };
 }
 
