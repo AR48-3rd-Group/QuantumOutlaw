@@ -13,6 +13,9 @@
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 #include "qoGunItem.h"
+#include "qoHPUI.h"
+#include "qoHPUIBackGround.h"
+#include "qoHPUIScript.h"
 
 namespace qo
 {
@@ -27,28 +30,28 @@ namespace qo
 	void Stage1_1::Initialize()
 	{
 		#pragma region Player
-		Player* player = new Player();
-		Transform* PlayerTransform = player->AddComponent<Transform>();
+		mPlayer = new Player();
+		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
 		PlayerTransform->SetPositionInPixels(800, 384, 0.);
 		PlayerTransform->SetScaleInPixels(64, 128, 0);
 		//PlayerTransform->SetScale(1, 1, 0);
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
-		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
+		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
 		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* PlayerCollider = player->AddComponent<Collider>();
+		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
 
-		player->AddComponent<Rigidbody>();
+		mPlayer->AddComponent<Rigidbody>();
 
-		player->AddComponent<PlayerScript>();
+		mPlayer->AddComponent<PlayerScript>();
 
-		player->Initialize();
+		mPlayer->Initialize();
 
-		AddGameObject(player, LAYER::PLAYER);
-		Camera::SetTarget(player);
+		AddGameObject(mPlayer, LAYER::PLAYER);
+		Camera::SetTarget(mPlayer);
 		#pragma endregion
 
 		#pragma region Item
@@ -273,7 +276,38 @@ namespace qo
 		GoalCollider->SetScale(GoalTransform->GetScale());
 
 		AddGameObject(Goal, LAYER::WALL);
+		#pragma endregion
 
+		#pragma region UI
+		HPUI* hpui = new HPUI(mPlayer);
+		Transform* hpuiTransform = hpui->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
+		hpui->SetFixedPosition(Vector3(300.f, 830.f, 0));
+		hpui->SetFixedScale(Vector3(400.f, 50.f, 0));
+
+		MeshRenderer* hpuiMeshRenderer = hpui->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		hpui->AddComponent<HPUIScript>();
+
+		AddGameObject(hpui, LAYER::UI);
+
+		HPUIBackGround* hpuiBG = new HPUIBackGround();
+		hpuiTransform = hpuiBG->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
+
+		hpuiMeshRenderer = hpuiBG->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		AddGameObject(hpuiBG, LAYER::UI);
 		#pragma endregion
 
 		#pragma region Managers
@@ -283,7 +317,6 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 		#pragma endregion
-
 	}
 
 	void Stage1_1::Update()
@@ -307,6 +340,15 @@ namespace qo
 	}
 
 	void Stage1_1::UnlockDoor(int tag)
+	{
+	}
+
+	void Stage1_1::Enter()
+	{
+		Camera::SetTarget(mPlayer);
+	}
+
+	void Stage1_1::Exit()
 	{
 	}
 

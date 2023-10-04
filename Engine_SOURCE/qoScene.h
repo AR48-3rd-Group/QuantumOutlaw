@@ -24,7 +24,6 @@ namespace qo
 		// 개체의 Transform, MeshRenderer, Collider를 입력한 값에 따라서 자동생성 해주는 함수
 		void CreateAndSetUpGameObject(GameObject* object, LAYER objectLayer, float xPixels, float yPixels, float widthInPixels, float heightInPixels, const Vector4& color);
 
-
 		virtual void Enter() = 0;
 		virtual void Exit() = 0;
 	private:

@@ -5,6 +5,7 @@
 
 namespace qo
 {
+	class Player;
 	class Stage1_2 : public Scene
 	{
 	public:
@@ -28,5 +29,7 @@ namespace qo
 		static const int EventDoorCount = 3;
 		LockedDoor* EventTrap;
 		LockedDoor* EventDoor[EventDoorCount];
+		
+		Player* mPlayer;
 	};
 }

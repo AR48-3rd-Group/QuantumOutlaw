@@ -18,8 +18,10 @@ namespace qo
 		void SetFixedPosition(Vector3 fixedposition) { mFixedPosition = fixedposition; }
 		void SetFixedScale(Vector3 fixedScale) { mFixedScale = fixedScale; }
 
-		Vector3 GetFixedPosition() { return mFixedPosition; }
-		Vector3 GetFixedScale() { return mFixedScale; }
+		Vector3 GetFixedPosition() const { return mFixedPosition; }
+		Vector3 GetFixedScale() const { return mFixedScale; }
+
+		Player* GetPlayer() const { return mPlayer; }
 
 	private:
 		Vector3 mFixedScale;

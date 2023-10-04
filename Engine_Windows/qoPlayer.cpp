@@ -18,7 +18,8 @@ namespace qo
 		, mActiveGun(nullptr)
 		, mState(ePlayerState::Idle)
 		, mDir(eDirection::RIGHT)
-		, mHp(100)
+		, mCurHp(100)
+		, mMaxHp(100)
 		, mSpeed(0.5f)
 	{
 	}

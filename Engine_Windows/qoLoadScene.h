@@ -8,7 +8,7 @@ namespace qo
 {
 	void InitializeScenes()
 	{
-		//SceneManager::CreateScene<Stage1_1>(L"Stage1_1");
+		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<Stage1_1>(L"Stage1_1");
 		SceneManager::CreateScene<Stage1_2>(L"Stage1_2");
 

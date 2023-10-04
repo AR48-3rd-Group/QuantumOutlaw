@@ -184,7 +184,6 @@ namespace qo
 		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 		
 		AddGameObject(hpuiBG, LAYER::UI);
-		
 	}
 
 	void PlayScene::Update()
@@ -205,5 +204,11 @@ namespace qo
 	void PlayScene::Render()
 	{
 		Scene::Render();
+	}
+	void PlayScene::Enter()
+	{
+	}
+	void PlayScene::Exit()
+	{
 	}
 }

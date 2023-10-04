@@ -23,6 +23,7 @@ namespace qo
 			T* scene = new T();
 			mScenes.insert(std::make_pair(name, scene));
 			scene->Initialize();
+			mActiveScene = scene;
 
 			return true;
 		}

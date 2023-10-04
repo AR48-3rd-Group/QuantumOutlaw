@@ -4,6 +4,7 @@
 
 namespace qo
 {
+	class Player;
 	class Stage1_1 : public Scene
 	{
 	public:
@@ -21,6 +22,7 @@ namespace qo
 		void Exit() override;
 
 	private:
+		Player* mPlayer;
 		DoorSwitch* OpenSwitch;
 		LockedDoor* Goal;
 	};

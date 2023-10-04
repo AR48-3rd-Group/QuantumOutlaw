@@ -5,13 +5,13 @@ namespace qo::enums
 	enum LAYER
 	{
 		NONE = 0,
-		PLAYER,
-		FLOOR,
-		WALL,
-		BULLET,
-		ENEMY,
 		UI,
 		ITEM,
+		ENEMY,
+		WALL,
+		FLOOR,
+		BULLET,
+		PLAYER,
 		MAX = 16,
 	};
 

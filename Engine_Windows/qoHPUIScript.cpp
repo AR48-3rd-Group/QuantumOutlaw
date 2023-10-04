@@ -10,10 +10,9 @@ extern qo::Application application;
 namespace qo
 {
 	HPUIScript::HPUIScript()
-		: mMaxHP(100)
-		, mCurHP(100)
+		: mMaxHP(0)
+		, mCurHP(0)
 	{
-		
 	}
 
 	HPUIScript::~HPUIScript()
@@ -26,19 +25,23 @@ namespace qo
 
 	void HPUIScript::Update()
 	{
-		if (Input::GetKeyState(KEY_CODE::O) == KEY_STATE::DOWN)
-		{
-			mCurHP -= 1;
-		}
-		
-		if (Input::GetKeyState(KEY_CODE::P) == KEY_STATE::DOWN)
-		{
-			mCurHP += 1;
-		}
 	}
 
 	void HPUIScript::LateUpdate()
 	{
+		mCurHP = dynamic_cast<HPUI*>(GetOwner())->GetPlayer()->GetCurHP();
+		mMaxHP = dynamic_cast<HPUI*>(GetOwner())->GetPlayer()->GetMaxHP();
+
+		if (mCurHP < 0)
+		{
+			dynamic_cast<HPUI*>(GetOwner())->GetPlayer()->SetCurHP(0);
+		}
+
+		if (mCurHP > mMaxHP)
+		{
+			dynamic_cast<HPUI*>(GetOwner())->GetPlayer()->SetCurHP(mMaxHP);
+		}
+
 		Vector3 HPpos = GetOwner()->GetComponent<Transform>()->GetPosition();
 		Vector3 HPscale = GetOwner()->GetComponent<Transform>()->GetScale();
 		Vector3 HPfixedpos = dynamic_cast<HPUI*>(GetOwner())->GetFixedPosition();
