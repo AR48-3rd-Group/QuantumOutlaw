@@ -17,8 +17,9 @@ namespace qo
 		: mGuns{}
 		, mActiveGun(nullptr)
 		, mState(ePlayerState::Idle)
+		, mDir(eDirection::RIGHT)
 		, mHp(100)
-		, mSpeed(1.f)
+		, mSpeed(0.5f)
 	{
 	}
 
