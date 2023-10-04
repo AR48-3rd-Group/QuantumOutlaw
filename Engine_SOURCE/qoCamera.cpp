@@ -2,6 +2,9 @@
 #include "qoInput.h"
 #include "qoTime.h"
 #include "qoTransform.h"
+#include "qoApplication.h"
+
+extern qo::Application application;
 
 namespace qo
 {
@@ -31,8 +34,8 @@ namespace qo
 				Vector3 TargetPosition = mTarget->GetComponent<Transform>()->GetPosition();
 				mLookAt = TargetPosition;
 
-				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 2.f;
-				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 2.f;
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / static_cast<float>(application.GetWidth()) - 2.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / static_cast<float>(application.GetHeight()) - 2.f;
 
 				if (mLookAt.x < 0.f)
 				{
@@ -68,8 +71,8 @@ namespace qo
 
 				mLookAt = TargetPosition;
 
-				float limitnormalizedX = (mLimitLookAt.x * 2.f) / 1600.f - 2.f;
-				float limitnormalizedY = (mLimitLookAt.y * 2.f) / 900.f - 2.f;
+				float limitnormalizedX = (mLimitLookAt.x * 2.f) / static_cast<float>(application.GetWidth()) - 2.f;
+				float limitnormalizedY = (mLimitLookAt.y * 2.f) / static_cast<float>(application.GetHeight()) - 2.f;
 
 				if (mLookAt.x < 0.f)
 				{
