@@ -17,6 +17,9 @@
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
 
+#include "qoInput.h"
+#include "qoSceneManager.h"
+
 namespace qo
 {
 	Stage1_1::Stage1_1()
@@ -332,6 +335,11 @@ namespace qo
 	void Stage1_1::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (Input::GetKeyState(KEY_CODE::L) == KEY_STATE::DOWN)
+		{
+			SceneManager::ReStartScene<Stage1_1>(GetName());
+		}
 	}
 
 	void Stage1_1::Render()
