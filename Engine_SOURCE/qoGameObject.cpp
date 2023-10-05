@@ -16,6 +16,12 @@ namespace qo
 			delete comp;
 			comp = nullptr;
 		}
+
+		for (Script* script : mScripts)
+		{
+			delete script;
+			script = nullptr;
+		}
 	}
 
 	void GameObject::Initialize()
