@@ -92,6 +92,8 @@ namespace qo
 
 				trackerBullet->Initialize();
 
+				trackerBullet->SetFirst(enemy);
+
 				SceneManager::GetActiveScene()->AddGameObject(trackerBullet, LAYER::BULLET);
 			}
 

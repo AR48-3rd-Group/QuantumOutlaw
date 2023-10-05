@@ -117,9 +117,11 @@ namespace qo::renderer
 		}
 
 		for (int i = 0; i < vertices.size() - 2; ++i)
+		{
+			indexes.push_back(i);
+			indexes.push_back(1);
 			indexes.push_back(i + 1);
-
-		indexes.push_back(1);
+		}
 
 		CircleMesh->CreateVertexBuffer(vertices.data(), static_cast<UINT>(vertices.size()));
 		CircleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
@@ -242,7 +244,7 @@ namespace qo::renderer
 		// Circle Shader
 		CircleShader->Create(eShaderStage::VS, L"CircleVS.hlsl", "VS");
 		CircleShader->Create(eShaderStage::PS, L"CirclePS.hlsl", "PS");
-		CircleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST); // TOPOLOGY LINELIST 설정
+		CircleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST); 
 		ResourceManager::Insert(L"CircleShader", CircleShader);
 
 		GetDevice()->CreateInputLayout(InputLayouts, 2,
@@ -270,7 +272,10 @@ namespace qo::renderer
 
 	void Release()
 	{
-		delete TriangleMesh;
+		// ------------------
+		// ResourceManger에서 메모리 해제
+		// ------------------
+		/*delete TriangleMesh;
 		delete RectangleMesh;
 		delete CircleMesh;
 		delete BasicRectangleMesh;
@@ -278,7 +283,7 @@ namespace qo::renderer
 		delete shader;
 		delete ColorTestShader;
 		delete CircleShader;
-		delete ColorTestShader2;
+		delete ColorTestShader2;*/
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];
 		delete constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];

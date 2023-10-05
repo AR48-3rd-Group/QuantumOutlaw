@@ -6,6 +6,7 @@ namespace qo
 	Layer::Layer()
 	{
 	}
+
 	Layer::~Layer()
 	{
 		for (GameObject* gameObject : mGameObjects)
