@@ -22,6 +22,7 @@ namespace qo
 
 			T* scene = new T();
 			mScenes.insert(std::make_pair(name, scene));
+			scene->SetName(name);
 			scene->Initialize();
 			mActiveScene = scene;
 
@@ -30,6 +31,25 @@ namespace qo
 		static Scene* LoadScene(const std::wstring name);
 
 		static Scene* GetActiveScene() { return mActiveScene; }
+
+		template <typename T>
+		static void ReStartScene(const std::wstring name)
+		{
+			mActiveScene->Exit();
+
+			std::map<std::wstring, Scene*>::iterator iter
+				= mScenes.find(name);
+
+			// 기존씬 메모리 해제
+			delete iter->second;
+
+			// 현재 씬을 Scene에서 제거한다
+			mScenes.erase(iter);
+
+			CreateScene<T>(name);
+
+			mActiveScene->Enter();
+		}
 
 	private:
 		static Scene* mActiveScene;
