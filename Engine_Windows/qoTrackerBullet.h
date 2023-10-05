@@ -22,8 +22,11 @@ namespace qo
 
 		Enemy* GetTarget() { return mTarget; }
 
+		void SetFirst(Enemy* first) { mFirst = first; }
+
 	private:
 		Enemy* mTarget;
+		Enemy* mFirst;
     };
 }
 

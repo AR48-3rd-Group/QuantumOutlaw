@@ -46,6 +46,10 @@ namespace qo
 		Barrier* barrier = dynamic_cast<Barrier*> (other->GetOwner());
 
 		// 충돌한 객체가 해당 객체면 Bullet 삭제
+
+		if (mFirst == enemy)
+			return;
+
 		if (enemy == nullptr
 			&& floor == nullptr
 			&& wall == nullptr
