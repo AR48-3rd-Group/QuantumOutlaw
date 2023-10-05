@@ -294,7 +294,7 @@ namespace qo
 		CreateAndSetUpGameObject(EventElevator[2], WALL, 752, 736, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventElevator[3], WALL, 192, 1632, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventElevator[4], WALL, 1312, 2256, 448, 96, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventElevator[5], WALL, 4672, 2332, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[5], WALL, 4672, 2336, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 
 		#pragma endregion
