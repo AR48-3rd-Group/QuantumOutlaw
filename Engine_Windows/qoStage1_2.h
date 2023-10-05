@@ -19,16 +19,20 @@ namespace qo
 
 		// 특정 tag 값을 가진 잠긴 문을 열어주는 함수
 		void UnlockDoor(int tag);
+		void ActivateElevator(int tag);
 
 		void Enter() override;
 		void Exit() override;
 
 	private:
-		static const int EventSwitchCount = 2;
-		DoorSwitch* EventSwitch[EventSwitchCount];
+		static const int EventButtonCount = 7;
+		EventSwitch* EventButton[EventButtonCount];
+
 		static const int EventDoorCount = 3;
-		LockedDoor* EventTrap;
 		LockedDoor* EventDoor[EventDoorCount];
+
+		static const int EventElevatorCount = 6;
+		Elevator* EventElevator[EventElevatorCount];
 		
 		Player* mPlayer;
 	};

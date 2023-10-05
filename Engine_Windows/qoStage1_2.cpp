@@ -97,136 +97,205 @@ namespace qo
 		//--------------------------------------------------------
 		//						바닥 개체
 		//--------------------------------------------------------
-		const int FloorCount_1 = 3;
-		const int FloorCount_2 = 3;
-		const int FloorCount_3 = 4;
-		const int CeilingCount = 2;
-		const int StepBlockCount = 3;
+		const int StageFloorCount = 2;
+		const int Floor_1_Count = 3;
+		const int Floor_2_Count = 9;
+		const int Floor_3_Count = 5;
+		const int Step_1_Count = 4;
+		const int Step_2_Count = 4;
+		const int Step_3_Count = 4;
+		const int Step_4_Count = 4;
+		const int Step_5_Count = 2;
 
-		Floor* StageFloor = new Floor();
-		Floor* ElevatorLRDiagonal = new Floor();
-		Floor* Floor_1[FloorCount_1];
-		Floor* Floor_2[FloorCount_2];
-		Floor* Floor_3[FloorCount_3];
-		Floor* Ceiling[CeilingCount];
-		Floor* StepBlock[StepBlockCount];
+		Floor* StageFloor[StageFloorCount];
+		Floor* Floor_1[Floor_1_Count];
+		Floor* Floor_2[Floor_2_Count];
+		Floor* Floor_3[Floor_3_Count];
+		Floor* Step_1[Step_1_Count];
+		Floor* Step_2[Step_2_Count];
+		Floor* Step_3[Step_3_Count];
+		Floor* Step_4[Step_4_Count];
+		Floor* Step_5[Step_5_Count];
 
-		for (int i = 0; i < FloorCount_1; i++)
-			Floor_1[i] = new Floor();
-		for (int i = 0; i < FloorCount_2; i++)
-			Floor_2[i] = new Floor();
-		for (int i = 0; i < FloorCount_3; i++)
-			Floor_3[i] = new Floor();
-		for (int i = 0; i < CeilingCount; i++)
-			Ceiling[i] = new Floor();
-		for (int i = 0; i < StepBlockCount; i++)
-			StepBlock[i] = new Floor();
+		for (size_t i = 0; i < StageFloorCount; i++)	StageFloor[i] = new Floor();
+		for (size_t i = 0; i < Floor_1_Count; i++)		Floor_1[i] = new Floor();
+		for (size_t i = 0; i < Floor_2_Count; i++)		Floor_2[i] = new Floor();
+		for (size_t i = 0; i < Floor_3_Count; i++)		Floor_3[i] = new Floor();
+		for (size_t i = 0; i < Step_1_Count; i++)		Step_1[i] = new Floor();
+		for (size_t i = 0; i < Step_2_Count; i++)		Step_2[i] = new Floor();
+		for (size_t i = 0; i < Step_3_Count; i++)		Step_3[i] = new Floor();
+		for (size_t i = 0; i < Step_4_Count; i++)		Step_4[i] = new Floor();
+		for (size_t i = 0; i < Step_5_Count; i++)		Step_5[i] = new Floor();
 
 		// 개체 생성
-		CreateAndSetUpGameObject(StageFloor, FLOOR, 3200, 128, 6400, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(ElevatorLRDiagonal, FLOOR, 888, 2516, 368, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_1[0], FLOOR, 1368, 824, 2736, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_1[1], FLOOR, 934, 1334, 1232, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_1[2], FLOOR, 2926, 1662, 1376, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_2[0], FLOOR, 1138, 2070, 2020, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_2[1], FLOOR, 3840, 2412, 2656, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_2[2], FLOOR, 3112, 3028, 1488, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_3[0], FLOOR, 4240, 824, 768, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_3[1], FLOOR, 6016, 824, 768, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_3[2], FLOOR, 4848, 1396, 1472, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Floor_3[3], FLOOR, 5600, 1904, 1344, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Ceiling[0], FLOOR, 1992, 3536, 3728, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(Ceiling[1], FLOOR, 5192, 3536, 2160, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(StepBlock[0], FLOOR, 6144, 1206, 256, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(StepBlock[1], FLOOR, 4240, 1714, 256, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(StepBlock[2], FLOOR, 6144, 2220, 256, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageFloor[0], FLOOR, 3200, 64, 6400, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageFloor[1], FLOOR, 3232, 3136, 6336, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_1[0], FLOOR, 800, 576, 1600, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_1[1], FLOOR, 3712, 384, 1600, 512, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_1[2], FLOOR, 5520, 544, 1632, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[0], FLOOR, 3408, 1056, 4992, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[1], FLOOR, 320, 1280, 512, 640, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[2], FLOOR, 832, 1536, 512, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[3], FLOOR, 2512, 1824, 768, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[4], FLOOR, 2512, 1280, 768, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[5], FLOOR, 3600, 1760, 512, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[6], FLOOR, 4528, 1632, 512, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[7], FLOOR, 4656, 1280, 768, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_2[8], FLOOR, 6040, 1632, 592, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_3[0], FLOOR, 2720, 1984, 3264, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_3[1], FLOOR, 704, 2112, 768, 384, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_3[2], FLOOR, 5376, 2112, 2048, 384, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_3[3], FLOOR, 2303, 2848, 4478, 448, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Floor_3[4], FLOOR, 5600, 2752, 1600, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_1[0], FLOOR, 1792, 224, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_1[1], FLOOR, 2112, 352, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_1[2], FLOOR, 2432, 480, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_1[3], FLOOR, 2768, 608, 288, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_2[0], FLOOR, 6272, 736, 128, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_2[1], FLOOR, 5968, 864, 128, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_2[2], FLOOR, 6272, 992, 128, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_2[3], FLOOR, 5968, 1120, 128, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_3[0], FLOOR, 5552, 1248, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_3[1], FLOOR, 5184, 1376, 288, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_3[2], FLOOR, 5552, 1504, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_3[3], FLOOR, 5184, 1632, 288, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_4[0], FLOOR, 4144, 1376, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_4[1], FLOOR, 3824, 1248, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_4[2], FLOOR, 3376, 1248, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_4[3], FLOOR, 3040, 1376, 288, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_5[0], FLOOR, 1984, 1376, 288, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(Step_5[1], FLOOR, 1648, 1248, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//						벽 개체
 		//--------------------------------------------------------
-		const int StartWallCount = 3;
-		const int WallCount = 4;
-		const int DoorWallCount = 3;
+		const int StageWallCount = 4;
+		const int FieldWallCount = 2;
+		const int CeilWallCount = 14;
 
-		Wall* StartWall[StartWallCount];
-		Wall* wall[WallCount];
-		Wall* DoorWall[DoorWallCount];
+		Wall* StageWall[StageWallCount];
+		Wall* FieldWall[FieldWallCount];
+		Wall* CeilWall[CeilWallCount];
 
-		for (int i = 0; i < StartWallCount; i++)
-			StartWall[i] = new Wall();
-		for (int i = 0; i < WallCount; i++)
-			wall[i] = new Wall();
-		for (int i = 0; i < DoorWallCount; i++)
-			DoorWall[i] = new Wall();
+		for (size_t i = 0; i < StageWallCount; i++)	StageWall[i] = new Wall();
+		for (size_t i = 0; i < FieldWallCount; i++)	FieldWall[i] = new Wall();
+		for (size_t i = 0; i < CeilWallCount; i++)	CeilWall[i] = new Wall();
 
 		// 개체 생성
-		CreateAndSetUpGameObject(StartWall[0], WALL, 64, 476, 128, 440, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(StartWall[1], WALL, 1536, 636, 128, 120, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(StartWall[2], WALL, 2272, 636, 128, 120, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(wall[0], WALL, 64, 2276, 128, 2648, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(wall[1], WALL, 3984, 3282, 256, 636, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(wall[2], WALL, 3984, 1650, 256, 1396, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(wall[3], WALL, 6336, 2276, 128, 2648, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(DoorWall[0], WALL, 3920, 636, 128, 120, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(DoorWall[1], WALL, 6336, 636, 128, 120, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(DoorWall[2], WALL, 4048, 2880, 128, 168, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageWall[0], WALL, 32, 288, 64, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageWall[1], WALL, 32, 1952, 64, 2496, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageWall[2], WALL, 6368, 1024, 64, 1792, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(StageWall[3], WALL, 6368, 2976, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(FieldWall[0], WALL, 1536, 832, 128, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(FieldWall[1], WALL, 4304, 1792, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[0], WALL, 1080, 384, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[1], WALL, 3856, 896, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[2], WALL, 4480, 896, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[3], WALL, 5872, 896, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[4], WALL, 5872, 1856, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[5], WALL, 3888, 1664, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[6], WALL, 3312, 1664, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[7], WALL, 2160, 1664, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[8], WALL, 944, 1408, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[9], WALL, 2032, 2560, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[10], WALL, 2544, 2560, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[11], WALL, 3056, 2560, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[12], WALL, 3568, 2560, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(CeilWall[13], WALL, 6336, 2560, 128, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//					파괴되는 벽 개체
 		//--------------------------------------------------------
-		const int BreakableWallCount = 2;
+		const int BreakWallCount = 4;
 
-		DestuctibleWall* BreakableWall[BreakableWallCount];
+		DestuctibleWall* BreakWall[BreakWallCount];
 
-		for (int i = 0; i < BreakableWallCount; i++)
-			BreakableWall[i] = new DestuctibleWall();
+		for (size_t i = 0; i < BreakWallCount; i++)	BreakWall[i] = new DestuctibleWall();
 
 		// 개체 생성
-		CreateAndSetUpGameObject(BreakableWall[0], WALL, 1536, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(BreakableWall[1], WALL, 2272, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(BreakWall[0], WALL, 1080, 224, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(BreakWall[1], WALL, 4608, 608, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(BreakWall[2], WALL, 5872, 736, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(BreakWall[3], WALL, 944, 1248, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//					배리어 개체
 		//--------------------------------------------------------
-		const int BarrierCount = 2;
+		const int EventBarrierCount = 3;
 
-		Barrier* barrier[BarrierCount];
+		Barrier* EventBarrier[EventBarrierCount];
 
-		for (int i = 0; i < BarrierCount; i++)
-			barrier[i] = new Barrier();
-
-		// 개체 생성
-		CreateAndSetUpGameObject(barrier[0], WALL, 4368, 1142, 96, 380, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(barrier[1], WALL, 3632, 3282, 96, 380, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-
-		//--------------------------------------------------------
-		//					스위치 개체
-		//--------------------------------------------------------
-		for (int i = 0; i < BarrierCount; i++)
-			EventSwitch[i] = new DoorSwitch();
+		for (size_t i = 0; i < EventBarrierCount; i++)	EventBarrier[i] = new Barrier();
 
 		// 개체 생성
-		CreateAndSetUpGameObject(EventSwitch[0], WALL, 4144, 1142, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventSwitch[1], WALL, 3824, 3282, 64, 128, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventBarrier[0], WALL, 6176, 1792, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventBarrier[1], WALL, 1312, 832, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventBarrier[2], WALL, 6176, 2944, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		//--------------------------------------------------------
+		//				이벤트 스위치 개체
+		//--------------------------------------------------------
+		for (size_t i = 0; i < EventButtonCount; i++)	EventButton[i] = new EventSwitch();
+
+		// 개체 생성
+		CreateAndSetUpGameObject(EventButton[0], WALL, 4912, 224, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[1], WALL, 6304, 1792, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[2], WALL, 1472, 832, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[3], WALL, 432, 1696, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[4], WALL, 976, 2400, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[5], WALL, 4910, 2432, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[6], WALL, 6304, 3008, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//					잠긴 문 개체
 		//--------------------------------------------------------
-		EventTrap = new LockedDoor();
+		for (size_t i = 0; i < EventDoorCount; i++)	EventDoor[i] = new LockedDoor();
 
-		for (int i = 0; i < EventDoorCount; i++)
-			EventDoor[i] = new LockedDoor();
-
-		EventTrap->SetTag(2);
-		EventDoor[0]->SetTag(2);
-		EventDoor[1]->SetTag(2);
-		EventDoor[2]->SetTag(1);
+		EventDoor[0]->SetTag(1);
+		EventDoor[1]->SetTag(1);
+		EventDoor[2]->SetTag(2);
 
 		// 개체 생성
-		CreateAndSetUpGameObject(EventTrap, WALL, 5128, 824, 1008, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventDoor[0], WALL, 3920, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventDoor[1], WALL, 6336, 416, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventDoor[2], WALL, 4048, 2636, 128, 320, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[0], WALL, 4752, 1504, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[1], WALL, 4752, 1792, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventDoor[2], WALL, 6336, 2400, 128, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		//--------------------------------------------------------
+		//					엘레베이터 개체
+		//--------------------------------------------------------
+		for (size_t i = 0; i < EventElevatorCount; i++)	EventElevator[i] = new Elevator();
+
+		EventElevator[4]->SetDirection(evrDirection::HORIZONTAL);
+		EventElevator[0]->SetTimer(2.5f);
+		EventElevator[1]->SetTimer(2.0f);
+		EventElevator[2]->SetTimer(2.0f);
+		EventElevator[3]->SetTimer(3.0f);
+		EventElevator[4]->SetTimer(12.0f);
+		EventElevator[5]->SetTimer(3.4f);
+
+		EventElevator[0]->SetTag(1);
+		EventElevator[1]->SetTag(2);
+		EventElevator[3]->SetTag(3);
+		EventElevator[4]->SetTag(4);
+		EventElevator[5]->SetTag(5);
+
+		EventElevator[2]->SetActive(true);
+
+		EventElevator[0]->SetRange(450);
+		EventElevator[1]->SetRange(384);
+		EventElevator[2]->SetRange(384);
+		EventElevator[3]->SetRange(640);
+		EventElevator[4]->SetRange(2816);
+		EventElevator[5]->SetRange(512);
+
+		// 개체 생성
+		CreateAndSetUpGameObject(EventElevator[0], WALL, 4608, 160, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[1], WALL, 1186, 1184, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[2], WALL, 752, 736, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[3], WALL, 192, 1632, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[4], WALL, 1312, 2256, 448, 96, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventElevator[5], WALL, 4672, 2336, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
 
 		#pragma endregion
 
@@ -243,8 +312,13 @@ namespace qo
 	{
 		Scene::Update();
 
-		if (EventSwitch[0]->GetSwitch())	UnlockDoor(2);
-		if (EventSwitch[1]->GetSwitch())	UnlockDoor(1);
+		if (EventButton[0]->GetEventActive())	ActivateElevator(1);
+		if (EventButton[1]->GetEventActive())	UnlockDoor(1);
+		if (EventButton[2]->GetEventActive())	ActivateElevator(2);
+		if (EventButton[3]->GetEventActive())	ActivateElevator(3);
+		if (EventButton[4]->GetEventActive())	ActivateElevator(4);
+		if (EventButton[5]->GetEventActive())	ActivateElevator(5);
+		if (EventButton[6]->GetEventActive())	UnlockDoor(2);
 	}
 
 	void Stage1_2::LateUpdate()
@@ -259,13 +333,18 @@ namespace qo
 
 	void Stage1_2::UnlockDoor(int tag)
 	{
-		if (EventTrap->GetTag() == tag)			EventTrap->SetLocked(false);
-
-		for (int i = 0; i < EventDoorCount; i++)
+		for (size_t i = 0; i < EventDoorCount; i++)
 		{
 			if (EventDoor[i]->GetTag() == tag)	EventDoor[i]->SetLocked(false);
 		}
+	}
 
+	void Stage1_2::ActivateElevator(int tag)
+	{
+		for (size_t i = 0; i < EventElevatorCount; i++)
+		{
+			if (EventElevator[i]->GetTag() == tag)	EventElevator[i]->SetActive(true);
+		}
 	}
 
 	void Stage1_2::Enter()
@@ -276,4 +355,6 @@ namespace qo
 	void Stage1_2::Exit()
 	{
 	}
+
+	// 작동 테스트
 }
