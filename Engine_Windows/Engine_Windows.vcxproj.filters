@@ -213,6 +213,12 @@
     <ClCompile Include="qoItem.cpp">
       <Filter>GameObjects\Item</Filter>
     </ClCompile>
+    <ClCompile Include="qoElevator.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoEventSwitch.cpp">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayer.h">
@@ -332,6 +338,12 @@
     </ClInclude>
     <ClInclude Include="qoItem.h">
       <Filter>GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="qoElevator.h">
+      <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoEventSwitch.h">
+      <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
