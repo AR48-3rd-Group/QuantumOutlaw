@@ -10,6 +10,7 @@ namespace qo
 		static void Update();
 		static void LateUpdate();
 		static void Render();
+		static void Release();
 
 		template <typename T>
 		static bool CreateScene(const std::wstring name)

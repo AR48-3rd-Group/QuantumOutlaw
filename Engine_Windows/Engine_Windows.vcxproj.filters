@@ -94,6 +94,9 @@
     <Filter Include="GameObjects\Bullet\TrackerBullet">
       <UniqueIdentifier>{33917cc8-c38c-4336-816c-9040020a27c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Item">
+      <UniqueIdentifier>{c460db1b-7995-4c79-af56-7aa36be4a122}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayer.cpp">
@@ -201,10 +204,14 @@
     <ClCompile Include="qoHPUIBackGround.cpp">
       <Filter>GameObjects\UI\HP</Filter>
     </ClCompile>
-    <ClCompile Include="qoGunItem.cpp" />
-    <ClCompile Include="qoItem.cpp" />
     <ClCompile Include="qoPlayScene.cpp">
       <Filter>Scenes\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="qoGunItem.cpp">
+      <Filter>GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="qoItem.cpp">
+      <Filter>GameObjects\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,10 +324,14 @@
     <ClInclude Include="qoHPUIBackGround.h">
       <Filter>GameObjects\UI\HP</Filter>
     </ClInclude>
-    <ClInclude Include="qoGunItem.h" />
-    <ClInclude Include="qoItem.h" />
     <ClInclude Include="qoPlayScene.h">
       <Filter>Scenes\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="qoGunItem.h">
+      <Filter>GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="qoItem.h">
+      <Filter>GameObjects\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

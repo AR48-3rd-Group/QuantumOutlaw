@@ -5,6 +5,9 @@
 #include "Client.h"
 #include "qoApplication.h"
 #include "..\\Engine_Windows\\qoLoadScene.h"
+#include "qoSceneManager.h"
+#include "qoResourceManager.h"
+#include "qoRenderer.h"
 
 #ifdef  _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Engine_Windows.lib")
@@ -76,7 +79,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     qo::SceneManager::Release();
-    qo::Resources::Release();
+    qo::ResourceManager::Release();
+    qo::renderer::Release();
 
     return (int)msg.wParam;
 }

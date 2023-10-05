@@ -14,7 +14,6 @@ namespace qo
 {
 	Application::~Application()
 	{
-		renderer::Release();
 	}
 
 	void Application::Run()

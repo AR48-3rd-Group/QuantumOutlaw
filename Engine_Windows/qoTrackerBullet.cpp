@@ -37,7 +37,7 @@ namespace qo
 
 	void TrackerBullet::OnCollisionEnter(Collider* other)
 	{
-		//Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
 		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());

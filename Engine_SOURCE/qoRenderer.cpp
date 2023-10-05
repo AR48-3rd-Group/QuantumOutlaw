@@ -270,7 +270,10 @@ namespace qo::renderer
 
 	void Release()
 	{
-		delete TriangleMesh;
+		// ------------------
+		// ResourceManger에서 메모리 해제
+		// ------------------
+		/*delete TriangleMesh;
 		delete RectangleMesh;
 		delete CircleMesh;
 		delete BasicRectangleMesh;
@@ -278,7 +281,7 @@ namespace qo::renderer
 		delete shader;
 		delete ColorTestShader;
 		delete CircleShader;
-		delete ColorTestShader2;
+		delete ColorTestShader2;*/
 
 		delete constantBuffers[(UINT)graphics::eCBType::Transform];
 		delete constantBuffers[(UINT)graphics::eCBType::ColorSetTRANSFORM];
