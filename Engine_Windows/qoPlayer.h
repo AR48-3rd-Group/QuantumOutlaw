@@ -56,7 +56,9 @@ namespace qo
 
         int                 mCurHp;
         int                 mMaxHp;
-        float               mSpeed;
+        float               mMoveSpeed;
+        float               mJumpPower;
+        float               mDashPower;
     };
 }
 

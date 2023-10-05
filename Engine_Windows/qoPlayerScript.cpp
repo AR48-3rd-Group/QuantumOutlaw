@@ -118,7 +118,8 @@ namespace qo
 			Vector3 pos = mTransform->GetPosition();
 			mTransform->SetPosition(Vector3(pos.x, pos.y + 0.05f, pos.z));
 
-			mRigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
+			mRigidbody->SetGround(false);
+			mRigidbody->AddVelocity(Vector3(0.f, mPlayer->mJumpPower, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
@@ -136,13 +137,13 @@ namespace qo
 
 		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
 		{
-			pos.x -= mPlayer->mSpeed * Time::DeltaTime();
+			pos.x -= mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::LEFT;
 		}
 
 		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
 		{
-			pos.x += mPlayer->mSpeed * Time::DeltaTime();
+			pos.x += mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::RIGHT;
 		}
 
@@ -156,7 +157,7 @@ namespace qo
 			mTransform->SetPosition(Vector3(pos.x, pos.y + 0.05f, pos.z));
 
 			mRigidbody->SetGround(false);
-			mRigidbody->SetVelocity(Vector3(0.f, 1.f, 0.f));
+			mRigidbody->AddVelocity(Vector3(0.f, mPlayer->mJumpPower, 0.f));
 			mPlayer->mState = ePlayerState::Jump;
 		}
 	}
@@ -174,13 +175,13 @@ namespace qo
 
 		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
 		{
-			pos.x -= mPlayer->mSpeed * Time::DeltaTime();
+			pos.x -= mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::LEFT;
 		}
 
 		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
 		{
-			pos.x += mPlayer->mSpeed * Time::DeltaTime();
+			pos.x += mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::RIGHT;
 		}
 
@@ -189,18 +190,18 @@ namespace qo
 		// Dash
 		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
 		{
-			Vector3 velocity = mRigidbody->GetVelocity();
+			Vector3 velocity = Vector3::Zero;
 
 			if (mPlayer->mDir == eDirection::LEFT)
 			{
-				velocity.x -= 1.f;
+				velocity.x -= mPlayer->mDashPower;
 			}
 			else if (mPlayer->mDir == eDirection::RIGHT)
 			{
-				velocity.x += 1.f;
+				velocity.x += mPlayer->mDashPower;
 			}
 
-			mRigidbody->SetVelocity(velocity);
+			mRigidbody->AddVelocity(velocity);
 
 			mPlayer->mState = ePlayerState::Dash;
 			mDuration = 0.f;
@@ -220,13 +221,13 @@ namespace qo
 
 		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)
 		{
-			pos.x -= mPlayer->mSpeed * Time::DeltaTime();
+			pos.x -= mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::LEFT;
 		}
 
 		if (Input::GetKeyState(KEY_CODE::D) == KEY_STATE::PRESSED)
 		{
-			pos.x += mPlayer->mSpeed * Time::DeltaTime();
+			pos.x += mPlayer->mMoveSpeed * Time::DeltaTime();
 			mPlayer->mDir = eDirection::RIGHT;
 		}
 
@@ -242,18 +243,18 @@ namespace qo
 		// Dash
 		if (Input::GetKeyState(KEY_CODE::SPACE) == KEY_STATE::DOWN)
 		{
-			Vector3 velocity = mRigidbody->GetVelocity();
+			Vector3 velocity = Vector3::Zero;
 
 			if (mPlayer->mDir == eDirection::LEFT)
 			{
-				velocity.x -= 1.f;
+				velocity.x -= mPlayer->mDashPower;
 			}
 			else if (mPlayer->mDir == eDirection::RIGHT)
 			{
-				velocity.x += 1.f;
+				velocity.x += mPlayer->mDashPower;
 			}
 
-			mRigidbody->SetVelocity(velocity);
+			mRigidbody->AddVelocity(velocity);
 
 			mPlayer->mState = ePlayerState::Dash;
 			mDuration = 0.f;
@@ -273,7 +274,7 @@ namespace qo
 			mPlayer->mState = ePlayerState::Idle;
 		}
 
-		// 방향 설정ㅇ
+		// 방향 설정
 		Vector3 pos = mTransform->GetPosition();
 
 		if (Input::GetKeyState(KEY_CODE::A) == KEY_STATE::PRESSED)

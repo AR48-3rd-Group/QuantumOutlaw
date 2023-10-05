@@ -20,7 +20,9 @@ namespace qo
 		, mDir(eDirection::RIGHT)
 		, mCurHp(100)
 		, mMaxHp(100)
-		, mSpeed(0.5f)
+		, mMoveSpeed(0.5f)
+		, mJumpPower(1.5f)
+		, mDashPower(1.f)
 	{
 	}
 
