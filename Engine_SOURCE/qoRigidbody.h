@@ -21,6 +21,7 @@ namespace qo
 		void AddForce(math::Vector3 force) { mForce += force; }
 
 		void SetVelocity(math::Vector3 velocity) { mVelocity = velocity; }
+		void AddVelocity(math::Vector3 velocity) { mVelocity += velocity; }
 		math::Vector3 GetVelocity() { return mVelocity; }
 
 		void SetGround(bool ground) { mbGround = ground; }
