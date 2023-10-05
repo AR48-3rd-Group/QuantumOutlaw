@@ -265,7 +265,13 @@ namespace qo
 		//--------------------------------------------------------
 		for (size_t i = 0; i < EventElevatorCount; i++)	EventElevator[i] = new Elevator();
 
-		EventElevator[5]->SetDirection(evrDirection::HORIZONTAL);
+		EventElevator[4]->SetDirection(evrDirection::HORIZONTAL);
+		EventElevator[0]->SetTimer(2.5f);
+		EventElevator[1]->SetTimer(2.0f);
+		EventElevator[2]->SetTimer(2.0f);
+		EventElevator[3]->SetTimer(3.0f);
+		EventElevator[4]->SetTimer(12.0f);
+		EventElevator[5]->SetTimer(3.4f);
 
 		EventElevator[0]->SetTag(1);
 		EventElevator[1]->SetTag(2);
@@ -349,4 +355,6 @@ namespace qo
 	void Stage1_2::Exit()
 	{
 	}
+
+	// 작동 테스트
 }

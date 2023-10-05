@@ -45,7 +45,7 @@ namespace qo
 					mTimer -= Time::DeltaTime();
 					if (mTimer < 0.0f)
 					{
-						mTimer = 2.0f;
+						ResetTimer();
 						mTick = false;
 					}
 				}
@@ -55,7 +55,7 @@ namespace qo
 					mTimer -= Time::DeltaTime();
 					if (mTimer < 0.0f)
 					{
-						mTimer = 2.0f;
+						ResetTimer();
 						mTick = true;
 					}
 				}
@@ -68,7 +68,7 @@ namespace qo
 					mTimer -= Time::DeltaTime();
 					if (mTimer < 0.0f)
 					{
-						mTimer = 2.0f;
+						ResetTimer();
 						mTick = false;
 					}
 				}
@@ -217,6 +217,6 @@ namespace qo
 
 	void Elevator::ResetTimer()
 	{
-		mTimer = GetTimer();
+		mTimer = mInitialTimerValue;
 	}
 }

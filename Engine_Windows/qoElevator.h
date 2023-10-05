@@ -37,7 +37,11 @@ namespace qo
 		void SetRange(float range) { mMovementRange = range; }
 		float GetRange() { return mMovementRange; }
 
-		void SetTimer(float timer) { mTimer = timer; }
+		void SetTimer(float timer) 
+		{ 
+			mTimer = timer;
+			mInitialTimerValue = timer;
+		}
 		float GetTimer() { return mTimer; }
 
 		void ResetTimer();
@@ -48,6 +52,7 @@ namespace qo
 		int mTagNumber;
 		float mMovementRange;
 		float mTimer;
+		float mInitialTimerValue;
 
 		bool mTick;
 	};
