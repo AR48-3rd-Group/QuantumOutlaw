@@ -95,6 +95,7 @@ namespace qo
 			Transform* tr = bullet->AddComponent<Transform>();
 			tr->SetPosition(GunPos); // 총알 시작위치는 총위치로 설정
 			tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+			tr->SetColor(owner->GetGunColor());
 
 			MeshRenderer* meshRenderer = bullet->AddComponent<MeshRenderer>();
 			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
