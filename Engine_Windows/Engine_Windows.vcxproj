@@ -25,10 +25,12 @@
     <ClInclude Include="qoBulletScript.h" />
     <ClInclude Include="qoDestructibleWall.h" />
     <ClInclude Include="qoDoorSwitch.h" />
+    <ClInclude Include="qoElevator.h" />
     <ClInclude Include="qoEnemy.h" />
     <ClInclude Include="qoEntanglementBullet.h" />
     <ClInclude Include="qoEntanglementGun.h" />
     <ClInclude Include="qoEntanglementGunScript.h" />
+    <ClInclude Include="qoEventSwitch.h" />
     <ClInclude Include="qoFloor.h" />
     <ClInclude Include="qoGun.h" />
     <ClInclude Include="qoGunItem.h" />
@@ -66,10 +68,12 @@
     <ClCompile Include="qoBulletScript.cpp" />
     <ClCompile Include="qoDestructibleWall.cpp" />
     <ClCompile Include="qoDoorSwitch.cpp" />
+    <ClCompile Include="qoElevator.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
     <ClCompile Include="qoEntanglementBullet.cpp" />
     <ClCompile Include="qoEntanglementGun.cpp" />
     <ClCompile Include="qoEntanglementGunScript.cpp" />
+    <ClCompile Include="qoEventSwitch.cpp" />
     <ClCompile Include="qoFloor.cpp" />
     <ClCompile Include="qoGun.cpp" />
     <ClCompile Include="qoGunItem.cpp" />

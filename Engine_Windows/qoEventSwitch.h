@@ -3,11 +3,11 @@
 
 namespace qo
 {
-	class LockedDoor : public GameObject
+	class EventSwitch : public GameObject
 	{
 	public:
-		LockedDoor();
-		virtual ~LockedDoor();
+		EventSwitch();
+		virtual ~EventSwitch();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -18,14 +18,10 @@ namespace qo
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		void SetLocked(bool locked) { mIsLocked = locked; }
-		bool GetLocked() { return mIsLocked; }
-
-		void SetTag(int tag) { mTagNumber = tag; }
-		int GetTag() { return mTagNumber; }
+		void SetEventActive(bool active) { mIsActive = active; }
+		bool GetEventActive() { return mIsActive; }
 
 	private:
-		bool mIsLocked;
-		int mTagNumber;
+		bool mIsActive;
 	};
 }
