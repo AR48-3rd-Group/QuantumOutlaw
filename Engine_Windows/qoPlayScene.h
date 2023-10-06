@@ -4,6 +4,7 @@
 
 namespace qo
 {
+	class Player;
 	class PlayScene : public Scene
 	{
 	public:
@@ -21,5 +22,6 @@ namespace qo
 	private:
 		DoorSwitch* doorswitch;
 		LockedDoor* lockeddoor;
+		Player*		mPlayer;
 	};
 }
