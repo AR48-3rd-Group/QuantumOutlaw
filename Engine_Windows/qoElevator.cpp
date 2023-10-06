@@ -17,6 +17,7 @@ namespace qo
 		, mMovementRange(100)
 		, mTick(true)
 		, mTimer(2.0f)
+		, mHorizontalMovement(0.f)
 	{
 	}
 
@@ -64,7 +65,8 @@ namespace qo
 			{
 				if (mTick)
 				{
-					ElevatorPosition.x += (1.0f / static_cast<float>(application.GetWidth())) * mMovementRange * Time::DeltaTime();
+					mHorizontalMovement = (1.0f / static_cast<float>(application.GetWidth())) * mMovementRange * Time::DeltaTime();
+					ElevatorPosition.x += mHorizontalMovement;
 					mTimer -= Time::DeltaTime();
 					if (mTimer < 0.0f)
 					{
@@ -142,7 +144,7 @@ namespace qo
 				{
 					// 벽 상단 충돌
 					Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
-					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f), 0);
+					PlayerTransform->SetPosition(PlayerPosition.x + mHorizontalMovement, (WallTop + PlayerCollider->GetScale().y / 2.f) - 0.03f, 0);
 					PlayerRigidbody->SetGround(true);
 				}
 			}
@@ -204,7 +206,7 @@ namespace qo
 				{
 					// 벽 상단 충돌
 					Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
-					PlayerTransform->SetPosition(PlayerPosition.x, (WallTop + PlayerCollider->GetScale().y / 2.f), 0);
+					PlayerTransform->SetPosition(PlayerPosition.x + mHorizontalMovement, (WallTop + PlayerCollider->GetScale().y / 2.f) - 0.03f, 0);
 					PlayerRigidbody->SetGround(true);
 				}
 			}
@@ -213,6 +215,13 @@ namespace qo
 
 	void Elevator::OnCollisionExit(Collider* other)
 	{
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player != nullptr)
+		{
+			Rigidbody* PlayerRigidbody = player->GetComponent<Rigidbody>();
+			PlayerRigidbody->SetGround(false);
+		}
 	}
 
 	void Elevator::ResetTimer()

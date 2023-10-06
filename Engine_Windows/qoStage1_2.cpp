@@ -285,7 +285,8 @@ namespace qo
 		EventElevator[1]->SetRange(384);
 		EventElevator[2]->SetRange(384);
 		EventElevator[3]->SetRange(640);
-		EventElevator[4]->SetRange(2816);
+		//EventElevator[4]->SetRange(2816);
+		EventElevator[4]->SetRange(512);
 		EventElevator[5]->SetRange(512);
 
 		// 개체 생성
