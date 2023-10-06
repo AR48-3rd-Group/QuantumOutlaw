@@ -43,6 +43,7 @@ namespace qo
 				if (owner->BulletConsumption(1))
 				{
 					Shoot();
+					Camera::ShakeCam(0.1f, ShakeDir::Horizontal, 0.01f, 50.f);
 				}
 			}
 		}
