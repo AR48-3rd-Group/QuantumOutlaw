@@ -55,5 +55,8 @@ namespace qo
 		float mInitialTimerValue;
 
 		bool mTick;
+
+
+		float mHorizontalMovement;
 	};
 }
