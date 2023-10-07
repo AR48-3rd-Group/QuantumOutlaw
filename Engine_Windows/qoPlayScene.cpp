@@ -26,14 +26,13 @@ namespace qo
 	{
 	}
 
-
 	PlayScene::~PlayScene()
 	{
 
 	}
 
 	void PlayScene::Initialize()
-	{		
+	{	
 		Player* player = new Player();
 		Transform* PlayerTransform = player->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
