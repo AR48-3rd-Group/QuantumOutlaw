@@ -23,6 +23,7 @@
 namespace qo
 {
 	PlayScene::PlayScene()
+		: mPlayer(nullptr)
 	{
 	}
 
@@ -32,35 +33,35 @@ namespace qo
 	}
 
 	void PlayScene::Initialize()
-	{	
-		Player* player = new Player();
-		Transform* PlayerTransform = player->AddComponent<Transform>();
+	{		
+		mPlayer = new Player();
+		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
-		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
+		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
 		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
 
-		Collider* PlayerCollider = player->AddComponent<Collider>();
+		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
 					 
-		player->AddComponent<Rigidbody>();
+		mPlayer->AddComponent<Rigidbody>();
 		
-		player->AddComponent<PlayerScript>();
+		mPlayer->AddComponent<PlayerScript>();
 
 		// 醚 积己
-		player->AddGun(eGunType::Superposition);
-		player->AddGun(eGunType::Entanglement);
-		player->AddGun(eGunType::Teleportation);
+		mPlayer->AddGun(eGunType::Superposition);
+		mPlayer->AddGun(eGunType::Entanglement);
+		mPlayer->AddGun(eGunType::Teleportation);
 
-		player->ChangeActiveGun(eGunType::Superposition);
+		mPlayer->ChangeActiveGun(eGunType::Superposition);
 
-		player->Initialize();
+		mPlayer->Initialize();
 
-		AddGameObject(player, LAYER::PLAYER);
-		Camera::SetTarget(player);
+		AddGameObject(mPlayer, LAYER::PLAYER);
+		Camera::SetTarget(mPlayer);
 
 		// 官蹿 按眉 积己
 		Floor* floor = new Floor();
@@ -154,7 +155,7 @@ namespace qo
 
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
 
-		HPUI* hpui = new HPUI(player);
+		HPUI* hpui = new HPUI(mPlayer);
 		Transform* hpuiTransform = hpui->AddComponent<Transform>();
 		hpuiTransform->SetPositionInPixels(300, 830, 0);
 		hpuiTransform->SetScaleInPixels(400, 50, 0);
@@ -204,9 +205,12 @@ namespace qo
 	{
 		Scene::Render();
 	}
+
 	void PlayScene::Enter()
 	{
+		Camera::SetTarget(mPlayer);
 	}
+
 	void PlayScene::Exit()
 	{
 	}
