@@ -28,9 +28,24 @@ namespace qo
 		Vector3 GetRotation() { return mRotation; }
 		Vector3 GetScale() { return mScale; }
 
+
+		void SetColor(math::Vector4 color) { mColor = color; }
+
+		// New function to set position in pixels
+		void SetPositionInPixels(float xPixels, float yPixels, float z);
+		void SetScaleInPixels(float widthInPixels, float heightInPixels, float z);
+
+		void SetAffectedCamera(bool affectedcamera) { mAffectedCamera = affectedcamera; }
+
 	private:
 		Vector3 mPosition;
 		Vector3 mRotation;
 		Vector3 mScale;
+
+		// 상수버퍼에 전달해줄 Color 값
+		Vector4 mColor;
+
+		// Camera Affected
+		bool mAffectedCamera;
 	};
 }

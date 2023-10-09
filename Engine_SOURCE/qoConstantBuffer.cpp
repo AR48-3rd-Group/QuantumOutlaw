@@ -3,8 +3,8 @@
 
 namespace qo::graphics
 {
-	ConstantBuffer::ConstantBuffer()
-		:mType()
+	ConstantBuffer::ConstantBuffer(eCBType type)
+		: mType(type)
 	{
 	}
 

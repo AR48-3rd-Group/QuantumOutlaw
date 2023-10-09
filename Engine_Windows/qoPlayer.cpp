@@ -4,12 +4,25 @@
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
 #include "qoResourceManager.h"
+#include "qoSuperpositionGun.h"
+#include "qoEntanglementGun.h"
+#include "qoTeleportationGun.h"
+#include "qoSuperpositionGunScript.h"
+#include "qoEntanglementGunScript.h"
+#include "qoTeleportationGunScript.h"
 
 namespace qo
 {
 	Player::Player()
 		: mGuns{}
 		, mActiveGun(nullptr)
+		, mState(ePlayerState::Idle)
+		, mDir(eDirection::RIGHT)
+		, mCurHp(100)
+		, mMaxHp(100)
+		, mMoveSpeed(0.5f)
+		, mJumpPower(1.5f)
+		, mDashPower(1.f)
 	{
 	}
 
@@ -64,30 +77,109 @@ namespace qo
 		}
 	}
 
-	void Player::AddGun()
+	void Player::AddGun(eGunType type)
 	{
+		// 이미 해당 타입의 총을 들고있다면 무효
+		for (Gun* gun : mGuns)
+		{
+			if (gun->GetGunType() == type)
+			{
+				return;
+			}
+		}
+
+
 		// 플레이어 객체 정보
 		Transform* PlayerTransform = GetComponent<Transform>();
 		Vector3 PlayerPos = PlayerTransform->GetPosition();
 
-		// ============
+		// ================================
 		// 총 객체 생성
-		// ============
-		Gun* gun = new Gun(this, 50);
+		// ================================
+		if (type == eGunType::Superposition)
+		{
+			SuperpositionGun* gun = new SuperpositionGun(this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
-		Transform* GunTransform = gun->AddComponent<Transform>();
-		GunTransform->SetPosition(PlayerPos);
-		GunTransform->SetScale(Vector3(0.3f, 0.3f, 0.3f));
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
 
-		MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
-		meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		meshRenderer->SetShader(ResourceManager::Find<Shader>(L"TriangleShader"));
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		gun->AddComponent<GunScript>();
-		
-		gun->Initialize();
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<SuperpositionGunScript>();
 
-		mGuns.push_back(gun);
-		mActiveGun = gun;		
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
+		}
+		else if(type == eGunType::Entanglement)
+		{
+			EntanglementGun* gun = new EntanglementGun(this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
+
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
+
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<EntanglementGunScript>();
+
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
+		}
+		else if (type == eGunType::Teleportation)
+		{
+			TeleportationGun* gun = new TeleportationGun(this, 10);
+			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
+
+			Transform* GunTransform = gun->AddComponent<Transform>();
+			GunTransform->SetPosition(GunPos);
+			GunTransform->SetScale(Vector3(0.1f, 0.1f, 0.f));
+			GunTransform->SetColor(gun->GetGunColor());
+
+			MeshRenderer* meshRenderer = gun->AddComponent<MeshRenderer>();
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+			gun->AddComponent<GunScript>();
+			gun->AddComponent<TeleportationGunScript>();
+
+			gun->Initialize();
+
+			mGuns.push_back(gun);
+			mActiveGun = gun;
+		}
+	}
+
+	bool Player::ChangeActiveGun(eGunType type)
+	{
+		for (Gun* gun : mGuns)
+		{
+			if (type != gun->GetGunType())
+				continue;
+
+			mActiveGun = gun;
+			return true;
+		}
+
+		// 해당타입의 총을 찾지 못했다
+		return false;
+	}
+
+	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
+	{
 	}
 }

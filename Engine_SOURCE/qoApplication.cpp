@@ -6,6 +6,7 @@
 #include "qoRenderer.h"
 #include "qoSceneManager.h"
 #include "qoCollisionManager.h"
+#include "qoCamera.h"
 
 using namespace qo::graphics;
 
@@ -13,7 +14,6 @@ namespace qo
 {
 	Application::~Application()
 	{
-		renderer::Release();
 	}
 
 	void Application::Run()
@@ -39,11 +39,12 @@ namespace qo
 		Input::Update();
 		CollisionManager::Update();
 		SceneManager::Update();
+		Camera::Update();
 	}
 
 	void Application::LateUpdate()
 	{
-
+		SceneManager::LateUpdate();
 	}
 
 	void Application::Render()

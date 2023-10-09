@@ -8,12 +8,14 @@ namespace qo
 	class GameObject : public Entity
 	{
 	public:
-		enum eState
+		enum class eState
 		{
 			Active,
 			Paused,
 			Dead,
 		};
+
+		friend __forceinline static void Destroy(GameObject* obj);
 
 		GameObject();
 		virtual ~GameObject();
@@ -64,9 +66,19 @@ namespace qo
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
+		eState GetGameObjectState() const { return mState; }
+
+	private:
+		void Dead() { mState = eState::Dead; }
+
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
 		std::vector<Script*> mScripts;
 	};
+
+	__forceinline static void Destroy(GameObject* obj)
+	{
+		obj->Dead();
+	}
 }

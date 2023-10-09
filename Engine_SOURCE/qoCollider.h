@@ -1,8 +1,11 @@
 #pragma once
 #include "qoComponent.h" 
+#include "qoMesh.h"
+#include "qoShader.h"
 
 namespace qo
 {
+	using namespace graphics;
 	class Collider : public Component
 	{
 	public:
@@ -26,11 +29,26 @@ namespace qo
 		void SetOffset(math::Vector3 offset) { mOffset = offset; }
 		math::Vector3 GetOffset() { return mOffset; }
 
+		UINT GetCollisionNumber() const { return mCollisionNumber; }
+
+		void SetActive(bool active) { mIsActive = active; }
+		bool GetActive() { return mIsActive; }
+
 	private:
+		static UINT mCollisionCount;
+		UINT mCollisionNumber;
+
 		math::Vector3 mScale;
 		math::Vector3 mOffset;
-		bool mbisCollision;
+		bool mbIsCollision;
 		bool mAffectedCamera;
+
+		// 충돌 상자 작동 여부
+		bool mIsActive;
+
+		// Collider Render
+		Mesh* mMesh;
+		Shader* mShader;
 	};
 }
 

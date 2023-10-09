@@ -21,19 +21,19 @@ namespace qo
 	{
 		Bullet* bullet = dynamic_cast<Bullet*>(GetOwner());
 		
-		// Bullet이 갖고있는 방향으로 초당 5.f 의 속도로 이동
-		if (bullet != nullptr)
-		{
-			Transform* tr = bullet->GetComponent<Transform>();
-			Vector3 dir = bullet->mDir;
+		if (bullet == nullptr)
+			return;
+		
+		// Bullet이 갖고있는 방향으로 초당 2.f 의 속도로 이동
+		Transform* tr = bullet->GetComponent<Transform>();
+		Vector3 dir = bullet->GetDirection();
 
-			Vector3 pos = tr->GetPosition();
+		Vector3 pos = tr->GetPosition();
 
-			dir.Normalize();
+		dir.Normalize();
 
-			pos += dir * 5.f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
+		pos += dir * 2.f * Time::DeltaTime();
+		tr->SetPosition(pos);		
 	}
 
 	void BulletScript::LateUpdate()

@@ -20,7 +20,8 @@ namespace qo
 		void SetMass(float mass) { mfMass = mass; }
 		void AddForce(math::Vector3 force) { mForce += force; }
 
-		void SetVeclocity(math::Vector3 velocity) { mVelocity = velocity; }
+		void SetVelocity(math::Vector3 velocity) { mVelocity = velocity; }
+		void AddVelocity(math::Vector3 velocity) { mVelocity += velocity; }
 		math::Vector3 GetVelocity() { return mVelocity; }
 
 		void SetGround(bool ground) { mbGround = ground; }

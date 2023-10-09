@@ -13,10 +13,6 @@ namespace qo
 		void Update() override;
 		void LateUpdate() override;
 		void Render() override;
-
-	private:
-		void Shoot();
-
 	};
 }
 

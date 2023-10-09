@@ -1,3 +1,4 @@
+#include "ConstantBuffer.hlsli"
 
 struct VTX_IN
 {
@@ -11,23 +12,26 @@ struct VTX_OUT
 	float4 vColor : COLOR;
 };
 
-cbuffer TRANSFORM : register(b0)
-{
-	float3 cbPos;
-	int padd1;
-	float3 cbScale;
-	int padd2;
-};
-
-VTX_OUT VS_Test(VTX_IN _in)
+VTX_OUT VS(VTX_IN _in)
 {
 	VTX_OUT output = (VTX_OUT) 0.f;
     
-    output.vPos = float4(_in.vPos * cbScale, 1.f);
-    output.vPos.xyz += cbPos.xyz;
+    output.vPos = float4(_in.vPos * cb0Scale, 1.f);
+    output.vPos.xyz += cb0Pos.xyz;
     
     //output.vPos *= 5.5f;
 	output.vColor = _in.vColor;
     
 	return output;
+}
+
+VTX_OUT ColorSetVS(VTX_IN _in)
+{
+    VTX_OUT output = (VTX_OUT) 0.f;
+    
+    output.vPos = float4(_in.vPos * cb1Scale.xyz, 1.f);
+    output.vPos.xyz += cb1Pos.xyz;
+    output.vColor = cb1Color; // 상수버퍼의 색상값으로 셋팅
+
+    return output;
 }

@@ -43,11 +43,11 @@ namespace qo
 		void SetATK(int atk) { myATK = atk; }
 
 		// 공통으로 사용할 메서드
-		virtual void Search();
-		virtual void Chase();
-		virtual void Attack();
-		virtual void Hit(int damage) { myHP -= damage; }
-		virtual void Dead();
+		virtual void Search() = 0;
+		virtual void Chase() = 0;
+		virtual void Attack() = 0;
+		virtual void Dead() = 0;
+		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) = 0;
 
 	private:
 		eType myTYPE;

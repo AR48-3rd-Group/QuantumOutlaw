@@ -7,7 +7,7 @@ namespace qo::graphics
 	class ConstantBuffer : public GpuBuffer
 	{
 	public:
-		ConstantBuffer();
+		ConstantBuffer(eCBType type);
 		~ConstantBuffer();
 
 		bool Create(size_t size);
