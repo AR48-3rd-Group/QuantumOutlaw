@@ -3,11 +3,12 @@
 namespace qo
 {
     LabGuard::LabGuard()
+        : Dir(-1)
     {
         SetType(eMelee);
         SetStage(eSearch);
         SetHP(50);
-        SetMovementSpeed(50);
+        SetMovementSpeed(0.5f);
         SetATK(10);
     }
 
@@ -15,9 +16,29 @@ namespace qo
     {
     }
 
+    void LabGuard::Initialize()
+    {
+        GameObject::Initialize();
+    }
+
+    void LabGuard::Update()
+    {
+        GameObject::Update();
+    }
+
+    void LabGuard::LateUpdate()
+    {
+        GameObject::LateUpdate();
+    }
+
+    void LabGuard::Render()
+    {
+        GameObject::Render();
+    }
+
     void LabGuard::Search()
     {
-        // 로직 작성
+        
     }
 
     void LabGuard::Chase()

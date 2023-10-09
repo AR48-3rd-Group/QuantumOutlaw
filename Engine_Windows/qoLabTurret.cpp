@@ -37,4 +37,20 @@ namespace qo
     void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)
     {
     }
+    void LabTurret::Initialize()
+    {
+        GameObject::Initialize();
+    }
+    void LabTurret::Update()
+    {
+        GameObject::Update();
+    }
+    void LabTurret::LateUpdate()
+    {
+        GameObject::LateUpdate();
+    }
+    void LabTurret::Render()
+    {
+        GameObject::Render();
+    }
 }

@@ -12,6 +12,8 @@
 #include "qoGround.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
 
 namespace qo
 {
@@ -92,6 +94,30 @@ namespace qo
 		AddGameObject(Wall, LAYER::GROUND);
 
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::GROUND, TRUE);
+
+
+		// 근접 몬스터 생성
+		LabGuard* LabGuard1 = new LabGuard();
+		Transform* LabGuardTransform = LabGuard1->AddComponent<Transform>();
+		LabGuardTransform->SetPosition(Vector3(0.1f, -0.23f, 0.0f));
+		LabGuardTransform->SetScale(Vector3(0.1f, 0.2f, 0.f));
+		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		MeshRenderer* LabGuardMeshRenderer = LabGuard1->AddComponent<MeshRenderer>();
+		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+
+		Collider* LabGuardCollider = LabGuard1->AddComponent<Collider>();
+		LabGuardCollider->SetScale(Vector3(0.1f, 0.2f, 0.f));
+		CollisionManager::CollisionLayerCheck(LAYER::MONSTER, LAYER::GROUND, TRUE);
+
+		LabGuard1->AddComponent<Rigidbody>();
+
+		LabGuard1->AddComponent<LabGuardScript>();
+
+		LabGuard1->Initialize();
+		AddGameObject(LabGuard1, LAYER::MONSTER);
 	}
 
 	void PlayScene::Update()

@@ -3,6 +3,7 @@
 #include "qoCollider.h"
 #include "qoTransform.h"
 #include "qoRigidbody.h"
+#include "qoLabGuard.h"
 
 namespace qo
 {
@@ -57,6 +58,32 @@ namespace qo
                     math::Vector3 playerPos = playertr->GetPosition();
                     playerPos.y += (scale - len) + 0.01f;
                     playertr->SetPosition(playerPos);
+                }
+            }
+        }
+
+        LabGuard* labguard = dynamic_cast<LabGuard*>(other->GetOwner());
+
+        if (labguard != nullptr)
+        {
+            Transform* labguardtr = labguard->GetComponent<Transform>();
+            Transform* floortr = GetComponent<Transform>();
+
+            Collider* labguardcol = labguard->GetComponent<Collider>();
+            Collider* floorcol = GetComponent<Collider>();
+
+            if (labguard->GetComponent<Rigidbody>()->GetVelocity().y < 0)
+            {
+                labguard->GetComponent<Rigidbody>()->SetGround(true);
+
+                float scale = fabs(labguardcol->GetScale().y / 2.f + floorcol->GetScale().y / 2.f);
+                float len = fabs(labguardtr->GetPosition().y + labguardcol->GetOffset().y + - floortr->GetPosition().y);
+
+                if (len < scale)
+                {
+                    math::Vector3 labguardPos = labguardtr->GetPosition();
+                    labguardPos.y += (scale - len) + 0.01f;
+                    labguardtr->SetPosition(labguardPos);
                 }
             }
         }

@@ -25,9 +25,6 @@
     <Filter Include="Engine\Resource">
       <UniqueIdentifier>{7effd67f-00b5-4220-a9da-d7519ca25047}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Scene">
-      <UniqueIdentifier>{a31c154c-2bf9-48a1-ac1f-507d049d6e96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\System">
       <UniqueIdentifier>{87602762-23c3-41e7-af59-fa98bdd7373f}</UniqueIdentifier>
     </Filter>
@@ -61,9 +58,6 @@
     <Filter Include="Engine\Resource\Shader">
       <UniqueIdentifier>{a83c62b2-92fa-4672-84b1-2ffe00586106}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Scene\Manager">
-      <UniqueIdentifier>{3c9f1a57-9b1c-42e0-9ea2-2892f133a86a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{08767bab-c502-43a3-8f7f-aa08165c34a1}</UniqueIdentifier>
     </Filter>
@@ -75,6 +69,12 @@
     </Filter>
     <Filter Include="Engine\Component\Rigidbody">
       <UniqueIdentifier>{da4fd1bb-cf64-46c9-a18d-2228dd2b4c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{a31c154c-2bf9-48a1-ac1f-507d049d6e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\Manager">
+      <UniqueIdentifier>{3c9f1a57-9b1c-42e0-9ea2-2892f133a86a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

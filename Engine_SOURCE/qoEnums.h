@@ -6,6 +6,7 @@ namespace qo::enums
 	{
 		NONE = 0,
 		PLAYER,
+		MONSTER,
 		GROUND,
 		BULLET,
 		MAX = 16,
