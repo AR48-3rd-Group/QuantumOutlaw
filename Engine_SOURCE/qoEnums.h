@@ -12,6 +12,7 @@ namespace qo::enums
 		FLOOR,
 		BULLET,
 		PLAYER,
+		BACKGROUND,
 		MAX = 16,
 	};
 

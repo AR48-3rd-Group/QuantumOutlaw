@@ -12,6 +12,8 @@ namespace qo::graphics
 
 		virtual HRESULT Load(const std::wstring& path) override;
 
+		void CreateSamplerState();
+		void ResourceViewCreate(std::wstring filename);
 		void Create(const graphics::eShaderStage stage, const std::wstring& file, const std::string& funcName);
 		void Update();
 
@@ -49,5 +51,8 @@ namespace qo::graphics
 		Microsoft::WRL::ComPtr<ID3D11DomainShader> mDS;
 		Microsoft::WRL::ComPtr<ID3D11GeometryShader> mGS;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPS;
+
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mResourceView;
+		Microsoft::WRL::ComPtr<ID3D11SamplerState> mSampleState;
 	};
 }
