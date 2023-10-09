@@ -43,6 +43,7 @@ namespace qo
 
 			// 기존씬 메모리 해제
 			delete iter->second;
+			iter->second = nullptr;
 
 			// 현재 씬을 Scene에서 제거한다
 			mScenes.erase(iter);
