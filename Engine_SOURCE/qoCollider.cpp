@@ -42,7 +42,7 @@ namespace qo
 
 	void Collider::Render()
 	{
-		//if (!mIsActive) return;
+		if (!mbRender) return;
 
 		if (mbIsCollision)
 		{

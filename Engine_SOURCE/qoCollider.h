@@ -34,6 +34,9 @@ namespace qo
 		void SetActive(bool active) { mIsActive = active; }
 		bool GetActive() { return mIsActive; }
 
+		void SetRender(bool render) { mbRender = render; }
+		bool GetRender() { return mbRender; }
+
 	private:
 		static UINT mCollisionCount;
 		UINT mCollisionNumber;
@@ -45,6 +48,7 @@ namespace qo
 
 		// 충돌 상자 작동 여부
 		bool mIsActive;
+		bool mbRender;
 
 		// Collider Render
 		Mesh* mMesh;

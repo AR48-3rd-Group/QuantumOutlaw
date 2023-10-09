@@ -6,5 +6,4 @@
 #include <filesystem>
 #include <bitset>
 
-
 #include "qoMath.h"

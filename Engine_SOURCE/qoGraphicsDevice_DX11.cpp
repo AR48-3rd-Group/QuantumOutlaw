@@ -53,8 +53,6 @@ namespace qo::graphics
         // Create Rendertarget view
         hr = mDevice->CreateRenderTargetView(mFrameBuffer.Get(), nullptr, mRenderTargetView.GetAddressOf());
 
-
-
         // DepthStencilTexture
         D3D11_TEXTURE2D_DESC texdesc = {};
 
@@ -107,6 +105,8 @@ namespace qo::graphics
 
         if (FAILED(pFactory->CreateSwapChain(mDevice.Get(), &desc, mSwapChain.GetAddressOf())))
             return false;
+
+        
 
         return true;
     }
