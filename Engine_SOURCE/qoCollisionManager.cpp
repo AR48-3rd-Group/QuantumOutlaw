@@ -132,8 +132,10 @@ namespace qo
 		math::Vector3 leftoffset = left->GetOffset();
 		math::Vector3 rightoffset = right->GetOffset();
 
+		float offset = 0.01f; // offset 범위만큼 충돌 범위를 늘린다.
+
 		if (fabs((leftpos.x + leftoffset.x) - (rightpos.x + rightoffset.x)) <= fabs(leftscale.x / 2.f + rightscale.x / 2.f)
-			&& fabs((leftpos.y + leftoffset.y) - (rightpos.y + rightoffset.y)) <= fabs(leftscale.y / 2.f + rightscale.y / 2.f))
+			&& fabs((leftpos.y + leftoffset.y) - (rightpos.y + rightoffset.y) + offset) <= fabs(leftscale.y / 2.f + rightscale.y / 2.f))
 		{
 			return true;
 		}

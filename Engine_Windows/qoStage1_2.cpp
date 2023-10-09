@@ -48,6 +48,7 @@ namespace qo
 
 		// ÃÑ »ý¼º
 		mPlayer->AddGun(eGunType::Superposition);
+		mPlayer->AddGun(eGunType::Teleportation);
 		mPlayer->ChangeActiveGun(eGunType::Superposition);
 
 		mPlayer->Initialize();
