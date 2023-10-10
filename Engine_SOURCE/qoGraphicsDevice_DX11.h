@@ -33,6 +33,12 @@ namespace qo::graphics
 		void BindConstantBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void SetConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);
 
+		// 이후 삭제
+		void CreateSamplerState(ID3D11SamplerState** samplerstate);
+		void CreateResourceView(ID3D11ShaderResourceView** mResourceView, std::wstring filename);
+
+		void SetShaderResources(UINT StartSlot, UINT NumViews, ID3D11ShaderResourceView* shaderResourceView);
+		void SetSamplers(UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* samplerstate);
 
 		void Clear();
 		void AdjustViewport();

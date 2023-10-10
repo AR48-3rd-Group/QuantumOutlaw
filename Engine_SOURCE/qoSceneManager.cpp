@@ -5,11 +5,14 @@
 #include "qoGameObject.h"
 #include "qoTransform.h"
 #include "qoMeshRenderer.h"
+#include "qoInput.h"
+#include "qoCollider.h"
 
 namespace qo
 {
 	Scene* SceneManager::mActiveScene = nullptr;
 	std::map<std::wstring, Scene*> SceneManager::mScenes = {};
+	bool SceneManager::mbRender = false;
 
 	void SceneManager::Initialize()
 	{
@@ -40,6 +43,24 @@ namespace qo
 	void SceneManager::LateUpdate()
 	{
 		mActiveScene->LateUpdate();
+		
+		if (Input::GetKeyState(KEY_CODE::P) == KEY_STATE::DOWN)
+		{
+			mbRender = !mbRender;
+		}
+
+		for (UINT layer = 1;layer < (UINT)LAYER::MAX;layer++)
+		{
+			std::vector<GameObject*>& GameObjects = mActiveScene->GetLayer(layer)->GetGameObjects();
+
+			for (GameObject* obj : GameObjects)
+			{
+				if (obj->GetComponent<Collider>() == nullptr)
+					continue;
+
+				obj->GetComponent<Collider>()->SetRender(mbRender);
+			}
+		}
 	}
 
 	void SceneManager::Render()

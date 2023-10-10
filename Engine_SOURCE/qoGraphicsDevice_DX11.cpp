@@ -4,6 +4,7 @@
 #include "qoMesh.h"
 #include "qoShader.h"
 #include "qoConstantBuffer.h"
+#include <DirectXTex.h>
 
 extern qo::Application application;
 
@@ -52,8 +53,6 @@ namespace qo::graphics
 
         // Create Rendertarget view
         hr = mDevice->CreateRenderTargetView(mFrameBuffer.Get(), nullptr, mRenderTargetView.GetAddressOf());
-
-
 
         // DepthStencilTexture
         D3D11_TEXTURE2D_DESC texdesc = {};
@@ -107,6 +106,8 @@ namespace qo::graphics
 
         if (FAILED(pFactory->CreateSwapChain(mDevice.Get(), &desc, mSwapChain.GetAddressOf())))
             return false;
+
+        
 
         return true;
     }
@@ -329,6 +330,98 @@ namespace qo::graphics
         default:
             break;
         }
+    }
+
+    void GraphicsDevice_DX11::CreateSamplerState(ID3D11SamplerState** samplerstate)
+    {
+        D3D11_SAMPLER_DESC samplerDesc;
+        samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+        samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+        samplerDesc.MipLODBias = 0.0f;
+        samplerDesc.MaxAnisotropy = 1;
+        samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+        samplerDesc.BorderColor[0] = 0;
+        samplerDesc.BorderColor[1] = 0;
+        samplerDesc.BorderColor[2] = 0;
+        samplerDesc.BorderColor[3] = 0;
+        samplerDesc.MinLOD = 0;
+        samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+        HRESULT hResult = mDevice->CreateSamplerState(&samplerDesc, samplerstate);
+        assert(SUCCEEDED(hResult));
+    }
+
+    void GraphicsDevice_DX11::CreateResourceView(ID3D11ShaderResourceView** mResourceView, std::wstring filename)
+    {
+        // 스크래치 이미지 생성.
+        DirectX::ScratchImage image;
+        HRESULT result = DirectX::LoadFromWICFile(filename.c_str(), DirectX::WIC_FLAGS_NONE, NULL, image);
+
+        // 오류 검사.
+        if (FAILED(result))
+        {
+            MessageBox(nullptr, L"스크래치 이미지 로드 실패", L"오류", 0);
+            //throw std::exception("스크래치 이미지 로드 실패");
+            return;
+        }
+
+        // 텍스쳐 생성.
+        Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
+        result = DirectX::CreateTexture(
+            mDevice.Get(),
+            image.GetImages(),
+            image.GetImageCount(),
+            image.GetMetadata(),
+            (ID3D11Resource**)texture.GetAddressOf()
+        );
+
+        // 오류 검사.
+        if (FAILED(result))
+        {
+            MessageBox(nullptr, L"텍스처 생성 실패", L"오류", 0);
+            //throw std::exception("텍스처 생성 실패");
+            return;
+        }
+
+        // 쉐이더 리소스 뷰 생성.
+        D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+        ZeroMemory(&srvDesc, sizeof(srvDesc));
+
+        srvDesc.ViewDimension = D3D10_SRV_DIMENSION_TEXTURE2D;
+        srvDesc.Texture2D.MostDetailedMip = 0;
+        srvDesc.Texture2D.MipLevels = 1;
+
+        D3D11_TEXTURE2D_DESC textureDesc;
+        texture->GetDesc(&textureDesc);
+
+        srvDesc.Format = textureDesc.Format;
+
+        ID3D11ShaderResourceView* shaderResourceView;
+        result = mDevice->CreateShaderResourceView(
+            texture.Get(),
+            &srvDesc,
+            mResourceView
+        );
+
+        // 오류 검사.
+        if (FAILED(result))
+        {
+            MessageBox(nullptr, L"셰이더 리소스 뷰 생성 실패", L"오류", 0);
+            //throw std::exception("셰이더 리소스 뷰 생성 실패");
+            return;
+        }
+    }
+
+    void GraphicsDevice_DX11::SetShaderResources(UINT StartSlot, UINT NumViews, ID3D11ShaderResourceView* shaderResourceView)
+    {
+        mContext->PSSetShaderResources(StartSlot, NumViews, &shaderResourceView);
+    }
+
+    void GraphicsDevice_DX11::SetSamplers(UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* samplerstate)
+    {
+        mContext->PSSetSamplers(StartSlot, NumSamplers, &samplerstate);
     }
 
     void GraphicsDevice_DX11::Clear()
