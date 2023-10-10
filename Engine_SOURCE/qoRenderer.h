@@ -33,7 +33,7 @@ namespace qo::renderer
 	};
 
 	// Color Test ¿ëµµ
-	CBUFFER(ColorTestCB, CBSLOT_ColorTest)
+	CBUFFER(ColorSetCB, CBSLOT_ColorSet)
 	{
 		Vector4 pos;
 		Vector4 scale;

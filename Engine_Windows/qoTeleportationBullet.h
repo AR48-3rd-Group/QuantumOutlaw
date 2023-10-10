@@ -3,10 +3,12 @@
 
 namespace qo
 {
+	class TeleportationGun;
+
 	class TeleportationBullet : public Bullet
 	{
 	public:
-		TeleportationBullet(Vector3 Dir);
+		TeleportationBullet(TeleportationGun* owner, Vector3 Dir);
 		virtual ~TeleportationBullet();
 
 		virtual void Initialize() override;
@@ -17,6 +19,10 @@ namespace qo
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
+
+	public:
+		TeleportationGun* mOwner;
+
 	};
 }
 

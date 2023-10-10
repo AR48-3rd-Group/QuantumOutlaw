@@ -46,6 +46,15 @@ namespace qo
 	{
 		mActiveScene->Render();
 	}
+	
+	void SceneManager::Release()
+	{
+		for (auto iter : mScenes)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+	}
 
 	Scene* SceneManager::LoadScene(const std::wstring name)
 	{
@@ -54,8 +63,9 @@ namespace qo
 
 		if (iter == mScenes.end())
 			return nullptr;
-
+		mActiveScene->Exit();
 		mActiveScene = iter->second;
+		mActiveScene->Enter();
 		return iter->second;
 	}
 }

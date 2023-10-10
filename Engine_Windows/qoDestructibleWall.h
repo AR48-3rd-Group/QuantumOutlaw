@@ -1,14 +1,13 @@
 #pragma once
-
 #include "qoGameObject.h"
 
 namespace qo
 {
-	class Ground : public GameObject
+	class DestuctibleWall : public GameObject
 	{
 	public:
-		Ground();
-		virtual ~Ground();
+		DestuctibleWall();
+		virtual ~DestuctibleWall();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -22,5 +21,3 @@ namespace qo
 	private:
 	};
 }
-
-

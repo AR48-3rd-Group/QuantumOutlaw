@@ -5,10 +5,13 @@ namespace qo::enums
 	enum LAYER
 	{
 		NONE = 0,
-		PLAYER,
-		MONSTER,
-		GROUND,
+		UI,
+		ITEM,
+		ENEMY,
+		WALL,
+		FLOOR,
 		BULLET,
+		PLAYER,
 		MAX = 16,
 	};
 
@@ -150,5 +153,11 @@ namespace qo::enums
 		//etc
 		SCRIPT,
 		END,
+	};
+
+	enum class eDirection
+	{
+		LEFT,
+		RIGHT,
 	};
 }

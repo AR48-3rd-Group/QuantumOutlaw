@@ -9,15 +9,23 @@
 #include "qoRigidbody.h"
 #include "qoPlayerScript.h"
 #include "qoPlayer.h"
-#include "qoGround.h"
+#include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 #include "qoLabGuard.h"
 #include "qoLabGuardScript.h"
 
+#include "qoLabTurret.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
+#include "qoHPUI.h"
+#include "qoHPUIScript.h"
+#include "qoHPUIBackGround.h"
+
 namespace qo
 {
 	PlayScene::PlayScene()
+		: mPlayer(nullptr)
 	{
 	}
 
@@ -29,100 +37,166 @@ namespace qo
 
 	void PlayScene::Initialize()
 	{		
-		Player* player = new Player();
-		Transform* PlayerTransform = player->AddComponent<Transform>();
+		mPlayer = new Player();
+		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
-		MeshRenderer* PlayerMeshRenderer = player->AddComponent<MeshRenderer>();
+		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
 		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
 
-		Collider* PlayerCollider = player->AddComponent<Collider>();
-		PlayerCollider->SetScale(Vector3(0.1f, 0.3f, 0.f));
+		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
+		PlayerCollider->SetScale(PlayerTransform->GetScale());
 					 
-		player->AddComponent<Rigidbody>();
+		mPlayer->AddComponent<Rigidbody>();
 		
-		player->AddComponent<PlayerScript>();
+		mPlayer->AddComponent<PlayerScript>();
 
 		// 총 생성
-		player->AddGun(eGunType::Superposition);
-		player->AddGun(eGunType::Entanglement);
-		player->AddGun(eGunType::Teleportation);
+		mPlayer->AddGun(eGunType::Superposition);
+		mPlayer->AddGun(eGunType::Entanglement);
+		mPlayer->AddGun(eGunType::Teleportation);
 
-		player->ChangeActiveGun(eGunType::Superposition);
+		mPlayer->ChangeActiveGun(eGunType::Superposition);
 
-		player->Initialize();
+		mPlayer->Initialize();
 
-		AddGameObject(player, LAYER::PLAYER);
-		Camera::SetTarget(player);
-
+		AddGameObject(mPlayer, LAYER::PLAYER);
+		Camera::SetTarget(mPlayer);
 
 		// 바닥 객체 생성
-		Ground* ground = new Ground();
-		Transform* GroundTransform = ground->AddComponent<Transform>();
-		GroundTransform->SetPosition(Vector3(0.0f, -0.5f, 0.0f));
-		GroundTransform->SetScale(Vector3(1.f, 0.3f, 0.0f));
-		GroundTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		Floor* floor = new Floor();
+		Transform* FloorTransform = floor->AddComponent<Transform>();
+		FloorTransform->SetPositionInPixels(0, 0, 0);
+		FloorTransform->SetScaleInPixels(1990, 100, 0);
+		FloorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* GroundMeshRenderer = ground->AddComponent<MeshRenderer>();
-		GroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		GroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader")); 
+		MeshRenderer* FloorMeshRenderer = floor->AddComponent<MeshRenderer>();
+		FloorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		FloorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* GroundCollider = ground->AddComponent<Collider>();
-		GroundCollider->SetScale(Vector3(1.f, 0.3f, 0.f));
+		Collider* FloorCollider = floor->AddComponent<Collider>();
+		FloorCollider->SetScale(FloorTransform->GetScale());
 
-		AddGameObject(ground, LAYER::GROUND);
+		AddGameObject(floor, LAYER::FLOOR);
 
-		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::GROUND, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
-		// 벽 오브젝트 생성
-		Ground* Wall = new Ground();
-		Transform* WallTransform = Wall->AddComponent<Transform>();
-		WallTransform->SetPosition(Vector3(0.5f, 0.0f, 0.0f));
-		WallTransform->SetScale(Vector3(0.3f, 1.f, 0.0f));
-		WallTransform->SetColor(Vector4(0.3f, 0.3f, 0.3f, 0.f));
+		// 스위치 개체 생성
+		doorswitch = new DoorSwitch();
+		Transform* DSTransform = doorswitch->AddComponent<Transform>();
+		DSTransform->SetPositionInPixels(-500, 200, 0);
+		DSTransform->SetScaleInPixels(400, 400, 0);
+		DSTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* WallMeshRenderer = Wall->AddComponent<MeshRenderer>();
-		WallMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		WallMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		MeshRenderer* DSMeshRenderer = doorswitch->AddComponent<MeshRenderer>();
+		DSMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		DSMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* WallCollider = Wall->AddComponent<Collider>();
-		WallCollider->SetScale(Vector3(0.3f, 1.f, 0.0f));
+		Collider* DSCollider = doorswitch->AddComponent<Collider>();
+		DSCollider->SetScale(DSTransform->GetScale());
 
-		AddGameObject(Wall, LAYER::GROUND);
+		AddGameObject(doorswitch, LAYER::WALL);
 
-		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::GROUND, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
+
+		// 잠긴 문 개체 생성
+		/*lockeddoor = new LockedDoor();
+		Transform* LockedDoorTransform = lockeddoor->AddComponent<Transform>();
+		LockedDoorTransform->SetPositionInPixels(500, 200, 0);
+		LockedDoorTransform->SetScaleInPixels(400, 400, 0);
+		LockedDoorTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		MeshRenderer* LockedDoorMeshRenderer = lockeddoor->AddComponent<MeshRenderer>();
+		LockedDoorMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LockedDoorMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* LockedDoorCollider = lockeddoor->AddComponent<Collider>();
+		LockedDoorCollider->SetScale(LockedDoorTransform->GetScale());
+
+		AddGameObject(lockeddoor, LAYER::WALL);*/
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+		LabTurret* enemy1 = new LabTurret();
+		Transform* EnemyTransform = enemy1->AddComponent<Transform>();
+		EnemyTransform->SetPositionInPixels(300, 400, 0);
+		EnemyTransform->SetScaleInPixels(50, 50, 0);
+		EnemyTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		MeshRenderer* EnemyMeshRenderer = enemy1->AddComponent<MeshRenderer>();
+		EnemyMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		EnemyMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* EnemyCollider = enemy1->AddComponent<Collider>();
+		EnemyCollider->SetScale(EnemyTransform->GetScale());
+
+		AddGameObject(enemy1, LAYER::ENEMY);
+
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
+
+		LabGuard* enemy2 = new LabGuard();
+		EnemyTransform = enemy2->AddComponent<Transform>();
+		EnemyTransform->SetPositionInPixels(300, 600, 0);
+		EnemyTransform->SetScaleInPixels(50, 50, 0);
+		EnemyTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		EnemyMeshRenderer = enemy2->AddComponent<MeshRenderer>();
+		EnemyMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		EnemyMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		EnemyCollider = enemy2->AddComponent<Collider>();
+		EnemyCollider->SetScale(EnemyTransform->GetScale());
+
+		enemy2->AddComponent<LabGuardScript>();
+
+		AddGameObject(enemy2, LAYER::ENEMY);
 
 
-		// 근접 몬스터 생성
-		LabGuard* LabGuard1 = new LabGuard();
-		Transform* LabGuardTransform = LabGuard1->AddComponent<Transform>();
-		LabGuardTransform->SetPosition(Vector3(0.1f, -0.23f, 0.0f));
-		LabGuardTransform->SetScale(Vector3(0.1f, 0.2f, 0.f));
-		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
 
-		MeshRenderer* LabGuardMeshRenderer = LabGuard1->AddComponent<MeshRenderer>();
-		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		HPUI* hpui = new HPUI(mPlayer);
+		Transform* hpuiTransform = hpui->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
+		hpui->SetFixedPosition(Vector3(300.f, 830.f, 0));
+		hpui->SetFixedScale(Vector3(400.f, 50.f, 0));
 
+		MeshRenderer* hpuiMeshRenderer = hpui->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* LabGuardCollider = LabGuard1->AddComponent<Collider>();
-		LabGuardCollider->SetScale(Vector3(0.1f, 0.2f, 0.f));
-		CollisionManager::CollisionLayerCheck(LAYER::MONSTER, LAYER::GROUND, TRUE);
+		hpui->AddComponent<HPUIScript>();
 
-		LabGuard1->AddComponent<Rigidbody>();
+		AddGameObject(hpui, LAYER::UI);
 
-		LabGuard1->AddComponent<LabGuardScript>();
+		HPUIBackGround* hpuiBG = new HPUIBackGround();
+		hpuiTransform = hpuiBG->AddComponent<Transform>();
+		hpuiTransform->SetPositionInPixels(300, 830, 0);
+		hpuiTransform->SetScaleInPixels(400, 50, 0);
+		hpuiTransform->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
+		hpuiTransform->SetAffectedCamera(false);
 
-		LabGuard1->Initialize();
-		AddGameObject(LabGuard1, LAYER::MONSTER);
+		hpuiMeshRenderer = hpuiBG->AddComponent<MeshRenderer>();
+		hpuiMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		
+		AddGameObject(hpuiBG, LAYER::UI);
 	}
 
 	void PlayScene::Update()
 	{
 		Scene::Update();
+
+		if (doorswitch->GetSwitch())
+		{
+			lockeddoor->SetLocked(false);
+		}
 	}
 
 	void PlayScene::LateUpdate()
@@ -133,5 +207,14 @@ namespace qo
 	void PlayScene::Render()
 	{
 		Scene::Render();
+	}
+
+	void PlayScene::Enter()
+	{
+		Camera::SetTarget(mPlayer);
+	}
+
+	void PlayScene::Exit()
+	{
 	}
 }
