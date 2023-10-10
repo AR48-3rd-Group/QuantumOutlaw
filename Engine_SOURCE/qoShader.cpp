@@ -44,8 +44,21 @@ namespace qo::graphics
 	{
 		GetDevice()->BindPrimitiveTopology(mTopology);
 		GetDevice()->BindInputLayout(mInputLayout.Get());
-
+		
 		GetDevice()->BindVertexShader(mVS.Get());
 		GetDevice()->BindPixelShader(mPS.Get());
+
+		GetDevice()->SetShaderResources(0,1,mResourceView.Get());
+		GetDevice()->SetSamplers(0, 1, mSampleState.Get());
+	}
+
+	void Shader::CreateSamplerState()
+	{
+		GetDevice()->CreateSamplerState(mSampleState.GetAddressOf());
+	}
+
+	void Shader::ResourceViewCreate(std::wstring filename)
+	{
+		GetDevice()->CreateResourceView(mResourceView.GetAddressOf(),filename);
 	}
 }

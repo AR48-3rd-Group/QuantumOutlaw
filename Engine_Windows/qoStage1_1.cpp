@@ -32,6 +32,20 @@ namespace qo
 
 	void Stage1_1::Initialize()
 	{
+		#pragma region BG
+		/*GameObject* BackGround = new GameObject();
+		Transform* BackGroundTransform = BackGround->AddComponent<Transform>();
+		BackGroundTransform->SetPositionInPixels(800, 450, 0.);
+		BackGroundTransform->SetScaleInPixels(1600, 900, 0);
+		BackGroundTransform->SetAffectedCamera(false);
+
+		MeshRenderer* BackGroundMeshRenderer = BackGround->AddComponent<MeshRenderer>();
+		BackGroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
+		BackGroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));
+
+		AddGameObject(BackGround, LAYER::BACKGROUND);*/
+		#pragma endregion
+
 		#pragma region Player
 		mPlayer = new Player();
 		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();

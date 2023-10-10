@@ -20,6 +20,8 @@
 #include "qoHPUIScript.h"
 #include "qoHPUIBackGround.h"
 
+#include "qoSceneManager.h"
+
 namespace qo
 {
 	PlayScene::PlayScene()
@@ -38,11 +40,11 @@ namespace qo
 		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
-		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
+		//PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
-		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
+		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));	
 
 		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
@@ -198,6 +200,7 @@ namespace qo
 
 	void PlayScene::LateUpdate()
 	{
+		Scene* scene = SceneManager::GetActiveScene();
 		Scene::LateUpdate();
 	}
 
