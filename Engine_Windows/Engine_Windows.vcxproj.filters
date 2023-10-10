@@ -165,9 +165,6 @@
     <ClCompile Include="qoDestructibleWall.cpp">
       <Filter>GameObjects\Architecture</Filter>
     </ClCompile>
-    <ClCompile Include="qoDoorSwitch.cpp">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClCompile>
     <ClCompile Include="qoFloor.cpp">
       <Filter>GameObjects\Architecture</Filter>
     </ClCompile>
@@ -291,9 +288,6 @@
       <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
     <ClInclude Include="qoDestructibleWall.h">
-      <Filter>GameObjects\Architecture</Filter>
-    </ClInclude>
-    <ClInclude Include="qoDoorSwitch.h">
       <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
     <ClInclude Include="qoFloor.h">

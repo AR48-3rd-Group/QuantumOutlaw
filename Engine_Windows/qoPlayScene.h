@@ -20,7 +20,7 @@ namespace qo
 		void Exit() override;
 
 	private:
-		DoorSwitch* doorswitch;
+		EventSwitch* eventSwitch;
 		LockedDoor* lockeddoor;
 		Player*		mPlayer;
 	};

@@ -24,7 +24,6 @@
     <ClInclude Include="qoBullet.h" />
     <ClInclude Include="qoBulletScript.h" />
     <ClInclude Include="qoDestructibleWall.h" />
-    <ClInclude Include="qoDoorSwitch.h" />
     <ClInclude Include="qoElevator.h" />
     <ClInclude Include="qoEnemy.h" />
     <ClInclude Include="qoEntanglementBullet.h" />
@@ -47,7 +46,9 @@
     <ClInclude Include="qoLockedDoor.h" />
     <ClInclude Include="qoPlayer.h" />
     <ClInclude Include="qoPlayerScript.h" />
-    <ClInclude Include="qoPlayScene.h" />
+    <ClInclude Include="qoPlayScene.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="qoStage1_1.h" />
     <ClInclude Include="qoStage1_2.h" />
     <ClInclude Include="qoSuperpositionBullet.h" />
@@ -67,7 +68,6 @@
     <ClCompile Include="qoBullet.cpp" />
     <ClCompile Include="qoBulletScript.cpp" />
     <ClCompile Include="qoDestructibleWall.cpp" />
-    <ClCompile Include="qoDoorSwitch.cpp" />
     <ClCompile Include="qoElevator.cpp" />
     <ClCompile Include="qoEnemy.cpp" />
     <ClCompile Include="qoEntanglementBullet.cpp" />
@@ -89,7 +89,9 @@
     <ClCompile Include="qoLockedDoor.cpp" />
     <ClCompile Include="qoPlayer.cpp" />
     <ClCompile Include="qoPlayerScript.cpp" />
-    <ClCompile Include="qoPlayScene.cpp" />
+    <ClCompile Include="qoPlayScene.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="qoStage1_1.cpp" />
     <ClCompile Include="qoStage1_2.cpp" />
     <ClCompile Include="qoSuperpositionBullet.cpp" />
