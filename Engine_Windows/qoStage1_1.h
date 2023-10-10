@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\Engine_SOURCE\\qoScene.h"
 #include "ArchitectureInclude.h"
+#include "qoGameObject.h"
 
 namespace qo
 {
@@ -23,7 +24,7 @@ namespace qo
 
 	private:
 		Player* mPlayer;
-		DoorSwitch* OpenSwitch;
-		LockedDoor* Goal;
+		EventSwitch* EventButton;
+		LockedDoor* EventDoor;
 	};
 }

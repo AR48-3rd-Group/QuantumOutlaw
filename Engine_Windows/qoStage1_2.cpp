@@ -8,13 +8,15 @@
 #include "qoRigidbody.h"
 #include "qoPlayerScript.h"
 #include "qoPlayer.h"
-#include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 #include "qoGunItem.h"
 #include "qoHPUI.h"
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
+
+#include "qoInput.h"
+#include "qoSceneManager.h"
 
 namespace qo
 {

@@ -82,20 +82,20 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
 		// 스위치 개체 생성
-		doorswitch = new DoorSwitch();
-		Transform* DSTransform = doorswitch->AddComponent<Transform>();
+		eventSwitch = new EventSwitch();
+		Transform* DSTransform = eventSwitch->AddComponent<Transform>();
 		DSTransform->SetPositionInPixels(-500, 200, 0);
 		DSTransform->SetScaleInPixels(400, 400, 0);
 		DSTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* DSMeshRenderer = doorswitch->AddComponent<MeshRenderer>();
+		MeshRenderer* DSMeshRenderer = eventSwitch->AddComponent<MeshRenderer>();
 		DSMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		DSMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* DSCollider = doorswitch->AddComponent<Collider>();
+		Collider* DSCollider = eventSwitch->AddComponent<Collider>();
 		DSCollider->SetScale(DSTransform->GetScale());
 
-		AddGameObject(doorswitch, LAYER::WALL);
+		AddGameObject(eventSwitch, LAYER::WALL);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
@@ -190,7 +190,7 @@ namespace qo
 	{
 		Scene::Update();
 
-		if (doorswitch->GetSwitch())
+		if (eventSwitch->GetEventActive())
 		{
 			lockeddoor->SetLocked(false);
 		}
