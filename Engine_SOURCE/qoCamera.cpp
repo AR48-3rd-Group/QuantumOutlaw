@@ -13,7 +13,7 @@ namespace qo
 	math::Vector3 Camera::mDiffDistance = {};
 	GameObject* Camera::mTarget = nullptr;
 
-	math::Vector3 Camera::mLimitLookAt = math::Vector3(6400.f,3600.f,0.f);
+	math::Vector3 Camera::mLimitLookAt = math::Vector3(6400.f,3200.f,0.f);
 
 	CAM_EFFECT Camera::mCurCamEffect = CAM_EFFECT::None;
 	std::list<tCamEffect> Camera::m_listCamEffect = {};

@@ -231,7 +231,7 @@ namespace qo
 		// 개체 생성
 		CreateAndSetUpGameObject(EventBarrier[0], WALL, 6176, 1792, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventBarrier[1], WALL, 1312, 832, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventBarrier[2], WALL, 6176, 2944, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventBarrier[2], WALL, 6176, 2976, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//				이벤트 스위치 개체
@@ -245,7 +245,7 @@ namespace qo
 		CreateAndSetUpGameObject(EventButton[3], WALL, 432, 1696, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventButton[4], WALL, 976, 2400, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventButton[5], WALL, 4910, 2432, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventButton[6], WALL, 6304, 3008, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[6], WALL, 6304, 2976, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//					잠긴 문 개체
@@ -271,8 +271,8 @@ namespace qo
 		EventElevator[1]->SetTimer(2.0f);
 		EventElevator[2]->SetTimer(2.0f);
 		EventElevator[3]->SetTimer(3.0f);
-		EventElevator[4]->SetTimer(12.0f);
-		EventElevator[5]->SetTimer(3.4f);
+		EventElevator[4]->SetTimer(12.565f);
+		EventElevator[5]->SetTimer(3.0f);
 
 		EventElevator[0]->SetTag(1);
 		EventElevator[1]->SetTag(2);
@@ -282,13 +282,12 @@ namespace qo
 
 		EventElevator[2]->SetActive(true);
 
-		EventElevator[0]->SetRange(450);
+		EventElevator[0]->SetRange(360);
 		EventElevator[1]->SetRange(384);
 		EventElevator[2]->SetRange(384);
-		EventElevator[3]->SetRange(640);
-		//EventElevator[4]->SetRange(2816);
-		EventElevator[4]->SetRange(512);
-		EventElevator[5]->SetRange(512);
+		EventElevator[3]->SetRange(430);
+		EventElevator[4]->SetRange(448);
+		EventElevator[5]->SetRange(344);
 
 		// 개체 생성
 		CreateAndSetUpGameObject(EventElevator[0], WALL, 4608, 160, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
