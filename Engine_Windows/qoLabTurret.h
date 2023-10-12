@@ -9,17 +9,16 @@ namespace qo
 		LabTurret();
 		virtual ~LabTurret();
 
-		virtual void Search() override;
-		virtual void Chase() override;
-		virtual void Attack() override;
-		virtual void Dead() override;
-		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
-
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetPlayer(GameObject* player);
+
+		//virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
+
+		class Player* mPlayer;
 	private:
 	};
 }
