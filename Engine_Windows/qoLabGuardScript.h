@@ -1,5 +1,4 @@
 #pragma once
-#include "qoLabGuard.h"
 #include "ES_CommonInclude.h"
 
 namespace qo
@@ -16,14 +15,23 @@ namespace qo
 		virtual void Render() override;
 
 	private:
-		// FSM
 		void Search();
 		void Chase();
+		void Fall();
 		void Attack();
 		void Hit();
 		void Dead();
 
+		// labguard 穿号識情
 		class LabGuard* mLabGuard;
+		class Transform* mTransform;
+		class Rigidbody* mRigidbody;
+		Vector3 LabGuardPos;
+
+		// player 穿号識情
+		class Player* mPlayer;
+		class Transform* mPlayerTr;
+		Vector3 PlayerPos;
 	};
 
 }

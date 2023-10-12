@@ -15,6 +15,7 @@ namespace qo
 	{
 		eSearch,
 		eChase,
+		eFall,
 		eAttack,
 		eHit,
 		eDead,
@@ -36,11 +37,14 @@ namespace qo
 		int GetHP() const { return myHP; }
 		void SetHP(int hp) { myHP = hp; }
 
-		int GetMovementSpeed() const { return mySPEED; }
+		float GetMovementSpeed() const { return mySPEED; }
 		void SetMovementSpeed(float speed) { mySPEED = speed; }
 
 		int GetATK() const { return myATK; }
 		void SetATK(int atk) { myATK = atk; }
+
+		eDirection GetDirection() const { return mDir; }
+		void SetDirection(eDirection Direction) { mDir = Direction; }
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -57,6 +61,7 @@ namespace qo
 	private:
 		eType myTYPE;
 		eStage mySTAGE;
+		eDirection mDir;
 
 		float mySPEED;
 

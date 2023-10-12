@@ -1,15 +1,17 @@
 #include "qoLabGuard.h"
+#include "qoPlayer.h"
 
 namespace qo
 {
     LabGuard::LabGuard()
-        : Dir(-1)
+        : mPlayer(nullptr)
     {
         SetType(eMelee);
         SetStage(eSearch);
         SetHP(50);
-        SetMovementSpeed(0.5f);
+        SetMovementSpeed(0.3f);
         SetATK(10);
+        SetDirection(eDirection::LEFT);
     }
 
     LabGuard::~LabGuard()
@@ -34,6 +36,11 @@ namespace qo
     void LabGuard::Render()
     {
         GameObject::Render();
+    }
+
+    void LabGuard::SetPlayer(GameObject* player)
+    {
+        mPlayer = dynamic_cast<Player*>(player);
     }
 
     void LabGuard::Search()

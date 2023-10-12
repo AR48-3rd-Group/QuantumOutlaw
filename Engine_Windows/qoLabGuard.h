@@ -14,7 +14,8 @@ namespace qo
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void SetStatus(Vector3 labguardPos) { pos = labguardPos; }
+		void SetStatus(Vector3 Position) { Pos = Position; }
+		void SetPlayer(GameObject* player);
 
 		virtual void Search() override;
 		virtual void Chase() override;
@@ -22,9 +23,9 @@ namespace qo
 		virtual void Dead() override;
 		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
 
-		int Dir; // right -> 1		Left -> -1
+		Vector3 Pos;
 
-		Vector3 pos;
+		class Player* mPlayer;
 	private:
 	};
 }

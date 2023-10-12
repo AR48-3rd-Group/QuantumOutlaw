@@ -1,11 +1,17 @@
 #include "qoLabGuardScript.h"
 #include "qoTransform.h"
+#include "qoRigidbody.h"
 #include "qoTime.h"
+#include "qoLabGuard.h"
+#include "qoPlayer.h"
 
 namespace qo
 {
 	LabGuardScript::LabGuardScript()
-		: mLabGuard(nullptr)
+		: mPlayer(nullptr)
+		, mLabGuard(nullptr)
+		, mTransform(nullptr)
+		, mRigidbody(nullptr)
 	{
 
 	}
@@ -17,6 +23,15 @@ namespace qo
 	void LabGuardScript::Initialize()
 	{
 		mLabGuard = dynamic_cast<LabGuard*>(GetOwner());
+		mTransform = mLabGuard->GetComponent<Transform>();
+		mRigidbody = mLabGuard->GetComponent<Rigidbody>();
+
+		LabGuardPos = mTransform->GetPosition();
+		mLabGuard->SetStatus(LabGuardPos);
+
+		mPlayer = dynamic_cast<LabGuard*>(GetOwner())->mPlayer;
+		mPlayerTr = mPlayer->GetComponent<Transform>();
+		PlayerPos = mPlayerTr->GetPosition();
 
 		assert(mLabGuard);
 	}
@@ -29,20 +44,26 @@ namespace qo
 			Search();
 			break;
 		case eStage::eChase:
-			mLabGuard->Chase();
+			Chase();
+			break;
+		case eStage::eFall:
+			Fall();
 			break;
 		case eStage::eAttack:
-			mLabGuard->Attack();
+			Attack();
 			break;
 		case eStage::eHit:
 			//mLabGuard->TakeHit();
 			break;
 		case eStage::eDead:
-			mLabGuard->Dead();
+			Dead();
 			break;
 		default:
 			break;
 		}
+
+		PlayerPos = mPlayerTr->GetPosition();
+		LabGuardPos = mTransform->GetPosition();
 
 		LabGuard* obj = dynamic_cast<LabGuard*>(GetOwner());
 
@@ -62,42 +83,100 @@ namespace qo
 
 	void LabGuardScript::Search()
 	{
-		Transform* tr = mLabGuard->GetComponent<Transform>();
-		Vector3 LabGuardPos = tr->GetPosition();
-
-		if (mLabGuard->Dir == -1)
+		if (!mRigidbody->GetGround())
 		{
-			LabGuardPos.x -= mLabGuard->GetMovementSpeed() * Time::DeltaTime();
+			mLabGuard->SetStage(eStage::eFall);
+		}
+		
+		// 일정 범위 내에 몬스터가 있으면 chase 함수로
+		if ((LabGuardPos.x - 0.5f <= PlayerPos.x) && (LabGuardPos.x + 0.5f >= PlayerPos.x))
+		{
+			mLabGuard->SetStage(eStage::eChase);
+		}
+
+		else
+		{
+			// 왼쪽으로 0.5만큼 이동하면 오른쪽으로 바꾸기
+			if (mLabGuard->GetDirection() == eDirection::LEFT)
+			{
+				LabGuardPos.x -= mLabGuard->GetMovementSpeed() * Time::DeltaTime();
 			
-			//if (mLabGuard->pos.x + 0.3f < LabGuardPos.x)
-			//{
-			//	mLabGuard->Dir *= -1;
-			//}
+				if (mLabGuard->Pos.x - 0.5f > LabGuardPos.x)
+				{
+					mLabGuard->SetDirection(eDirection::RIGHT);
+				}
+			}
+
+			// 오른쪽으로 0.5만큼 이동하면 왼쪽으로 바꾸기
+			else if (mLabGuard->GetDirection() == eDirection::RIGHT)
+			{
+				LabGuardPos.x += mLabGuard->GetMovementSpeed() * Time::DeltaTime();
+
+				if (mLabGuard->Pos.x + 0.5f < LabGuardPos.x)
+				{
+					mLabGuard->SetDirection(eDirection::LEFT);
+				}
+			}
 		}
 
-		else if (mLabGuard->Dir == 1)
-		{
-			LabGuardPos.x += mLabGuard->GetMovementSpeed() * Time::DeltaTime();
-			//
-			//if (mLabGuard->pos.x - 0.3f > LabGuardPos.x)
-			//{
-			//	mLabGuard->Dir *= -1;
-			//}
-		}
-
-		tr->SetPosition(LabGuardPos);
-
-		// monster랑 wall이랑 충돌처리되면 dir * -1 해서 방향 전환하기
+		mTransform->SetPosition(LabGuardPos);
 	}
 
 	void LabGuardScript::Chase()
 	{
-		// player 위치 받아서 따라가기
+		// 몬스터 좌표 +- 0.5f 범위 내에 플레이어가 있으면
+		if ((LabGuardPos.x - 0.5f <= PlayerPos.x) && (LabGuardPos.x + 0.5f >= PlayerPos.x))
+		{
+			// 몬스터가 플레이어보다 오른쪽에 있으면
+			if (LabGuardPos.x > PlayerPos.x)
+			{
+				LabGuardPos.x -= mLabGuard->GetMovementSpeed() * Time::DeltaTime();
+				mLabGuard->SetDirection(eDirection::LEFT);
+			}
+
+			// 몬스터가 플레이어보다 왼쪽에 있으면
+			else if (LabGuardPos.x < PlayerPos.x)
+			{
+				LabGuardPos.x += mLabGuard->GetMovementSpeed() * Time::DeltaTime();
+				mLabGuard->SetDirection(eDirection::RIGHT);
+			}
+
+			// +- 0.1 범위에 플레이어가 있으면 attack
+			else if ((LabGuardPos.x - 0.1f <= PlayerPos.x) && (LabGuardPos.x + 0.1f >= PlayerPos.x))
+			{
+				mLabGuard->SetStage(eStage::eAttack);
+			}
+		}
+
+		else
+		{
+			mLabGuard->SetStage(eStage::eSearch);
+		}
+
+		mTransform->SetPosition(LabGuardPos);
+	}
+
+	void LabGuardScript::Fall()
+	{
+		if (mRigidbody->GetGround())
+		{
+			mLabGuard->SetStage(eStage::eSearch);
+		}
 	}
 
 	void LabGuardScript::Attack()
 	{
 		// 몬스터의 히트박스 안에 플레이어 존재하면 공격하기
+		if ((LabGuardPos.x - 0.1f <= PlayerPos.x) && (LabGuardPos.x + 0.1f >= PlayerPos.x))
+		{
+
+
+		}
+
+		else
+		{
+			mLabGuard->SetStage(eStage::eSearch);
+		}
 	}
 
 	void LabGuardScript::Hit()
