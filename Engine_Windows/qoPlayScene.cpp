@@ -12,6 +12,8 @@
 #include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
 
 #include "qoLabTurret.h"
 #include "qoLabGuard.h"

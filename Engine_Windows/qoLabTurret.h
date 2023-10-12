@@ -15,6 +15,11 @@ namespace qo
 		virtual void Dead() override;
 		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
 
+		virtual void Initialize() override;
+		virtual void Update() override;
+		virtual void LateUpdate() override;
+		virtual void Render() override;
+
 	private:
 	};
 }

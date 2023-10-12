@@ -3,6 +3,7 @@
 namespace qo
 {
 	LabTurretScript::LabTurretScript()
+		: mEnemy(nullptr)
 	{
 	}
 
@@ -16,6 +17,24 @@ namespace qo
 
 	void LabTurretScript::Update()
 	{
+		switch (mEnemy->GetStage())
+		{
+		case eStage::eSearch:
+			mEnemy->Search();
+			break;
+		case eStage::eAttack:
+			mEnemy->Attack();
+			break;
+		case eStage::eHit:
+			//mEnemy->TakeHit();
+			break;
+		case eStage::eDead:
+			mEnemy->Dead();
+			break;
+		default:
+			break;
+		}
+
 		LabTurret* obj = dynamic_cast<LabTurret*>(GetOwner());
 
 		if (obj != nullptr)

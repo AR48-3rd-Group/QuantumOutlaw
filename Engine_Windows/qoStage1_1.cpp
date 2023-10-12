@@ -15,6 +15,9 @@
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
 
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
+
 #include "qoInput.h"
 #include "qoSceneManager.h"
 
@@ -68,6 +71,73 @@ namespace qo
 		AddGameObject(mPlayer, LAYER::PLAYER);
 		Camera::SetTarget(mPlayer);
 		#pragma endregion
+
+		#pragma region LabGuard
+
+		// 첫번째 근접 몬스터
+		LabGuard* mLabGuard_1 = new LabGuard();
+		Transform* LabGuardTransform = mLabGuard_1->AddComponent<Transform>();
+		LabGuardTransform->SetPositionInPixels(2150, 305, 0.);
+		LabGuardTransform->SetScaleInPixels(100, 100, 0);
+		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		MeshRenderer* LabGuardMeshRenderer = mLabGuard_1->AddComponent<MeshRenderer>();
+		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* LabGuardCollider = mLabGuard_1->AddComponent<Collider>();
+		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
+
+		mLabGuard_1->AddComponent<Rigidbody>();
+		mLabGuard_1->AddComponent<LabGuardScript>();
+		mLabGuard_1->SetPlayer(mPlayer);
+		mLabGuard_1->Initialize();
+
+		AddGameObject(mLabGuard_1, LAYER::ENEMY);
+
+
+		// 두번째 근접 몬스터
+		LabGuard* mLabGuard_2 = new LabGuard();
+		LabGuardTransform = mLabGuard_2->AddComponent<Transform>();
+		LabGuardTransform->SetPositionInPixels(3200, 305, 0.);
+		LabGuardTransform->SetScaleInPixels(100, 100, 0);
+		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		LabGuardMeshRenderer = mLabGuard_2->AddComponent<MeshRenderer>();
+		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		LabGuardCollider = mLabGuard_2->AddComponent<Collider>();
+		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
+
+		mLabGuard_2->AddComponent<Rigidbody>();
+		mLabGuard_2->AddComponent<LabGuardScript>();
+		mLabGuard_2->SetPlayer(mPlayer);
+		mLabGuard_2->Initialize();
+
+		AddGameObject(mLabGuard_2, LAYER::ENEMY);
+
+		LabGuard* mLabGuard_3 = new LabGuard();
+		LabGuardTransform = mLabGuard_3->AddComponent<Transform>();
+		LabGuardTransform->SetPositionInPixels(5000, 305, 0.);
+		LabGuardTransform->SetScaleInPixels(100, 100, 0);
+		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
+
+		LabGuardMeshRenderer = mLabGuard_3->AddComponent<MeshRenderer>();
+		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		LabGuardCollider = mLabGuard_3->AddComponent<Collider>();
+		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
+
+		mLabGuard_3->AddComponent<Rigidbody>();
+		mLabGuard_3->AddComponent<LabGuardScript>();
+		mLabGuard_3->SetPlayer(mPlayer);
+		mLabGuard_3->Initialize();
+
+		AddGameObject(mLabGuard_3, LAYER::ENEMY);
+		#pragma endregion
+
 
 		#pragma region Item
 		GunItem* gunItem = new GunItem(eGunType::Superposition);
@@ -189,6 +259,8 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::ITEM, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::WALL, TRUE);
 		#pragma endregion
 	}
 
