@@ -47,6 +47,9 @@ namespace qo
         void SetCurHP(const int curhp) { mCurHp = curhp; }  
         int GetCurHP() const { return mCurHp; }
 
+        void Damaged(int amount) { mCurHp -= amount; }
+        void Recovery(int amount) { mCurHp += amount; }
+
     private:
         Gun*                mActiveGun; // 현재 활성화된 총
         std::vector<Gun*>   mGuns;      // 플레이어가 보유하고있는 총
