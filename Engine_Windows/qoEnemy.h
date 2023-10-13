@@ -46,6 +46,9 @@ namespace qo
 		eDirection GetDirection() const { return mDir; }
 		void SetDirection(eDirection Direction) { mDir = Direction; }
 
+		void Damaged(int amount) { myHP -= amount; }
+		void Recovery(int amount) { myHP += amount; }
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
@@ -56,7 +59,7 @@ namespace qo
 		//virtual void Chase() = 0;
 		//virtual void Attack() = 0;
 		//virtual void Dead() = 0;
-		//virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) = 0;
+		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) = 0;
 
 	private:
 		eType myTYPE;

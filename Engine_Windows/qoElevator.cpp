@@ -73,6 +73,7 @@ namespace qo
 					{
 						//ResetTimer();
 						mTick = false;
+						mHorizontalMovement = 0.f;
 					}
 				}
 			}
