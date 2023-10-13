@@ -54,6 +54,8 @@ namespace qo
 
 		// ÃÑ »ý¼º
 		mPlayer->AddGun(eGunType::Superposition);
+		mPlayer->AddGun(eGunType::Entanglement);
+		mPlayer->AddGun(eGunType::Teleportation);
 		mPlayer->ChangeActiveGun(eGunType::Superposition);
 
 		mPlayer->Initialize();
@@ -66,7 +68,7 @@ namespace qo
 		GameObject* ChamjalImage = new GameObject();
 		Transform* ChamjalTransform = ChamjalImage->AddComponent<Transform>();
 		ChamjalTransform->SetPositionInPixels(application.GetWidth() / 2.f, application.GetHeight() / 2.f + 60 , 0);
-		ChamjalTransform->SetScaleInPixels(application.GetWidth(), application.GetHeight() * 0.9f, 0);
+		ChamjalTransform->SetScaleInPixels(static_cast<float>(application.GetWidth()), application.GetHeight() * 0.9f, 0);
 
 		MeshRenderer* ChamjalRenderer = ChamjalImage->AddComponent<MeshRenderer>();
 		ChamjalRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
