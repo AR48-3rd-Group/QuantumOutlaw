@@ -46,13 +46,20 @@ namespace qo
 		eDirection GetDirection() const { return mDir; }
 		void SetDirection(eDirection Direction) { mDir = Direction; }
 
+		void Damaged(int amount) { myHP -= amount; }
+		void Recovery(int amount) { myHP += amount; }
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
 		// 공통으로 사용할 메서드
-		//virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) = 0;
+		//virtual void Search() = 0;
+		//virtual void Chase() = 0;
+		//virtual void Attack() = 0;
+		//virtual void Dead() = 0;
+		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) = 0;
 
 	private:
 		eType myTYPE;

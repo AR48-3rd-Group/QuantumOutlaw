@@ -40,6 +40,9 @@ namespace qo
 
 	void LabGuardScript::Update()
 	{
+		PlayerPos = mPlayerTr->GetPosition();
+		LabGuardPos = mTransform->GetPosition();
+	
 		switch (mLabGuard->GetStage())
 		{
 		case eStage::eSearch:
@@ -62,13 +65,11 @@ namespace qo
 			break;
 		default:
 			break;
-		}
+		}	
 
-		PlayerPos = mPlayerTr->GetPosition();
-		mPlayerTr->SetPosition(PlayerPos);
-
-		LabGuardPos = mTransform->GetPosition();
-		mTransform->SetPosition(LabGuardPos);
+		if (IsAttacked == true)
+		{
+			Delay += Time::DeltaTime();
 
 		LabGuard* obj = dynamic_cast<LabGuard*>(GetOwner());
 
