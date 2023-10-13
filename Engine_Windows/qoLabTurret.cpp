@@ -41,7 +41,7 @@ namespace qo
         mPlayer = static_cast<Player*>(player);
     }
 
-    //void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)
-    //{
-    //}
+    void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)
+    {
+    }
 }
