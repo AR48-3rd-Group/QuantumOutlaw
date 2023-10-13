@@ -109,7 +109,7 @@ namespace qo
 		{
 			AttackTime += Time::DeltaTime();
 
-			if (AttackTime > 1.df)
+			if (AttackTime > 1.f)
 			{
 				Vector3 Dir = PlayerPos - LabTurretPos;
 				Dir.Normalize();
