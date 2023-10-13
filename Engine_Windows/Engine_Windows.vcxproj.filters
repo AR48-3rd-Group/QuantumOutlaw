@@ -232,6 +232,9 @@
       <Filter>GameObjects\Trigger</Filter>
 >>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     </ClCompile>
+    <ClCompile Include="qoStage1_3.cpp">
+      <Filter>Scenes\Level1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayer.h">
@@ -362,6 +365,9 @@
     <ClInclude Include="qoTrigger.h">
       <Filter>GameObjects\Trigger</Filter>
 >>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
+    </ClInclude>
+    <ClInclude Include="qoStage1_3.h">
+      <Filter>Scenes\Level1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

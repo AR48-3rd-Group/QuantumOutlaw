@@ -28,8 +28,10 @@ namespace qo
 		if (!mIsLocked)
 		{
 			Collider* WallCollider = GetComponent<Collider>();
-
+		
 			WallCollider->SetActive(false);
+
+			GetComponent<Transform>()->SetColor(Vector4(1.f,0.8f,0.f,1.f));
 		}
 	}
 

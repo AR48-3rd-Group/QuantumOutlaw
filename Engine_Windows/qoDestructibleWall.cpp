@@ -158,9 +158,7 @@ namespace qo
 
 		if (bullet != nullptr)
 		{
-			Collider* WallCollider = GetComponent<Collider>();
-
-			WallCollider->SetActive(false);
+			Destroy(this);
 		}
 	}
 
