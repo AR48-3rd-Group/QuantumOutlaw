@@ -1,4 +1,5 @@
 #include "qoLabTurret.h"
+#include "qoPlayer.h"
 
 namespace qo
 {
@@ -15,42 +16,32 @@ namespace qo
     {
     }
 
-    void LabTurret::Search()
-    {
-        // 肺流 累己
-    }
-
-    void LabTurret::Chase()
-    {
-        // 肺流 累己
-    }
-
-    void LabTurret::Attack()
-    {
-        // 肺流 累己
-    }
-
-    void LabTurret::Dead()
-    {
-    }
-
-    void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)
-    {
-    }
     void LabTurret::Initialize()
     {
         GameObject::Initialize();
     }
+
     void LabTurret::Update()
     {
         GameObject::Update();
     }
+
     void LabTurret::LateUpdate()
     {
         GameObject::LateUpdate();
     }
+
     void LabTurret::Render()
     {
         GameObject::Render();
     }
+
+    void LabTurret::SetPlayer(GameObject* player)
+    {
+        mPlayer = static_cast<Player*>(player);
+    }
+
+    //void LabTurret::TakeHit(int DamageAmount, math::Vector3 HitDir)
+    //{
+    //}
 }

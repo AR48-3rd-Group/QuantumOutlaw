@@ -17,6 +17,8 @@
 
 #include "qoLabGuard.h"
 #include "qoLabGuardScript.h"
+#include "qoLabTurret.h"
+#include "qoLabTurretScript.h"
 
 #include "qoInput.h"
 #include "qoSceneManager.h"
@@ -117,6 +119,7 @@ namespace qo
 
 		AddGameObject(mLabGuard_2, LAYER::ENEMY);
 
+		// 세번째 근접 몬스터
 		LabGuard* mLabGuard_3 = new LabGuard();
 		LabGuardTransform = mLabGuard_3->AddComponent<Transform>();
 		LabGuardTransform->SetPositionInPixels(5000, 305, 0.);
@@ -138,6 +141,29 @@ namespace qo
 		AddGameObject(mLabGuard_3, LAYER::ENEMY);
 		#pragma endregion
 
+		#pragma region LabTurret
+		
+		// 첫번째 포탑
+		LabTurret* LabTurret_1 = new LabTurret();
+		Transform* LabTurretTransform = LabTurret_1->AddComponent<Transform>();
+		LabTurretTransform->SetPositionInPixels(2150, 400, 0.);
+		LabTurretTransform->SetScaleInPixels(100, 200, 0);
+		LabTurretTransform->SetColor(Vector4(1.f, 1.f, 0.f, 0.f));
+
+		MeshRenderer* LabTurretMeshRenderer = LabTurret_1->AddComponent<MeshRenderer>();
+		LabTurretMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
+		LabTurretMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+
+		Collider* LabTurretCollider = LabTurret_1->AddComponent<Collider>();
+		LabTurretCollider->SetScale(LabTurretTransform->GetScale());
+
+		LabTurret_1->AddComponent<LabTurretScript>();
+		LabTurret_1->AddComponent<Rigidbody>();
+		LabTurret_1->SetPlayer(mPlayer);
+		LabTurret_1->Initialize();
+
+		AddGameObject(LabTurret_1, LAYER::ENEMY);
+		#pragma endregion
 
 		#pragma region Item
 		GunItem* gunItem = new GunItem(eGunType::Superposition);
@@ -261,6 +287,7 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::PLAYER, TRUE);
 		#pragma endregion
 	}
 

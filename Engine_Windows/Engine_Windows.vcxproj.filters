@@ -10,9 +10,6 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{e62976ab-da0e-4c02-898b-003c11271af4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Player">
-      <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Bullet">
       <UniqueIdentifier>{eaabd28c-4994-4e0c-a77a-a47e776139b0}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,9 @@
     </Filter>
     <Filter Include="GameObjects\Item">
       <UniqueIdentifier>{c460db1b-7995-4c79-af56-7aa36be4a122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
