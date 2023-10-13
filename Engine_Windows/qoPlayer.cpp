@@ -206,7 +206,7 @@ namespace qo
 
 		if (rb != nullptr)
 		{
-			rb->AddVelocity(HitDir * 0.25f);
+			rb->AddVelocity(HitDir * 0.5f);
 		}
 	}
 }

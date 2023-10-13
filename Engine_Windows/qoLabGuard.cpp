@@ -4,6 +4,7 @@
 #include "qoRigidbody.h"
 #include "qoScene.h"
 #include "qoSceneManager.h"
+#include "qoBullet.h"
 
 namespace qo
 {
@@ -56,7 +57,31 @@ namespace qo
 
     void LabGuard::OnCollisionEnter(Collider* other)
     {
+        Bullet* bullet = dynamic_cast<Bullet*>(other->GetOwner());
 
+        if (bullet != nullptr)
+        {
+            Vector3 first = bullet->GetComponent<Transform>()->GetPosition();
+
+            Scene* ActiveScene = SceneManager::GetActiveScene();
+            std::vector<GameObject*> bullets = ActiveScene->GetLayer((UINT)LAYER::BULLET)->GetGameObjects();
+
+            GameObject* target = nullptr;
+
+            for (GameObject* bulletobj : bullets)
+            {
+                if (bullet == bulletobj)
+                {
+                    target = bulletobj;
+                    continue;
+                }
+            }
+
+            if (target != nullptr)
+            {
+                SetStage(eStage::eHit);
+            }
+        }
     }
 
     void LabGuard::OnCollisionStay(Collider* other)
@@ -84,7 +109,12 @@ namespace qo
 
             if (target != nullptr && (AttackTime >= 2.f))
             {
-                player->Damaged(GetATK());
+                // Damage 함수를 TakeHit로 바꿔서 공격당하면 밀리게 만들기
+                //player->Damaged(GetATK());
+
+                Vector3 dir = PlayerPos - GetComponent<Transform>()->GetPosition();
+                dir.Normalize();
+                player->TakeHit(GetATK(), dir);
             }
         }
     }
@@ -96,6 +126,11 @@ namespace qo
     void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
     {
         Damaged(DamageAmount);
+
+        if (GetHP() < 0)
+        {
+            SetStage(eStage::eDead);
+        }
 
         Rigidbody* rb = GetComponent<Rigidbody>();
 
