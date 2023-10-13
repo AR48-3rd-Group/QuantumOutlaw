@@ -12,8 +12,8 @@ namespace qo
 		, mLabGuard(nullptr)
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
-		, IsAttacked(false)
-		, Delay(0.f)
+		//, IsAttacked(false)
+		//, Delay(0.f)
 	{
 
 	}
@@ -55,7 +55,7 @@ namespace qo
 			Attack();
 			break;
 		case eStage::eHit:
-			//mLabGuard->TakeHit();
+			//TakeHit();
 			break;
 		case eStage::eDead:
 			Dead();
@@ -65,19 +65,10 @@ namespace qo
 		}
 
 		PlayerPos = mPlayerTr->GetPosition();
+		mPlayerTr->SetPosition(PlayerPos);
+
 		LabGuardPos = mTransform->GetPosition();
-
-		if (IsAttacked == true)
-		{
-			Delay += Time::DeltaTime();
-
-			// 공격하고 1초가 넘기면 0으로 초기화
-			if (Delay > 1.0f)
-			{
-				Delay = 0.f;
-				IsAttacked = false;
-			}
-		}
+		mTransform->SetPosition(LabGuardPos);
 
 		LabGuard* obj = dynamic_cast<LabGuard*>(GetOwner());
 
@@ -138,6 +129,11 @@ namespace qo
 
 	void LabGuardScript::Chase()
 	{
+		if (!mRigidbody->GetGround())
+		{
+			mLabGuard->SetStage(eStage::eFall);
+		}
+
 		// 몬스터 좌표 +- 0.5f 범위 내에 플레이어가 있으면
 		if ((LabGuardPos.x - 0.5f <= PlayerPos.x) && (LabGuardPos.x + 0.5f >= PlayerPos.x))
 		{
@@ -181,25 +177,30 @@ namespace qo
 
 	void LabGuardScript::Attack()
 	{
-		// 몬스터 좌표 +- 0.1f 안에 플레이어 존재하면 공격하기
-		if ((LabGuardPos.x - 0.1f <= PlayerPos.x) && (LabGuardPos.x + 0.1f >= PlayerPos.x) && (IsAttacked == false))
+		if (!mRigidbody->GetGround())
 		{
-			IsAttacked = true;
+			mLabGuard->SetStage(eStage::eFall);
+		}
+
+		// 몬스터 좌표 +- 0.1f 안에 플레이어 존재하면 공격하기
+		if ((LabGuardPos.x - 0.1f <= PlayerPos.x) && (LabGuardPos.x + 0.1f >= PlayerPos.x))
+		{
 			mLabGuard->SetStage(eStage::eChase);
 		}
 
 		// 범위 내에 플레이어가 없으면 search
 		else
 		{
-			IsAttacked = false;
 			mLabGuard->SetStage(eStage::eSearch);
 		}
 	}
 
-	void LabGuardScript::Hit()
+	void LabGuardScript::TakeHit(int DamageAmount, math::Vector3 HitDir)
 	{
 		// 불릿과 몬스터가 충돌하면 이 함수를 타게 만들고
 		// 여기서 몬스터의 피가 깎이게 만들기 
+
+
 	}
 
 	void LabGuardScript::Dead()

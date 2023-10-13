@@ -19,7 +19,7 @@ namespace qo
 		void Chase();
 		void Fall();
 		void Attack();
-		void Hit();
+		void TakeHit(int DamageAmount, math::Vector3 HitDir);
 		void Dead();
 
 		// labguard 전방선언
@@ -33,8 +33,8 @@ namespace qo
 		class Transform* mPlayerTr;
 		Vector3 PlayerPos;
 	
-		bool IsAttacked;
-		float Delay;
+		//bool IsAttacked;
+		//float Delay;
 	};
 
 }

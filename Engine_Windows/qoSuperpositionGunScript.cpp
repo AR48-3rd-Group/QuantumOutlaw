@@ -97,7 +97,10 @@ namespace qo
 			tr->SetColor(owner->GetGunColor());
 
 			MeshRenderer* meshRenderer = bullet->AddComponent<MeshRenderer>();
-			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
+			meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"
+				
+				
+				"));
 			meshRenderer->SetShader(ResourceManager::Find<Shader>(L"CircleShader"));
 
 			Collider* col = bullet->AddComponent<Collider>();

@@ -16,6 +16,10 @@ namespace qo
 
 		void SetPlayer(GameObject* player);
 
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
 		//virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
 
 		class Player* mPlayer;
