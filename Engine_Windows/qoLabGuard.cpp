@@ -61,12 +61,10 @@ namespace qo
 
         if (bullet != nullptr)
         {
-            // 충돌한 bullet 객체의 포지션
             Vector3 first = bullet->GetComponent<Transform>()->GetPosition();
 
             Scene* ActiveScene = SceneManager::GetActiveScene();
             std::vector<GameObject*> bullets = ActiveScene->GetLayer((UINT)LAYER::BULLET)->GetGameObjects();
-            long double min = 60.f;
 
             GameObject* target = nullptr;
 
@@ -77,17 +75,6 @@ namespace qo
                     target = bulletobj;
                     continue;
                 }
-
-                //Vector3 compare = bulletobj->GetComponent<Transform>()->GetPosition();
-
-                //long double Distance = sqrt(pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2) +
-                //    pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2));
-
-                //if (static_cast<long double>(min) > Distance)
-                //{
-                //    //min = Distance;
-                //    target = bulletobj;
-                //}
             }
 
             if (target != nullptr)
@@ -123,7 +110,11 @@ namespace qo
             if (target != nullptr && (AttackTime >= 2.f))
             {
                 // Damage 함수를 TakeHit로 바꿔서 공격당하면 밀리게 만들기
-                player->Damaged(GetATK());
+                //player->Damaged(GetATK());
+
+                Vector3 dir = PlayerPos - GetComponent<Transform>()->GetPosition();
+                dir.Normalize();
+                player->TakeHit(GetATK(), dir);
             }
         }
     }
@@ -135,6 +126,11 @@ namespace qo
     void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
     {
         Damaged(DamageAmount);
+
+        if (GetHP() < 0)
+        {
+            SetStage(eStage::eDead);
+        }
 
         Rigidbody* rb = GetComponent<Rigidbody>();
 

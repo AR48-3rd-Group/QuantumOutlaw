@@ -6,6 +6,7 @@
 #include "qoSceneManager.h"
 #include "qoMeshRenderer.h"
 #include "qoResourceManager.h"
+#include "qoLabTurret.h"
 
 namespace qo
 {
@@ -45,12 +46,11 @@ namespace qo
 		if (player != nullptr)
 		{
 			// 충돌한 player 객체의 포지션
-			Vector3 first = player->GetComponent<Transform>()->GetPosition();
+			Vector3 PlayerPos = player->GetComponent<Transform>()->GetPosition();
 
 			// 이제 그 에너미와 가까운 에너미 탐색
 			Scene* ActiveScene = SceneManager::GetActiveScene();
 			std::vector<GameObject*> players = ActiveScene->GetLayer((UINT)LAYER::PLAYER)->GetGameObjects();
-			//long double min = 60.f;
 
 			GameObject* target = nullptr;
 
@@ -61,20 +61,8 @@ namespace qo
 					target = playerobj;
 					continue;
 				}
-
-				//Vector3 compare = playerobj->GetComponent<Transform>()->GetPosition();
-
-				//long double Distance = sqrt(pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2) +
-				//	pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2));
-
-				//if (static_cast<long double>(min) > Distance)
-				//{
-				//	min = Distance;
-				//	target = playerobj;
-				//}
 			}
 
-			// 타겟을 찾았다면 연쇄 반응
 			if (target != nullptr)
 			{
 				//TrackerBullet* trackerBullet = new TrackerBullet(dynamic_cast<Player*>(target));
@@ -97,6 +85,11 @@ namespace qo
 
 				//SceneManager::GetActiveScene()->AddGameObject(trackerBullet, LAYER::BULLET);
 			}
+
+			Vector3 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+
+			player->TakeHit(10, Dir);
 
 			Destroy(this);
 			return;

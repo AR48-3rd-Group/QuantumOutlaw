@@ -12,8 +12,6 @@ namespace qo
 		, mLabGuard(nullptr)
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
-		//, IsAttacked(false)
-		//, Delay(0.f)
 	{
 
 	}
@@ -33,7 +31,6 @@ namespace qo
 
 		mPlayer = dynamic_cast<LabGuard*>(GetOwner())->mPlayer;
 		mPlayerTr = mPlayer->GetComponent<Transform>();
-		//PlayerPos = mPlayerTr->GetPosition();
 
 		assert(mLabGuard);
 	}
@@ -57,19 +54,15 @@ namespace qo
 		case eStage::eAttack:
 			Attack();
 			break;
-		case eStage::eHit:
-			//TakeHit();
-			break;
+		/*case eStage::eHit:
+			TakeHit();
+			break;*/
 		case eStage::eDead:
 			Dead();
 			break;
 		default:
 			break;
 		}	
-
-		if (IsAttacked == true)
-		{
-			Delay += Time::DeltaTime();
 
 		LabGuard* obj = dynamic_cast<LabGuard*>(GetOwner());
 
@@ -196,17 +189,17 @@ namespace qo
 		}
 	}
 
-	void LabGuardScript::TakeHit(int DamageAmount, math::Vector3 HitDir)
-	{
-		// 불릿과 몬스터가 충돌하면 이 함수를 타게 만들고
-		// 여기서 몬스터의 피가 깎이게 만들기 
+	//void LabGuardScript::TakeHit(int DamageAmount, math::Vector3 HitDir)
+	//{
+	//	// 불릿과 몬스터가 충돌하면 이 함수를 타게 만들고
+	//	// 여기서 몬스터의 피가 깎이게 만들기 
 
 
-	}
+	//}
 
 	void LabGuardScript::Dead()
 	{
-		// hp 0되면 dead
+		Destroy(mLabGuard);
 	}
 
 }
