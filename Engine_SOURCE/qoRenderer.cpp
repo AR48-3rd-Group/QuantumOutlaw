@@ -14,12 +14,14 @@ namespace qo::renderer
 	Mesh* CircleMesh = nullptr;
 	Mesh* BasicRectangleMesh = nullptr;
 	Mesh* TextureMesh = nullptr;
+	Mesh* ChamjalMesh = nullptr;
 
 	Shader* shader = nullptr;
 	Shader* ColorTestShader = nullptr;
 	Shader* CircleShader = nullptr;
 	Shader* ColorTestShader2 = nullptr;
 	Shader* TextureShader = nullptr;
+	Shader* ChamjalShader = nullptr;
 
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
@@ -224,6 +226,34 @@ namespace qo::renderer
 
 		vertices.clear();
 		indexes.clear();
+
+		texturevertex[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		texturevertex[0].uv = Vector2(0.f, 0.f);
+
+		texturevertex[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		texturevertex[1].uv = Vector2(1.f, 0.f);
+
+		texturevertex[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		texturevertex[2].uv = Vector2(1.f, 1.f);
+
+		texturevertex[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		texturevertex[3].uv = Vector2(0.f, 1.f);
+
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+
+		indexes.push_back(0);
+		indexes.push_back(2);
+		indexes.push_back(3);
+
+		ChamjalMesh->CreateVertexBuffer(texturevertex.data(), 4, sizeof(TextureVertex));
+		ChamjalMesh->SetBufferType(buffertype::Texture);
+		ChamjalMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"ChamjalMesh", ChamjalMesh);
+
+		vertices.clear();
+		indexes.clear();
 	}
 
 	void LoadShader()
@@ -305,6 +335,20 @@ namespace qo::renderer
 			, TextureShader->GetVSCode()->GetBufferPointer()
 			, TextureShader->GetVSCode()->GetBufferSize()
 			, TextureShader->GetInputLayoutAddressOf());
+
+		// Chamjal Shader
+		ChamjalShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ChamjalShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ChamjalShader->CreateSamplerState();
+		ChamjalShader->ResourceViewCreate(L"..\\Resources\\goodjob.png");
+		ResourceManager::Insert(L"ChamjalShader", ChamjalShader);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ChamjalShader->GetVSCode()->GetBufferPointer()
+			, ChamjalShader->GetVSCode()->GetBufferSize()
+			, ChamjalShader->GetInputLayoutAddressOf());
 	}
 
 	void Initialize()
@@ -314,12 +358,14 @@ namespace qo::renderer
 		CircleMesh = new Mesh();
 		BasicRectangleMesh = new Mesh();
 		TextureMesh = new Mesh();
+		ChamjalMesh = new Mesh();
 
 		shader = new Shader();
 		ColorTestShader = new Shader();
 		CircleShader = new Shader();
 		ColorTestShader2 = new Shader();
 		TextureShader = new Shader();
+		ChamjalShader = new Shader();
 
 		LoadShader();
 		SetUpStates();

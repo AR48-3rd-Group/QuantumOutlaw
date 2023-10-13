@@ -14,6 +14,7 @@
 #include "qoHPUI.h"
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
+#include "qoTrigger.h"
 
 #include "qoInput.h"
 #include "qoSceneManager.h"
@@ -93,6 +94,9 @@ namespace qo
 		#pragma region Item
 		GunItem* gunItem = new GunItem(eGunType::Entanglement);
 		CreateAndSetUpGameObject(gunItem, ITEM, 1200, 300, 100, 100, gunItem->GetColor());
+
+		GunItem* gunItem2 = new GunItem(eGunType::Teleportation);
+		CreateAndSetUpGameObject(gunItem2, ITEM, 6222, 190, 100, 100, gunItem2->GetColor());
 		#pragma endregion
 
 		#pragma region Map Layout
@@ -298,6 +302,16 @@ namespace qo
 		CreateAndSetUpGameObject(EventElevator[4], WALL, 1312, 2256, 448, 96, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventElevator[5], WALL, 4672, 2336, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
+
+		//--------------------------------------------------------
+		//					Æ®¸®°Å
+		//--------------------------------------------------------
+
+		#pragma region SceneTrigger
+		Trigger* SceneTrigger = new Trigger();
+		SceneTrigger->SetSceneName(L"Stage1_3");
+		CreateAndSetUpGameObject(SceneTrigger, WALL, 6336, 2400, 128, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		#pragma endregion
 
 		#pragma endregion
 

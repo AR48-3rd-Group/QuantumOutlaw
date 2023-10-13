@@ -51,6 +51,7 @@
     </ClInclude>
     <ClInclude Include="qoStage1_1.h" />
     <ClInclude Include="qoStage1_2.h" />
+    <ClInclude Include="qoStage1_3.h" />
     <ClInclude Include="qoSuperpositionBullet.h" />
     <ClInclude Include="qoSuperpositionGun.h" />
     <ClInclude Include="qoSuperpositionGunScript.h" />
@@ -95,6 +96,7 @@
     </ClCompile>
     <ClCompile Include="qoStage1_1.cpp" />
     <ClCompile Include="qoStage1_2.cpp" />
+    <ClCompile Include="qoStage1_3.cpp" />
     <ClCompile Include="qoSuperpositionBullet.cpp" />
     <ClCompile Include="qoSuperpositionGun.cpp" />
     <ClCompile Include="qoSuperpositionGunScript.cpp" />

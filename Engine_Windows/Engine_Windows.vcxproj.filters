@@ -222,6 +222,9 @@
     <ClCompile Include="qoTrigger.cpp">
       <Filter>GameObjects\Trigger</Filter>
     </ClCompile>
+    <ClCompile Include="qoStage1_3.cpp">
+      <Filter>Scenes\Level1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qoPlayer.h">
@@ -347,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="qoTrigger.h">
       <Filter>GameObjects\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="qoStage1_3.h">
+      <Filter>Scenes\Level1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
