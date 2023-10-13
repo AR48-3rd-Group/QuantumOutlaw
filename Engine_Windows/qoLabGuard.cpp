@@ -93,7 +93,15 @@ namespace qo
     {
     }
 
-    //void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
-    //{
-    //}
+    void LabGuard::TakeHit(int DamageAmount, math::Vector3 HitDir)
+    {
+        Damaged(DamageAmount);
+
+        Rigidbody* rb = GetComponent<Rigidbody>();
+
+        if (rb != nullptr)
+        {
+            rb->AddVelocity(HitDir * 0.25f);
+        }
+    }
 }

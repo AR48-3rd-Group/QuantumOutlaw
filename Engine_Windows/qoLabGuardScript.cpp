@@ -40,6 +40,9 @@ namespace qo
 
 	void LabGuardScript::Update()
 	{
+		PlayerPos = mPlayerTr->GetPosition();
+		LabGuardPos = mTransform->GetPosition();
+	
 		switch (mLabGuard->GetStage())
 		{
 		case eStage::eSearch:
@@ -62,10 +65,7 @@ namespace qo
 			break;
 		default:
 			break;
-		}
-
-		PlayerPos = mPlayerTr->GetPosition();
-		LabGuardPos = mTransform->GetPosition();
+		}	
 
 		if (IsAttacked == true)
 		{

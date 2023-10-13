@@ -12,7 +12,7 @@ namespace qo
 		, mVelocity(math::Vector3(0.f, 0.f, 0.f))
 		, mAccelation(math::Vector3(0.f, 0.f, 0.f))
 		, mForce(math::Vector3(0.f, 0.f, 0.f))
-		, mfFriction(0.001f)
+		, mfFriction(0.5f)
 		, mCoefficient(0.002f)
 		, mbGround(false)
 	{

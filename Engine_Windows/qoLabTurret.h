@@ -16,7 +16,7 @@ namespace qo
 
 		void SetPlayer(GameObject* player);
 
-		//virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
+		virtual void TakeHit(int DamageAmount, math::Vector3 HitDir = Vector3::Zero) override;
 
 		class Player* mPlayer;
 	private:

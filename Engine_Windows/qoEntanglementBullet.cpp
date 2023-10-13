@@ -80,6 +80,7 @@ namespace qo
 				Transform* tr = trackerBullet->AddComponent<Transform>();
 				tr->SetPosition(first); // 총알 시작위치는 총위치로 설정
 				tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+				tr->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
 
 				MeshRenderer* meshRenderer = trackerBullet->AddComponent<MeshRenderer>();
 				meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
@@ -96,6 +97,11 @@ namespace qo
 
 				SceneManager::GetActiveScene()->AddGameObject(trackerBullet, LAYER::BULLET);
 			}
+
+			// Enemy 충돌 처리
+			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			enemy->TakeHit(25, Dir);
 
 			Destroy(this);
 			return;

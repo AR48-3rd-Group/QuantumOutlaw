@@ -61,6 +61,14 @@ namespace qo
 			&& barrier == nullptr)
 			return;
 
+		// Enemy 피격 처리
+		if (enemy != nullptr)
+		{
+			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			enemy->TakeHit(25, Dir);
+		}
+
 		Destroy(this);
 	}
 
