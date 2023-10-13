@@ -59,7 +59,11 @@
     <ClInclude Include="qoTeleportationGunScript.h" />
     <ClInclude Include="qoTrackerBullet.h" />
     <ClInclude Include="qoTrackerBulletScript.h" />
+<<<<<<< HEAD
     <ClInclude Include="qoTurretAttack.h" />
+=======
+    <ClInclude Include="qoTrigger.h" />
+>>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     <ClInclude Include="qoUI.h" />
     <ClInclude Include="qoUIScript.h" />
     <ClInclude Include="qoWall.h" />
@@ -103,7 +107,11 @@
     <ClCompile Include="qoTeleportationGunScript.cpp" />
     <ClCompile Include="qoTrackerBullet.cpp" />
     <ClCompile Include="qoTrackerBulletScript.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="qoTurretAttack.cpp" />
+=======
+    <ClCompile Include="qoTrigger.cpp" />
+>>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     <ClCompile Include="qoUI.cpp" />
     <ClCompile Include="qoUIScript.cpp" />
     <ClCompile Include="qoWall.cpp" />
