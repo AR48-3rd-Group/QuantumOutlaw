@@ -31,6 +31,8 @@ namespace qo
 		class Player* mPlayer;
 		class Transform* mPlayerTr;
 		Vector3 PlayerPos;
+
+		float AttackTime;
 	};
 
 }

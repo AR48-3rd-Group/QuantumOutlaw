@@ -97,8 +97,13 @@
     <Filter Include="GameObjects\Player">
       <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+    <Filter Include="GameObjects\Bullet\TurretAttack">
+      <UniqueIdentifier>{77fe1bac-0463-49ce-b612-59d2e6750181}</UniqueIdentifier>
+=======
     <Filter Include="GameObjects\Trigger">
       <UniqueIdentifier>{3793a367-4141-42f5-adce-07a31fa8ce19}</UniqueIdentifier>
+>>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,8 +224,13 @@
     <ClCompile Include="qoEventSwitch.cpp">
       <Filter>GameObjects\Architecture</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="qoTurretAttack.cpp">
+      <Filter>GameObjects\Bullet\TurretAttack</Filter>
+=======
     <ClCompile Include="qoTrigger.cpp">
       <Filter>GameObjects\Trigger</Filter>
+>>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,8 +355,13 @@
     <ClInclude Include="qoEventSwitch.h">
       <Filter>GameObjects\Architecture</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="qoTurretAttack.h">
+      <Filter>GameObjects\Bullet\TurretAttack</Filter>
+=======
     <ClInclude Include="qoTrigger.h">
       <Filter>GameObjects\Trigger</Filter>
+>>>>>>> ae30ebed78e488f573aa64aad6c8a9b55fbc409c
     </ClInclude>
   </ItemGroup>
 </Project>

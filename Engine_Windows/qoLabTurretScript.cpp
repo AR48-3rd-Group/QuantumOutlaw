@@ -3,6 +3,12 @@
 #include "qoTransform.h"
 #include "qoRigidbody.h"
 #include "qoPlayer.h"
+#include "qoTurretAttack.h"
+#include "qoCollider.h"
+#include "qoMeshRenderer.h"
+#include "qoResourceManager.h"
+#include "qoSceneManager.h"
+#include "qoBulletScript.h"
 
 namespace qo
 {
@@ -10,6 +16,7 @@ namespace qo
 		: mLabTurret(nullptr)
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
+		, AttackTime(0.f)
 	{
 
 	}
@@ -44,9 +51,9 @@ namespace qo
 		case eStage::eAttack:
 			Attack();
 			break;
-		case eStage::eHit:
-			//mEnemy->TakeHit();
-			break;
+		//case eStage::eHit:
+		//	//TakeHit();
+		//	break;
 		case eStage::eDead:
 			Dead();
 			break;
@@ -100,23 +107,51 @@ namespace qo
 		// +- 0.5 범위 내에 플레이어가 존재하면 공격한다
 		if ((LabTurretPos.x - 0.5f <= PlayerPos.x) && (LabTurretPos.x + 0.5f >= PlayerPos.x))
 		{
+			AttackTime += Time::DeltaTime();
+
+			if (AttackTime > 1.df)
+			{
+				Vector3 Dir = PlayerPos - LabTurretPos;
+				Dir.Normalize();
+				TurretAttack* turretattack = new TurretAttack(Dir);
+
+				Transform* tr = turretattack->AddComponent<Transform>();
+				tr->SetPosition(LabTurretPos); // 총알 시작위치는 총위치로 설정
+				tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+				tr->SetColor(Vector4(1.0f, 1.0f, 0.0f, 0.0f));
+
+				MeshRenderer* meshRenderer = turretattack->AddComponent<MeshRenderer>();
+				meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
+				meshRenderer->SetShader(ResourceManager::Find<Shader>(L"CircleShader"));
+
+				Collider* col = turretattack->AddComponent<Collider>();
+				col->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+
+				turretattack->AddComponent<BulletScript>();
+
+				turretattack->Initialize();
+
+				SceneManager::GetActiveScene()->AddGameObject(turretattack, LAYER::BULLET);
+				AttackTime = 0.f;
+			}
 
 		}
 
 		// +- 0.5 범위 내에 플레이어가 존재하지 않으면 search
 		else
 		{
+			AttackTime = 0.f;
 			mLabTurret->SetStage(eStage::eSearch);
 		}
 	}
 
-	void LabTurretScript::Hit()
-	{
-		// 근접몬스터 히트함수랑 똑같이
-	}
+	//void LabTurretScript::Hit()
+	//{
+	//	// 근접몬스터 히트함수랑 똑같이
+	//}
 
 	void LabTurretScript::Dead()
 	{
+		Destroy(mLabTurret);
 	}
-
 }

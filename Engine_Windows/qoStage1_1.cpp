@@ -296,8 +296,10 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::ITEM, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::BULLET, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::PLAYER, TRUE);
