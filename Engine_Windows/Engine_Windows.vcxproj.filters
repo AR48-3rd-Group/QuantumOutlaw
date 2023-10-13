@@ -31,45 +31,20 @@
     <ClCompile Include="qoUI.cpp" />
     <ClCompile Include="qoUIScript.cpp" />
     <ClCompile Include="qoWall.cpp" />
-    <ClCompile Include="qoBarrier.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoBullet.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoBulletScript.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoDestructibleWall.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoElevator.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoEnemy.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoEntanglementBullet.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoEntanglementGun.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoEntanglementGunScript.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoEventSwitch.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="qoGunItem.cpp">
-      <Filter>Test2</Filter>
-    </ClCompile>
-    <ClCompile Include="qoGunScript.cpp">
-      <Filter>Test2</Filter>
-    </ClCompile>
+    <ClCompile Include="qoGunItem.cpp" />
+    <ClCompile Include="qoGunScript.cpp" />
+    <ClCompile Include="qoBarrier.cpp" />
+    <ClCompile Include="qoBullet.cpp" />
+    <ClCompile Include="qoBulletScript.cpp" />
+    <ClCompile Include="qoDestructibleWall.cpp" />
+    <ClCompile Include="qoElevator.cpp" />
+    <ClCompile Include="qoEnemy.cpp" />
+    <ClCompile Include="qoEntanglementBullet.cpp" />
+    <ClCompile Include="qoEntanglementGun.cpp" />
+    <ClCompile Include="qoEntanglementGunScript.cpp" />
+    <ClCompile Include="qoEventSwitch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArchitectureInclude.h" />
     <ClInclude Include="qoFloor.h" />
     <ClInclude Include="qoHPUI.h" />
     <ClInclude Include="qoHPUIBackGround.h" />
@@ -100,52 +75,19 @@
     <ClInclude Include="qoUI.h" />
     <ClInclude Include="qoUIScript.h" />
     <ClInclude Include="qoWall.h" />
-    <ClInclude Include="qoBarrier.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoBullet.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoBulletScript.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoDestructibleWall.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoElevator.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoEnemy.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoEntanglementBullet.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoEntanglementGun.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoEntanglementGunScript.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoEventSwitch.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="qoGun.h">
-      <Filter>Test2</Filter>
-    </ClInclude>
-    <ClInclude Include="qoGunItem.h">
-      <Filter>Test2</Filter>
-    </ClInclude>
-    <ClInclude Include="qoGunScript.h">
-      <Filter>Test2</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Test">
-      <UniqueIdentifier>{cc5df826-65bb-4f1e-82eb-ad69dcc7aa84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Test2">
-      <UniqueIdentifier>{f37bac93-4780-4ebd-bd0d-55f464320a10}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="qoGun.h" />
+    <ClInclude Include="qoGunItem.h" />
+    <ClInclude Include="qoGunScript.h" />
+    <ClInclude Include="qoBarrier.h" />
+    <ClInclude Include="qoBullet.h" />
+    <ClInclude Include="qoBulletScript.h" />
+    <ClInclude Include="qoDestructibleWall.h" />
+    <ClInclude Include="qoElevator.h" />
+    <ClInclude Include="qoEnemy.h" />
+    <ClInclude Include="qoEntanglementBullet.h" />
+    <ClInclude Include="qoEntanglementGun.h" />
+    <ClInclude Include="qoEntanglementGunScript.h" />
+    <ClInclude Include="qoEventSwitch.h" />
+    <ClInclude Include="ArchitectureInclude.h" />
   </ItemGroup>
 </Project>

@@ -398,7 +398,6 @@ namespace qo::graphics
 
         srvDesc.Format = textureDesc.Format;
 
-        ID3D11ShaderResourceView* shaderResourceView;
         result = mDevice->CreateShaderResourceView(
             texture.Get(),
             &srvDesc,

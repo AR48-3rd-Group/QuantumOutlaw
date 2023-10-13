@@ -76,12 +76,12 @@ namespace qo
 	{
 		if (Input::GetKeyState(KEY_CODE::O) == KEY_STATE::DOWN)
 		{
-			mPlayer->mCurHp -= 1;
+			mPlayer->mCurHp -= 10;
 		}
 
 		if (Input::GetKeyState(KEY_CODE::P) == KEY_STATE::DOWN)
 		{
-			mPlayer->mCurHp += 1;
+			mPlayer->mCurHp += 10;
 		}
 	}
 

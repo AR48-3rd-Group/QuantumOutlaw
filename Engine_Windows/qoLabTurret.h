@@ -25,7 +25,6 @@ namespace qo
 		class Player* mPlayer;
 
 		float AttackTime;
-	private:
 	};
 }
 

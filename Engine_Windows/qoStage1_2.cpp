@@ -340,6 +340,12 @@ namespace qo
 	void Stage1_2::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (mPlayer->GetCurHP() <= 0.f
+			|| Input::GetKeyState(KEY_CODE::L) == KEY_STATE::DOWN)
+		{
+			SceneManager::ReStartScene<Stage1_2>(GetName());
+		}
 	}
 
 	void Stage1_2::Render()

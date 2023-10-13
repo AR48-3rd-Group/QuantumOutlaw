@@ -33,6 +33,7 @@ namespace qo
 		Vector3 PlayerPos;
 
 		float AttackTime;
+		float mDamagedDlay;
 	};
 
 }

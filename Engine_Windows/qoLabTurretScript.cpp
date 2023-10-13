@@ -17,6 +17,7 @@ namespace qo
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
 		, AttackTime(0.f)
+		, mDamagedDlay(0.f)
 	{
 
 	}
@@ -40,6 +41,9 @@ namespace qo
 
 	void LabTurretScript::Update()
 	{
+		PlayerPos = mPlayerTr->GetPosition();
+		LabTurretPos = mTransform->GetPosition();
+
 		switch (mLabTurret->GetStage())
 		{
 		case eStage::eSearch:
@@ -51,23 +55,14 @@ namespace qo
 		case eStage::eAttack:
 			Attack();
 			break;
-		//case eStage::eHit:
-		//	//TakeHit();
-		//	break;
+		case eStage::eHit:
+			Hit();
+			break;
 		case eStage::eDead:
 			Dead();
 			break;
 		default:
 			break;
-		}
-
-		PlayerPos = mPlayerTr->GetPosition();
-
-		LabTurret* obj = dynamic_cast<LabTurret*>(GetOwner());
-
-		if (obj != nullptr)
-		{
-			std::cout << "null";
 		}
 	}
 
@@ -145,10 +140,16 @@ namespace qo
 		}
 	}
 
-	//void LabTurretScript::Hit()
-	//{
-	//	// 근접몬스터 히트함수랑 똑같이
-	//}
+	void LabTurretScript::Hit()
+	{
+		mDamagedDlay += Time::DeltaTime();
+
+		if (mDamagedDlay > 1.f)
+		{
+			mLabTurret->SetStage(eStage::eSearch);
+			mDamagedDlay = 0.f;
+		}
+	}
 
 	void LabTurretScript::Dead()
 	{
