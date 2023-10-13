@@ -58,8 +58,8 @@ namespace qo
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
-		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));
 
 		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
