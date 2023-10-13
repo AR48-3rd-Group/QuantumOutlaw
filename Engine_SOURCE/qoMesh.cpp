@@ -19,7 +19,7 @@ namespace qo
 
     bool Mesh::CreateVertexBuffer(void* data, UINT Count, unsigned long long Size)
     {
-        mVBDesc.ByteWidth = Size * Count;
+        mVBDesc.ByteWidth = static_cast<UINT>(Size * Count);
         mVBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
         mVBDesc.Usage = D3D11_USAGE_DEFAULT;
         mVBDesc.CPUAccessFlags = 0;

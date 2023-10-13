@@ -317,7 +317,8 @@ namespace qo
 	{
 		Scene::LateUpdate();
 
-		if (Input::GetKeyState(KEY_CODE::L) == KEY_STATE::DOWN)
+		if (mPlayer->GetCurHP() <= 0.f
+			|| Input::GetKeyState(KEY_CODE::L) == KEY_STATE::DOWN)
 		{
 			SceneManager::ReStartScene<Stage1_1>(GetName());
 		}

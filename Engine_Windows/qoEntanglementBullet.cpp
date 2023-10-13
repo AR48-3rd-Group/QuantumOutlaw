@@ -101,7 +101,7 @@ namespace qo
 			// Enemy 충돌 처리
 			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 			Dir.Normalize();
-			enemy->TakeHit(25, Dir);
+			enemy->TakeHit(10, Dir);
 
 			Destroy(this);
 			return;

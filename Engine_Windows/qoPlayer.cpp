@@ -102,7 +102,7 @@ namespace qo
 		// ================================
 		if (type == eGunType::Superposition)
 		{
-			SuperpositionGun* gun = new SuperpositionGun(this, 50);
+			SuperpositionGun* gun = new SuperpositionGun(this, 30);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -124,7 +124,7 @@ namespace qo
 		}
 		else if(type == eGunType::Entanglement)
 		{
-			EntanglementGun* gun = new EntanglementGun(this, 50);
+			EntanglementGun* gun = new EntanglementGun(this, 12);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -146,7 +146,7 @@ namespace qo
 		}
 		else if (type == eGunType::Teleportation)
 		{
-			TeleportationGun* gun = new TeleportationGun(this, 50);
+			TeleportationGun* gun = new TeleportationGun(this, 3);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();

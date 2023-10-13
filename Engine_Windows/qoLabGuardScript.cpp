@@ -12,6 +12,7 @@ namespace qo
 		, mLabGuard(nullptr)
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
+		, mDamagedDlay(0.f)
 	{
 
 	}
@@ -54,9 +55,9 @@ namespace qo
 		case eStage::eAttack:
 			Attack();
 			break;
-		/*case eStage::eHit:
-			TakeHit();
-			break;*/
+		case eStage::eHit:
+			Hit();
+			break;
 		case eStage::eDead:
 			Dead();
 			break;
@@ -189,13 +190,16 @@ namespace qo
 		}
 	}
 
-	//void LabGuardScript::TakeHit(int DamageAmount, math::Vector3 HitDir)
-	//{
-	//	// 불릿과 몬스터가 충돌하면 이 함수를 타게 만들고
-	//	// 여기서 몬스터의 피가 깎이게 만들기 
+	void LabGuardScript::Hit()
+	{
+		mDamagedDlay += Time::DeltaTime();
 
-
-	//}
+		if (mDamagedDlay > 1.f)
+		{
+			mLabGuard->SetStage(eStage::eSearch);
+			mDamagedDlay = 0.f;
+		}
+	}
 
 	void LabGuardScript::Dead()
 	{
