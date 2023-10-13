@@ -14,6 +14,7 @@
 #include "qoHPUI.h"
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
+#include "qoTrigger.h"
 
 #include "qoLabGuard.h"
 #include "qoLabGuardScript.h"
@@ -247,6 +248,16 @@ namespace qo
 		CreateAndSetUpGameObject(EventDoor, WALL, 6336, 352, 128, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		#pragma endregion
 
+		//--------------------------------------------------------
+		//					Æ®¸®°Å
+		//--------------------------------------------------------
+
+		#pragma region SceneTrigger
+		Trigger* SceneTrigger = new Trigger();
+		SceneTrigger->SetSceneName(L"Stage1_2");
+		CreateAndSetUpGameObject(SceneTrigger, WALL, 6336, 352, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		#pragma endregion
+
 		#pragma region UI
 		HPUI* hpui = new HPUI(mPlayer);
 		Transform* hpuiTransform = hpui->AddComponent<Transform>();
@@ -278,6 +289,8 @@ namespace qo
 
 		AddGameObject(hpuiBG, LAYER::UI);
 		#pragma endregion
+
+
 
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);

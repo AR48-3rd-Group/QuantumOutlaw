@@ -97,6 +97,9 @@
     <Filter Include="GameObjects\Player">
       <UniqueIdentifier>{123e95b6-b95e-4739-ab0b-0d4ec0c1f593}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Trigger">
+      <UniqueIdentifier>{3793a367-4141-42f5-adce-07a31fa8ce19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="qoPlayer.cpp">
@@ -215,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="qoEventSwitch.cpp">
       <Filter>GameObjects\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="qoTrigger.cpp">
+      <Filter>GameObjects\Trigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="qoEventSwitch.h">
       <Filter>GameObjects\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="qoTrigger.h">
+      <Filter>GameObjects\Trigger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
