@@ -83,6 +83,11 @@ namespace qo
 		{
 			mPlayer->mCurHp += 10;
 		}
+
+		if (Input::GetKeyState(KEY_CODE::G) == KEY_STATE::DOWN)
+		{
+			mPlayer->mbGodMode = !mPlayer->mbGodMode;
+		}
 	}
 
 	void PlayerScript::Render()
