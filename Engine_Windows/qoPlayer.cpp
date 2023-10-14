@@ -27,6 +27,7 @@ namespace qo
 		, mMoveSpeed(0.5f)
 		, mJumpPower(1.5f)
 		, mDashPower(1.f)
+		, mbGodMode(false)
 	{
 	}
 
@@ -102,7 +103,7 @@ namespace qo
 		// ================================
 		if (type == eGunType::Superposition)
 		{
-			SuperpositionGun* gun = new SuperpositionGun(this, 30);
+			SuperpositionGun* gun = new SuperpositionGun(this, 200);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -124,7 +125,7 @@ namespace qo
 		}
 		else if(type == eGunType::Entanglement)
 		{
-			EntanglementGun* gun = new EntanglementGun(this, 12);
+			EntanglementGun* gun = new EntanglementGun(this, 100);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -185,6 +186,8 @@ namespace qo
 
 	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
 	{
+		if (mbGodMode) return;
+
 		Damaged(DamageAmount);
 
 		Rigidbody* rb = GetComponent<Rigidbody>();

@@ -23,6 +23,12 @@ namespace qo
 	void TrackerBullet::Update()
 	{
 		GameObject::Update();
+
+
+		if (mTarget->GetGameObjectState() == eState::Dead)
+		{
+			mTarget = nullptr;
+		}
 	}
 
 	void TrackerBullet::LateUpdate()

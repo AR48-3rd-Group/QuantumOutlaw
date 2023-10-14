@@ -48,10 +48,10 @@ namespace qo
 			SceneManager::LoadScene(mSceneName);
 		else if (mType == eTriggerType::EnemyFall)
 		{
-			for (GameObject* enemy : mEnemies)
+			for (size_t i = 0; i < mEnemies.size(); i++)
 			{
-				if(enemy!=nullptr)
-					enemy->GetComponent<Rigidbody>()->SetActive(true);
+				if (mEnemies[i] != nullptr)
+					mEnemies[i]->GetComponent<Rigidbody>()->SetActive(true);
 			}
 		}
 	}

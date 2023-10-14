@@ -62,6 +62,7 @@ namespace qo
         float               mMoveSpeed;
         float               mJumpPower;
         float               mDashPower;
+        bool                mbGodMode;
     };
 }
 
