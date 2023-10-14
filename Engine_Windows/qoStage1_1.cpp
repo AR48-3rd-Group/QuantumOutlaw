@@ -36,20 +36,6 @@ namespace qo
 
 	void Stage1_1::Initialize()
 	{
-		#pragma region BG
-		/*GameObject* BackGround = new GameObject();
-		Transform* BackGroundTransform = BackGround->AddComponent<Transform>();
-		BackGroundTransform->SetPositionInPixels(800, 450, 0.);
-		BackGroundTransform->SetScaleInPixels(1600, 900, 0);
-		BackGroundTransform->SetAffectedCamera(false);
-
-		MeshRenderer* BackGroundMeshRenderer = BackGround->AddComponent<MeshRenderer>();
-		BackGroundMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
-		BackGroundMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));
-
-		AddGameObject(BackGround, LAYER::BACKGROUND);*/
-		#pragma endregion
-
 		#pragma region Player
 		mPlayer = new Player();
 		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
@@ -75,100 +61,34 @@ namespace qo
 		Camera::SetTarget(mPlayer);
 		#pragma endregion
 
-		#pragma region LabGuard
-
-		// 첫번째 근접 몬스터
-		LabGuard* mLabGuard_1 = new LabGuard();
-		Transform* LabGuardTransform = mLabGuard_1->AddComponent<Transform>();
-		LabGuardTransform->SetPositionInPixels(2150, 305, 0.);
-		LabGuardTransform->SetScaleInPixels(100, 100, 0);
-		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
-
-		MeshRenderer* LabGuardMeshRenderer = mLabGuard_1->AddComponent<MeshRenderer>();
-		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-
-		Collider* LabGuardCollider = mLabGuard_1->AddComponent<Collider>();
-		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
-
-		mLabGuard_1->AddComponent<Rigidbody>();
-		mLabGuard_1->AddComponent<LabGuardScript>();
-		mLabGuard_1->SetPlayer(mPlayer);
-		mLabGuard_1->Initialize();
-
-		AddGameObject(mLabGuard_1, LAYER::ENEMY);
-
-
-		// 두번째 근접 몬스터
-		LabGuard* mLabGuard_2 = new LabGuard();
-		LabGuardTransform = mLabGuard_2->AddComponent<Transform>();
-		LabGuardTransform->SetPositionInPixels(3200, 305, 0.);
-		LabGuardTransform->SetScaleInPixels(100, 100, 0);
-		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
-
-		LabGuardMeshRenderer = mLabGuard_2->AddComponent<MeshRenderer>();
-		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-
-		LabGuardCollider = mLabGuard_2->AddComponent<Collider>();
-		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
-
-		mLabGuard_2->AddComponent<Rigidbody>();
-		mLabGuard_2->AddComponent<LabGuardScript>();
-		mLabGuard_2->SetPlayer(mPlayer);
-		mLabGuard_2->Initialize();
-
-		AddGameObject(mLabGuard_2, LAYER::ENEMY);
-
-		// 세번째 근접 몬스터
-		LabGuard* mLabGuard_3 = new LabGuard();
-		LabGuardTransform = mLabGuard_3->AddComponent<Transform>();
-		LabGuardTransform->SetPositionInPixels(5000, 305, 0.);
-		LabGuardTransform->SetScaleInPixels(100, 100, 0);
-		LabGuardTransform->SetColor(Vector4(1.f, 0.f, 0.f, 0.f));
-
-		LabGuardMeshRenderer = mLabGuard_3->AddComponent<MeshRenderer>();
-		LabGuardMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		LabGuardMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-
-		LabGuardCollider = mLabGuard_3->AddComponent<Collider>();
-		LabGuardCollider->SetScale(LabGuardTransform->GetScale());
-
-		mLabGuard_3->AddComponent<Rigidbody>();
-		mLabGuard_3->AddComponent<LabGuardScript>();
-		mLabGuard_3->SetPlayer(mPlayer);
-		mLabGuard_3->Initialize();
-
-		AddGameObject(mLabGuard_3, LAYER::ENEMY);
-		#pragma endregion
-
-		#pragma region LabTurret
-		
-		// 첫번째 포탑
-		LabTurret* LabTurret_1 = new LabTurret();
-		Transform* LabTurretTransform = LabTurret_1->AddComponent<Transform>();
-		LabTurretTransform->SetPositionInPixels(2150, 400, 0.);
-		LabTurretTransform->SetScaleInPixels(100, 200, 0);
-		LabTurretTransform->SetColor(Vector4(1.f, 1.f, 0.f, 0.f));
-
-		MeshRenderer* LabTurretMeshRenderer = LabTurret_1->AddComponent<MeshRenderer>();
-		LabTurretMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		LabTurretMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
-
-		Collider* LabTurretCollider = LabTurret_1->AddComponent<Collider>();
-		LabTurretCollider->SetScale(LabTurretTransform->GetScale());
-
-		LabTurret_1->AddComponent<LabTurretScript>();
-		LabTurret_1->AddComponent<Rigidbody>();
-		LabTurret_1->SetPlayer(mPlayer);
-		LabTurret_1->Initialize();
-
-		AddGameObject(LabTurret_1, LAYER::ENEMY);
-		#pragma endregion
-
 		#pragma region Item
 		GunItem* gunItem = new GunItem(eGunType::Superposition);
 		CreateAndSetUpGameObject(gunItem, ITEM, 1200, 300, 100, 100, gunItem->GetColor());
+		#pragma endregion
+
+
+		#pragma region Enemy
+		// 객체 할당
+		for (size_t i = 0; i < LabGuardCount; i++)	EnemyLabGuard[i] = new LabGuard();
+
+		// 객체 생성 정보 추가
+		// 위치 및 색상
+		CreateAndSetUpGameObject(EnemyLabGuard[0], ENEMY, 1720, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[1], ENEMY, 2120, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[2], ENEMY, 2520, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[3], ENEMY, 2900, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[4], ENEMY, 5440, 840, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[5], ENEMY, 5440, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[6], ENEMY, 5840, 320, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+
+		// Script 및 Rigidbody 추가 SetPlayer 적용
+		for (size_t i = 0; i < LabGuardCount; i++)
+		{
+			EnemyLabGuard[i]->AddComponent<LabGuardScript>();
+			EnemyLabGuard[i]->AddComponent<Rigidbody>();
+			EnemyLabGuard[i]->SetPlayer(mPlayer);
+			EnemyLabGuard[i]->Initialize();
+		}
 		#pragma endregion
 
 		#pragma region Map Layout
