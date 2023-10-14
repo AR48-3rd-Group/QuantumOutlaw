@@ -6,6 +6,9 @@
 namespace qo
 {
 	class Player;
+	class LabGuard;
+	class LabTurret;
+	class Trigger;
 	class Stage1_1 : public Scene
 	{
 	public:
@@ -23,6 +26,9 @@ namespace qo
 		void Exit() override;
 
 	private:
+		static const int LabGuardCount = 7;
+		LabGuard* EnemyLabGuard[LabGuardCount];
+
 		Player* mPlayer;
 		EventSwitch* EventButton;
 		LockedDoor* EventDoor;
