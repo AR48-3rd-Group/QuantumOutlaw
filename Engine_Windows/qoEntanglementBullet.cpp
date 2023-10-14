@@ -64,7 +64,7 @@ namespace qo
 				Vector3 compare = enemyobj->GetComponent<Transform>()->GetPosition();
 
 				long double Distance = sqrt(pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2) +
-					pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2));
+					pow(static_cast<long double>(first.y) - static_cast<long double>(compare.y), 2));
 
 				if (static_cast<long double>(min) > Distance)
 				{
