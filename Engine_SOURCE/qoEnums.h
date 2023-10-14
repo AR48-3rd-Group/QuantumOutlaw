@@ -13,6 +13,7 @@ namespace qo::enums
 		BULLET,
 		PLAYER,
 		BACKGROUND,
+		TRIGGER,
 		MAX = 16,
 	};
 

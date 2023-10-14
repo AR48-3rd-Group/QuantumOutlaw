@@ -8,6 +8,7 @@ namespace qo
 	class Player;
 	class LabGuard;
 	class LabTurret;
+	class Trigger;
 	class Stage1_2 : public Scene
 	{
 	public:
@@ -41,6 +42,9 @@ namespace qo
 
 		static const int LabTurretCount = 12;
 		LabTurret* EnemyLabTurret[LabTurretCount];
+
+		static const int EnemyFallTriggerCount = 4;
+		Trigger* EnemyFallTrigger[EnemyFallTriggerCount];
 
 		Player* mPlayer;
 	};

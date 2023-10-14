@@ -1,5 +1,6 @@
 #include "qoTrigger.h"
 #include "qoCollider.h"
+#include "qoRigidbody.h"
 #include "qoPlayer.h"
 #include "qoElevator.h"
 #include "qoSceneManager.h"
@@ -7,6 +8,7 @@
 namespace qo
 {
 	Trigger::Trigger()
+		: mType(eTriggerType::None)
 	{
 	}
 
@@ -37,12 +39,21 @@ namespace qo
 	void Trigger::OnCollisionEnter(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		
+		Elevator* elvator = dynamic_cast<Elevator*>(other->GetOwner());
 
-		if (player == nullptr)
+		if (player == nullptr && elvator == nullptr)
 			return;
 
-		SceneManager::LoadScene(mSceneName);
+		if(mType==eTriggerType::SceneChanger)
+			SceneManager::LoadScene(mSceneName);
+		else if (mType == eTriggerType::EnemyFall)
+		{
+			for (GameObject* enemy : mEnemies)
+			{
+				if(enemy!=nullptr)
+					enemy->GetComponent<Rigidbody>()->SetActive(true);
+			}
+		}
 	}
 
 	void Trigger::OnCollisionStay(Collider* other)
