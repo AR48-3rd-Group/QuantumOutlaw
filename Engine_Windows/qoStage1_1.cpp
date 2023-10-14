@@ -290,8 +290,6 @@ namespace qo
 		AddGameObject(hpuiBG, LAYER::UI);
 		#pragma endregion
 
-
-
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);

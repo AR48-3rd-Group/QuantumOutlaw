@@ -6,6 +6,8 @@
 namespace qo
 {
 	class Player;
+	class LabGuard;
+	class LabTurret;
 	class Stage1_2 : public Scene
 	{
 	public:
@@ -33,7 +35,13 @@ namespace qo
 
 		static const int EventElevatorCount = 6;
 		Elevator* EventElevator[EventElevatorCount];
-		
+
+		static const int LabGuardCount = 28;
+		LabGuard* EnemyLabGuard[LabGuardCount];
+
+		static const int LabTurretCount = 12;
+		LabTurret* EnemyLabTurret[LabTurretCount];
+
 		Player* mPlayer;
 	};
 }

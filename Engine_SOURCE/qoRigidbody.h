@@ -30,12 +30,16 @@ namespace qo
 		void SetFriction(float friction) { mfFriction = friction; }
 		float GetFriction() { return mfFriction; }
 
+		void SetActive(bool active) { mbActive = active; }
+
 	private:
 		bool mbGround;
 
 		float mfMass;
 		float mfFriction;
 		float mCoefficient;
+
+		bool mbActive;
 
 		math::Vector3 mVelocity;
 		math::Vector3 mAccelation;

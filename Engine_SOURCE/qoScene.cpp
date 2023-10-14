@@ -77,6 +77,9 @@ namespace qo
         case LAYER::ITEM:
             AddGameObject(object, LAYER::ITEM);
             break;
+        case LAYER::ENEMY:
+            AddGameObject(object, LAYER::ENEMY);
+            break;
         }
     }
 }
