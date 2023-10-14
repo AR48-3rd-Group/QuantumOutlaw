@@ -89,7 +89,8 @@ namespace qo
 		}
 		
 		// 일정 범위 내에 몬스터가 있으면 chase 함수로
-		if ((LabGuardPos.x - 0.5f <= PlayerPos.x) && (LabGuardPos.x + 0.5f >= PlayerPos.x))
+		if ((LabGuardPos.x - 0.5f <= PlayerPos.x) && (LabGuardPos.x + 0.5f >= PlayerPos.x) 
+			&& (LabGuardPos.y-0.1f<= PlayerPos.y) && (LabGuardPos.y + 0.1f >= PlayerPos.y))
 		{
 			mLabGuard->SetStage(eStage::eChase);
 		}

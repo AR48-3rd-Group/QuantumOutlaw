@@ -254,8 +254,9 @@ namespace qo
 
 		#pragma region SceneTrigger
 		Trigger* SceneTrigger = new Trigger();
+		SceneTrigger->SetType(eTriggerType::SceneChanger);
 		SceneTrigger->SetSceneName(L"Stage1_2");
-		CreateAndSetUpGameObject(SceneTrigger, WALL, 6336, 352, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(SceneTrigger, TRIGGER, 6336, 352, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		#pragma endregion
 
 		#pragma region UI
@@ -290,8 +291,6 @@ namespace qo
 		AddGameObject(hpuiBG, LAYER::UI);
 		#pragma endregion
 
-
-
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
@@ -303,6 +302,7 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::PLAYER, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::TRIGGER, TRUE);
 		#pragma endregion
 	}
 

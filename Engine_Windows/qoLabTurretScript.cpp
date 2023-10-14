@@ -30,7 +30,7 @@ namespace qo
 	{
 		mLabTurret = dynamic_cast<LabTurret*>(GetOwner());
 		mTransform = mLabTurret->GetComponent<Transform>();
-		mRigidbody = mLabTurret->GetComponent<Rigidbody>();
+		//mRigidbody = mLabTurret->GetComponent<Rigidbody>();
 		LabTurretPos = mTransform->GetPosition();
 
 		mPlayer = dynamic_cast<LabTurret*>(GetOwner())->mPlayer;
@@ -76,13 +76,14 @@ namespace qo
 
 	void LabTurretScript::Search()
 	{
-		if (!mRigidbody->GetGround())
+		/*if (!mRigidbody->GetGround())
 		{
 			mLabTurret->SetStage(eStage::eFall);
-		}
+		}*/
 
 		// +-0.5 범위 내에 플레이어가 존재하면 attack 함수로
-		if ((LabTurretPos.x - 0.5f <= PlayerPos.x) && (LabTurretPos.x + 0.5f >= PlayerPos.x))
+		if ((LabTurretPos.x - 1.f <= PlayerPos.x) && (LabTurretPos.x + 1.f >= PlayerPos.x)
+			&& (LabTurretPos.y - 0.5f <= PlayerPos.y) && (LabTurretPos.y + 0.5f >= PlayerPos.y))
 		{
 			mLabTurret->SetStage(eStage::eAttack);
 		}
@@ -90,10 +91,10 @@ namespace qo
 
 	void LabTurretScript::Fall()
 	{
-		if (mRigidbody->GetGround())
+	/*	if (mRigidbody->GetGround())
 		{
 			mLabTurret->SetStage(eStage::eSearch);
-		}
+		}*/
 	}
 
 	void LabTurretScript::Attack()

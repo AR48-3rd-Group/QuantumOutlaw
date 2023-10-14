@@ -14,6 +14,6 @@ namespace qo
 		SceneManager::CreateScene<Stage1_2>(L"Stage1_2");
 		SceneManager::CreateScene<Stage1_3>(L"Stage1_3");
 
-		SceneManager::LoadScene(L"Stage1_3");
+		SceneManager::LoadScene(L"Stage1_1");
 	}
 }

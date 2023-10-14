@@ -187,21 +187,6 @@ namespace qo
 	{
 		Damaged(DamageAmount);
 
-		// Player Dead시 Scene 재시작
-		if (GetCurHP() <= 0.f)
-		{
-			std::wstring SceneName = SceneManager::GetActiveScene()->GetName();
-
-			if (SceneName == L"Stage1_1")
-			{
-				SceneManager::ReStartScene<Stage1_1>(SceneName);
-			}
-			else if (SceneName == L"Stage1_2")
-			{
-				SceneManager::ReStartScene<Stage1_2>(SceneName);
-			}		
-		}
-
 		Rigidbody* rb = GetComponent<Rigidbody>();
 
 		if (rb != nullptr)
