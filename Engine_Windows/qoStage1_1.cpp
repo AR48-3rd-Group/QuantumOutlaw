@@ -24,6 +24,10 @@
 #include "qoInput.h"
 #include "qoSceneManager.h"
 
+#include "qoApplication.h"
+
+extern qo::Application application;
+
 namespace qo
 {
 	Stage1_1::Stage1_1()
@@ -59,6 +63,20 @@ namespace qo
 
 		AddGameObject(mPlayer, LAYER::PLAYER);
 		Camera::SetTarget(mPlayer);
+		#pragma endregion
+
+		#pragma region StageClear
+		GameObject* clearImage = new GameObject();
+		Transform* clearImageTransform = clearImage->AddComponent<Transform>();
+		clearImageTransform->SetPositionInPixels(application.GetWidth() / 2.f, -100.f, 0);
+		clearImageTransform->SetScaleInPixels(606, 103, 0);
+
+		MeshRenderer* clearImageRenderer = clearImage->AddComponent<MeshRenderer>();
+		clearImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		clearImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ClearShader1"));
+
+		clearImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(clearImage, LAYER::UI);
 		#pragma endregion
 
 		#pragma region Item
@@ -176,6 +194,7 @@ namespace qo
 		Trigger* SceneTrigger = new Trigger();
 		SceneTrigger->SetType(eTriggerType::SceneChanger);
 		SceneTrigger->SetSceneName(L"Stage1_2");
+		SceneTrigger->SetSceneClearImage1(clearImage);
 		CreateAndSetUpGameObject(SceneTrigger, TRIGGER, 6336, 352, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		#pragma endregion
 
@@ -209,6 +228,28 @@ namespace qo
 		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
 		AddGameObject(hpuiBG, LAYER::UI);
+
+		// 던전 진행도
+		GameObject* ProgressImage = new GameObject();
+		Transform* ProgressImageTransform = ProgressImage->AddComponent<Transform>();
+		ProgressImageTransform->SetPositionInPixels(1450.f, 850.f, 0);
+		ProgressImageTransform->SetScaleInPixels(300, 51, 0);
+
+		MeshRenderer* ProgressImageRenderer = ProgressImage->AddComponent<MeshRenderer>();
+		ProgressImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		ProgressImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ProgressShader"));
+
+		ProgressImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(ProgressImage, LAYER::UI);
+
+		GameObject* DungeonProcessUI1 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI1, enums::UI, 1400, 800, 32, 32, Vector4(1.f, 0.f, 0.f, 0.f));
+		DungeonProcessUI1->GetComponent<Transform>()->SetAffectedCamera(false);
+
+		GameObject* DungeonProcessUI2 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI2, enums::UI, 1500, 800, 32, 32, Vector4(1.f, 0.f, 0.f, 0.f));
+		DungeonProcessUI2->GetComponent<Transform>()->SetAffectedCamera(false);
+
 		#pragma endregion
 
 		#pragma region Managers

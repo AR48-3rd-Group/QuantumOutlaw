@@ -68,7 +68,7 @@ namespace qo
 		GameObject* ChamjalImage = new GameObject();
 		Transform* ChamjalTransform = ChamjalImage->AddComponent<Transform>();
 		ChamjalTransform->SetPositionInPixels(application.GetWidth() / 2.f, application.GetHeight() / 2.f + 60 , 0);
-		ChamjalTransform->SetScaleInPixels(static_cast<float>(application.GetWidth()), application.GetHeight() * 0.9f, 0);
+		ChamjalTransform->SetScaleInPixels(494, 85, 0);
 
 		MeshRenderer* ChamjalRenderer = ChamjalImage->AddComponent<MeshRenderer>();
 		ChamjalRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
@@ -85,6 +85,30 @@ namespace qo
 
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
+		#pragma endregion
+
+        #pragma region UI
+		// 던전 진행도
+		GameObject* ProgressImage = new GameObject();
+		Transform* ProgressImageTransform = ProgressImage->AddComponent<Transform>();
+		ProgressImageTransform->SetPositionInPixels(1450.f, 850.f, 0);
+		ProgressImageTransform->SetScaleInPixels(300, 51, 0);
+
+		MeshRenderer* ProgressImageRenderer = ProgressImage->AddComponent<MeshRenderer>();
+		ProgressImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		ProgressImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ProgressShader"));
+
+		ProgressImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(ProgressImage, LAYER::UI);
+
+		GameObject* DungeonProcessUI1 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI1, enums::UI, 1400, 800, 32, 32, Vector4(0.f, 1.f, 0.f, 0.f));
+		DungeonProcessUI1->GetComponent<Transform>()->SetAffectedCamera(false);
+
+		GameObject* DungeonProcessUI2 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI2, enums::UI, 1500, 800, 32, 32, Vector4(0.f, 1.f, 0.f, 0.f));
+		DungeonProcessUI2->GetComponent<Transform>()->SetAffectedCamera(false);
+
 		#pragma endregion
 	}
 

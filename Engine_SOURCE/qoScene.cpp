@@ -83,6 +83,9 @@ namespace qo
 		case LAYER::TRIGGER:
 			AddGameObject(object, LAYER::TRIGGER);
 			break;
+		case LAYER::UI:
+			AddGameObject(object, LAYER::UI);
+			break;
 		}
 	}
 }
