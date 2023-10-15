@@ -24,6 +24,21 @@ namespace qo
 	void Trigger::Update()
 	{
 		GameObject::Update();
+
+		// Dead Object Á¦¿Ü
+		std::vector<GameObject*>::iterator iter = mEnemies.begin();
+
+		for (; iter != mEnemies.end();)
+		{
+			if ((*iter)->GetGameObjectState() == GameObject::eState::Dead)
+			{
+				iter = mEnemies.erase(iter);
+			}
+			else
+			{
+				iter++;
+			}
+		}
 	}
 
 	void Trigger::LateUpdate()
@@ -50,7 +65,7 @@ namespace qo
 		{
 			for (size_t i = 0; i < mEnemies.size(); i++)
 			{
-				if (mEnemies[i] != nullptr)
+				if (mEnemies[i] != nullptr && mEnemies[i]->GetGameObjectState() != eState::Dead)
 					mEnemies[i]->GetComponent<Rigidbody>()->SetActive(true);
 			}
 		}
