@@ -24,8 +24,7 @@ namespace qo
 	{
 		GameObject::Update();
 
-
-		if (mTarget->GetGameObjectState() == eState::Dead)
+		if (mTarget != nullptr && mTarget->GetGameObjectState() == eState::Dead)
 		{
 			mTarget = nullptr;
 		}
