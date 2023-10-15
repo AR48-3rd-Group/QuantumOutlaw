@@ -22,6 +22,9 @@ namespace qo::renderer
 	Shader* ColorTestShader2 = nullptr;
 	Shader* TextureShader = nullptr;
 	Shader* ChamjalShader = nullptr;
+	Shader* ClearShader1 = nullptr;
+	Shader* ClearShader2 = nullptr;
+	Shader* ProgressShader = nullptr;
 
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
@@ -340,7 +343,7 @@ namespace qo::renderer
 		ChamjalShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
 		ChamjalShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
 		ChamjalShader->CreateSamplerState();
-		ChamjalShader->ResourceViewCreate(L"..\\Resources\\goodjob.png");
+		ChamjalShader->ResourceViewCreate(L"..\\Resources\\Level1.png");
 		ResourceManager::Insert(L"ChamjalShader", ChamjalShader);
 
 		GetDevice()->CreateInputLayout(
@@ -349,6 +352,48 @@ namespace qo::renderer
 			, ChamjalShader->GetVSCode()->GetBufferPointer()
 			, ChamjalShader->GetVSCode()->GetBufferSize()
 			, ChamjalShader->GetInputLayoutAddressOf());
+
+		// Clear Image1
+		ClearShader1->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ClearShader1->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ClearShader1->CreateSamplerState();
+		ClearShader1->ResourceViewCreate(L"..\\Resources\\StageClear1-1.png");
+		ResourceManager::Insert(L"ClearShader1", ClearShader1);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ClearShader1->GetVSCode()->GetBufferPointer()
+			, ClearShader1->GetVSCode()->GetBufferSize()
+			, ClearShader1->GetInputLayoutAddressOf());
+
+		// Clear Image2
+		ClearShader2->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ClearShader2->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ClearShader2->CreateSamplerState();
+		ClearShader2->ResourceViewCreate(L"..\\Resources\\StageClear1-2.png");
+		ResourceManager::Insert(L"ClearShader2", ClearShader2);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ClearShader2->GetVSCode()->GetBufferPointer()
+			, ClearShader2->GetVSCode()->GetBufferSize()
+			, ClearShader2->GetInputLayoutAddressOf());
+
+		// Progress Image
+		ProgressShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ProgressShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ProgressShader->CreateSamplerState();
+		ProgressShader->ResourceViewCreate(L"..\\Resources\\DungeonProgress.png");
+		ResourceManager::Insert(L"ProgressShader", ProgressShader);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ProgressShader->GetVSCode()->GetBufferPointer()
+			, ProgressShader->GetVSCode()->GetBufferSize()
+			, ProgressShader->GetInputLayoutAddressOf());
 	}
 
 	void Initialize()
@@ -366,6 +411,9 @@ namespace qo::renderer
 		ColorTestShader2 = new Shader();
 		TextureShader = new Shader();
 		ChamjalShader = new Shader();
+		ClearShader1 = new Shader();
+		ClearShader2 = new Shader();
+		ProgressShader = new Shader();
 
 		LoadShader();
 		SetUpStates();

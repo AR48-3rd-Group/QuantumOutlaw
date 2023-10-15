@@ -23,6 +23,10 @@
 #include "qoInput.h"
 #include "qoSceneManager.h"
 
+#include "qoApplication.h"
+
+extern qo::Application application;
+
 namespace qo
 {
 	Stage1_2::Stage1_2()
@@ -93,6 +97,27 @@ namespace qo
 		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
 		AddGameObject(hpuiBG, LAYER::UI);
+
+		// 던전 진행도
+		GameObject* ProgressImage = new GameObject();
+		Transform* ProgressImageTransform = ProgressImage->AddComponent<Transform>();
+		ProgressImageTransform->SetPositionInPixels(1450.f, 850.f, 0);
+		ProgressImageTransform->SetScaleInPixels(300, 51, 0);
+
+		MeshRenderer* ProgressImageRenderer = ProgressImage->AddComponent<MeshRenderer>();
+		ProgressImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		ProgressImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ProgressShader"));
+
+		ProgressImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(ProgressImage, LAYER::UI);
+
+		GameObject* DungeonProcessUI1 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI1, enums::UI, 1400, 800, 32, 32, Vector4(0.f, 1.f, 0.f, 0.f));
+		DungeonProcessUI1->GetComponent<Transform>()->SetAffectedCamera(false);
+
+		GameObject* DungeonProcessUI2 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI2, enums::UI, 1500, 800, 32, 32, Vector4(1.f, 0.f, 0.f, 0.f));
+		DungeonProcessUI2->GetComponent<Transform>()->SetAffectedCamera(false);
 		#pragma endregion
 
 		#pragma region Item
@@ -174,6 +199,20 @@ namespace qo
 			EnemyLabTurret[i]->Initialize();
 		}
 
+		#pragma endregion
+
+		#pragma region StageClear
+		GameObject* clearImage = new GameObject();
+		Transform* clearImageTransform = clearImage->AddComponent<Transform>();
+		clearImageTransform->SetPositionInPixels(application.GetWidth() / 2.f, -100.f, 0);
+		clearImageTransform->SetScaleInPixels(626, 97, 0);
+
+		MeshRenderer* clearImageRenderer = clearImage->AddComponent<MeshRenderer>();
+		clearImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		clearImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ClearShader2"));
+
+		clearImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(clearImage, LAYER::UI);
 		#pragma endregion
 
 		#pragma region Map Layout
@@ -388,6 +427,7 @@ namespace qo
 		Trigger* SceneTrigger = new Trigger();
 		SceneTrigger->SetType(eTriggerType::SceneChanger);
 		SceneTrigger->SetSceneName(L"Stage1_3");
+		SceneTrigger->SetSceneClearImage2(clearImage);
 		CreateAndSetUpGameObject(SceneTrigger, TRIGGER, 6336, 2400, 128, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		UINT enemyCount = 17;
@@ -399,7 +439,7 @@ namespace qo
 			EnemyFallTrigger[i]->SetEnemyObject(EnemyLabGuard[enemyCount++]);
 		}
 
-		CreateAndSetUpGameObject(EnemyFallTrigger[0], TRIGGER, 1776, 2256, 64, 64, Vector4(1.f, 0.2f, 0.2f, 1.0f));
+		CreateAndSetUpGameObject(EnemyFallTrigger[0], TRIGGER, 1776, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
 		CreateAndSetUpGameObject(EnemyFallTrigger[1], TRIGGER, 2266.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
 		CreateAndSetUpGameObject(EnemyFallTrigger[2], TRIGGER, 2762.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
 		CreateAndSetUpGameObject(EnemyFallTrigger[3], TRIGGER, 3290.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));

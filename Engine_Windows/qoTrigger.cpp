@@ -4,11 +4,19 @@
 #include "qoPlayer.h"
 #include "qoElevator.h"
 #include "qoSceneManager.h"
+#include "qoTime.h"
+#include "qoTransform.h"
 
 namespace qo
 {
 	Trigger::Trigger()
 		: mType(eTriggerType::None)
+		, mSceneClearImage1(nullptr)
+		, mSceneClearImage2(nullptr)
+		, mSceneClearImage3(nullptr)
+		, mSceneImageIdx(0)
+		, mCheckTime(0.f)
+		, mCheck(false)
 	{
 	}
 
@@ -39,6 +47,45 @@ namespace qo
 				iter++;
 			}
 		}
+
+		if (mSceneImageIdx == 1)
+		{
+			if (mCheckTime >= 1.5f && !mCheck)
+			{
+				SceneManager::LoadScene(mSceneName);
+				mCheck = false;
+			}
+
+			Vector3 pos = mSceneClearImage1->GetComponent<Transform>()->GetPosition();
+			if (pos.y<=0.5f)
+			{
+				pos.y += Time::DeltaTime() * 10.f;
+				mSceneClearImage1->GetComponent<Transform>()->SetPosition(pos);
+			}
+			else
+			{
+				mCheckTime += Time::DeltaTime();
+			}
+		}
+		else if (mSceneImageIdx == 2)
+		{
+			if (mCheckTime >= 1.5f && !mCheck)
+			{
+				SceneManager::LoadScene(mSceneName);
+				mCheck = false;
+			}
+
+			Vector3 pos = mSceneClearImage2->GetComponent<Transform>()->GetPosition();
+			if (pos.y <= 0.5f)
+			{
+				pos.y += Time::DeltaTime() * 10.f;
+				mSceneClearImage2->GetComponent<Transform>()->SetPosition(pos);
+			}
+			else
+			{
+				mCheckTime += Time::DeltaTime();
+			}
+		}
 	}
 
 	void Trigger::LateUpdate()
@@ -59,8 +106,17 @@ namespace qo
 		if (player == nullptr && elvator == nullptr)
 			return;
 
-		if(mType==eTriggerType::SceneChanger)
-			SceneManager::LoadScene(mSceneName);
+		if (mType == eTriggerType::SceneChanger)
+		{
+			if (mSceneName == L"Stage1_2")
+			{
+				mSceneImageIdx = 1;
+			}
+			else if (mSceneName == L"Stage1_3")
+			{
+				mSceneImageIdx = 2;
+			}
+		}
 		else if (mType == eTriggerType::EnemyFall)
 		{
 			for (size_t i = 0; i < mEnemies.size(); i++)

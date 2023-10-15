@@ -57,6 +57,9 @@ namespace qo::renderer
 	extern Shader* CircleShader;
 	extern Shader* TextureShader;
 	extern Shader* ChamjalShader;
+	extern Shader* ClearShader1;
+	extern Shader* ClearShader2;
+	extern Shader* ProgressShader;
 
 	// Basic Collider
 	extern Mesh* BasicRectangleMesh;
