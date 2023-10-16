@@ -8,13 +8,24 @@
 #include "qoRigidbody.h"
 #include "qoPlayerScript.h"
 #include "qoPlayer.h"
-#include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
 #include "qoGunItem.h"
 #include "qoHPUI.h"
 #include "qoHPUIBackGround.h"
 #include "qoHPUIScript.h"
+#include "qoTrigger.h"
+#include "qoLabGuard.h"
+#include "qoLabTurret.h"
+#include "qoLabGuardScript.h"
+#include "qoLabTurretScript.h"
+
+#include "qoInput.h"
+#include "qoSceneManager.h"
+
+#include "qoApplication.h"
+
+extern qo::Application application;
 
 namespace qo
 {
@@ -36,8 +47,8 @@ namespace qo
 		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
-		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
+		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));
 
 		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
@@ -48,7 +59,6 @@ namespace qo
 
 		// 총 생성
 		mPlayer->AddGun(eGunType::Superposition);
-		mPlayer->AddGun(eGunType::Teleportation);
 		mPlayer->ChangeActiveGun(eGunType::Superposition);
 
 		mPlayer->Initialize();
@@ -87,11 +97,122 @@ namespace qo
 		hpuiMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
 		AddGameObject(hpuiBG, LAYER::UI);
+
+		// 던전 진행도
+		GameObject* ProgressImage = new GameObject();
+		Transform* ProgressImageTransform = ProgressImage->AddComponent<Transform>();
+		ProgressImageTransform->SetPositionInPixels(1450.f, 850.f, 0);
+		ProgressImageTransform->SetScaleInPixels(300, 51, 0);
+
+		MeshRenderer* ProgressImageRenderer = ProgressImage->AddComponent<MeshRenderer>();
+		ProgressImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		ProgressImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ProgressShader"));
+
+		ProgressImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(ProgressImage, LAYER::UI);
+
+		GameObject* DungeonProcessUI1 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI1, enums::UI, 1400, 800, 32, 32, Vector4(0.f, 1.f, 0.f, 0.f));
+		DungeonProcessUI1->GetComponent<Transform>()->SetAffectedCamera(false);
+
+		GameObject* DungeonProcessUI2 = new GameObject();
+		CreateAndSetUpGameObject(DungeonProcessUI2, enums::UI, 1500, 800, 32, 32, Vector4(1.f, 0.f, 0.f, 0.f));
+		DungeonProcessUI2->GetComponent<Transform>()->SetAffectedCamera(false);
 		#pragma endregion
 
 		#pragma region Item
 		GunItem* gunItem = new GunItem(eGunType::Entanglement);
 		CreateAndSetUpGameObject(gunItem, ITEM, 1200, 300, 100, 100, gunItem->GetColor());
+
+		GunItem* gunItem2 = new GunItem(eGunType::Teleportation);
+		CreateAndSetUpGameObject(gunItem2, ITEM, 6222, 190, 100, 100, gunItem2->GetColor());
+		#pragma endregion
+
+		#pragma region Enemy
+		// 객체 할당
+		for (size_t i = 0; i < LabGuardCount; i++)	EnemyLabGuard[i] = new LabGuard();
+		for (size_t i = 0; i < LabTurretCount; i++)	EnemyLabTurret[i] = new LabTurret();
+
+		// 객체 생성 정보 추가
+		// 위치 및 색상
+		CreateAndSetUpGameObject(EnemyLabGuard[0], ENEMY, 1376, 180, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[1], ENEMY, 2276, 192, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[2], ENEMY, 2594, 192, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[3], ENEMY, 1832, 322, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[4], ENEMY, 2432, 576, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[5], ENEMY, 3552, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[6], ENEMY, 3840, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[7], ENEMY, 4096, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[8], ENEMY, 4384, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[9], ENEMY, 5040, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[10], ENEMY, 5744, 704, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[11], ENEMY, 4448, 1472, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[12], ENEMY, 4416, 1728, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[13], ENEMY, 4672, 1728, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[14], ENEMY, 3032, 1472, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[15], ENEMY, 2288, 1472, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[16], ENEMY, 632, 1664, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[17], ENEMY, 1680, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[18], ENEMY, 1872, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[19], ENEMY, 2170.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[20], ENEMY, 2362.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[21], ENEMY, 2666.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[22], ENEMY, 2858.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[23], ENEMY, 3194.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[24], ENEMY, 3386.5, 2500, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[25], ENEMY, 5936, 2944, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[26], ENEMY, 480, 768, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabGuard[27], ENEMY, 1186, 768, 100, 100, Vector4(1.f, 0.f, 0.f, 0.f));
+
+		CreateAndSetUpGameObject(EnemyLabTurret[0], ENEMY, 3792, 864, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[1], ENEMY, 4416, 864, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[2], ENEMY, 96, 896, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[3], ENEMY, 96, 768, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[4], ENEMY, 5806, 1824, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[5], ENEMY, 3952, 1632, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[6], ENEMY, 3248, 1632, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[7], ENEMY, 2223, 1632, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[8], ENEMY, 1968, 2528, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[9], ENEMY, 2479.5, 2528, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[10], ENEMY, 2992, 2528, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+		CreateAndSetUpGameObject(EnemyLabTurret[11], ENEMY, 3504, 2528, 64, 64, Vector4(1.f, 1.f, 0.f, 0.f));
+
+		// Script 및 Rigidbody 추가 SetPlayer 적용
+		for (size_t i = 0; i < LabGuardCount; i++)
+		{
+			EnemyLabGuard[i]->AddComponent<LabGuardScript>();
+			EnemyLabGuard[i]->AddComponent<Rigidbody>();
+			EnemyLabGuard[i]->SetPlayer(mPlayer);
+			EnemyLabGuard[i]->Initialize();
+		}
+
+		for (size_t i = 17; i < 25; i++)
+		{
+			EnemyLabGuard[i]->GetComponent<Rigidbody>()->SetActive(false);
+		}
+
+		for (size_t i = 0; i < LabTurretCount; i++)
+		{
+			EnemyLabTurret[i]->AddComponent<LabTurretScript>();
+			EnemyLabTurret[i]->AddComponent<Rigidbody>()->SetActive(false);
+			EnemyLabTurret[i]->SetPlayer(mPlayer);
+			EnemyLabTurret[i]->Initialize();
+		}
+
+		#pragma endregion
+
+		#pragma region StageClear
+		GameObject* clearImage = new GameObject();
+		Transform* clearImageTransform = clearImage->AddComponent<Transform>();
+		clearImageTransform->SetPositionInPixels(application.GetWidth() / 2.f, -100.f, 0);
+		clearImageTransform->SetScaleInPixels(626, 97, 0);
+
+		MeshRenderer* clearImageRenderer = clearImage->AddComponent<MeshRenderer>();
+		clearImageRenderer->SetMesh(ResourceManager::Find<Mesh>(L"ChamjalMesh"));
+		clearImageRenderer->SetShader(ResourceManager::Find<Shader>(L"ClearShader2"));
+
+		clearImage->GetComponent<Transform>()->SetAffectedCamera(false);
+		AddGameObject(clearImage, LAYER::UI);
 		#pragma endregion
 
 		#pragma region Map Layout
@@ -231,7 +352,7 @@ namespace qo
 		// 개체 생성
 		CreateAndSetUpGameObject(EventBarrier[0], WALL, 6176, 1792, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventBarrier[1], WALL, 1312, 832, 64, 256, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventBarrier[2], WALL, 6176, 2944, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventBarrier[2], WALL, 6176, 2976, 64, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//				이벤트 스위치 개체
@@ -245,7 +366,7 @@ namespace qo
 		CreateAndSetUpGameObject(EventButton[3], WALL, 432, 1696, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventButton[4], WALL, 976, 2400, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 		CreateAndSetUpGameObject(EventButton[5], WALL, 4910, 2432, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
-		CreateAndSetUpGameObject(EventButton[6], WALL, 6304, 3008, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+		CreateAndSetUpGameObject(EventButton[6], WALL, 6304, 2976, 64, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 		//--------------------------------------------------------
 		//					잠긴 문 개체
@@ -271,8 +392,8 @@ namespace qo
 		EventElevator[1]->SetTimer(2.0f);
 		EventElevator[2]->SetTimer(2.0f);
 		EventElevator[3]->SetTimer(3.0f);
-		EventElevator[4]->SetTimer(12.0f);
-		EventElevator[5]->SetTimer(3.4f);
+		EventElevator[4]->SetTimer(12.565f);
+		EventElevator[5]->SetTimer(3.0f);
 
 		EventElevator[0]->SetTag(1);
 		EventElevator[1]->SetTag(2);
@@ -282,13 +403,12 @@ namespace qo
 
 		EventElevator[2]->SetActive(true);
 
-		EventElevator[0]->SetRange(450);
+		EventElevator[0]->SetRange(360);
 		EventElevator[1]->SetRange(384);
 		EventElevator[2]->SetRange(384);
-		EventElevator[3]->SetRange(640);
-		//EventElevator[4]->SetRange(2816);
-		EventElevator[4]->SetRange(512);
-		EventElevator[5]->SetRange(512);
+		EventElevator[3]->SetRange(430);
+		EventElevator[4]->SetRange(448);
+		EventElevator[5]->SetRange(344);
 
 		// 개체 생성
 		CreateAndSetUpGameObject(EventElevator[0], WALL, 4608, 160, 192, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
@@ -299,14 +419,48 @@ namespace qo
 		CreateAndSetUpGameObject(EventElevator[5], WALL, 4672, 2336, 256, 64, Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
 
+		//--------------------------------------------------------
+		//					트리거
+		//--------------------------------------------------------
+
+		#pragma region Trigger
+		Trigger* SceneTrigger = new Trigger();
+		SceneTrigger->SetType(eTriggerType::SceneChanger);
+		SceneTrigger->SetSceneName(L"Stage1_3");
+		SceneTrigger->SetSceneClearImage2(clearImage);
+		CreateAndSetUpGameObject(SceneTrigger, TRIGGER, 6336, 2400, 128, 192, Vector4(0.5f, 0.5f, 0.5f, 0.f));
+
+		UINT enemyCount = 17;
+		for (size_t i = 0; i < EnemyFallTriggerCount; i++)
+		{
+			EnemyFallTrigger[i] = new Trigger();
+			EnemyFallTrigger[i]->SetType(eTriggerType::EnemyFall);
+			EnemyFallTrigger[i]->SetEnemyObject(EnemyLabGuard[enemyCount++]);
+			EnemyFallTrigger[i]->SetEnemyObject(EnemyLabGuard[enemyCount++]);
+		}
+
+		CreateAndSetUpGameObject(EnemyFallTrigger[0], TRIGGER, 1776, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
+		CreateAndSetUpGameObject(EnemyFallTrigger[1], TRIGGER, 2266.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
+		CreateAndSetUpGameObject(EnemyFallTrigger[2], TRIGGER, 2762.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
+		CreateAndSetUpGameObject(EnemyFallTrigger[3], TRIGGER, 3290.5, 2256, 64, 64, Vector4(0.2f, 0.2f, 0.2f, 1.0f));
+		
+		#pragma endregion
+
 		#pragma endregion
 
 		#pragma region Managers
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::ITEM, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::BULLET, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::ENEMY, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::FLOOR, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::WALL, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::ENEMY, LAYER::PLAYER, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::WALL, LAYER::TRIGGER, TRUE);
+		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::TRIGGER, TRUE);
 		#pragma endregion
 	}
 
@@ -326,6 +480,12 @@ namespace qo
 	void Stage1_2::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (mPlayer->GetCurHP() <= 0.f
+			|| Input::GetKeyState(KEY_CODE::L) == KEY_STATE::DOWN)
+		{
+			SceneManager::ReStartScene<Stage1_2>(GetName());
+		}
 	}
 
 	void Stage1_2::Render()

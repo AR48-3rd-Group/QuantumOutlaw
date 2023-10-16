@@ -4,6 +4,7 @@
 namespace qo
 {
     Mesh::Mesh()
+        :mbufferType(buffertype::Vertex)
     {
     }
 
@@ -16,9 +17,9 @@ namespace qo
         return E_NOTIMPL;
     }
 
-    bool Mesh::CreateVertexBuffer(void* data, UINT Count)
+    bool Mesh::CreateVertexBuffer(void* data, UINT Count, unsigned long long Size)
     {
-        mVBDesc.ByteWidth = sizeof(renderer::Vertex) * Count;
+        mVBDesc.ByteWidth = static_cast<UINT>(Size * Count);
         mVBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
         mVBDesc.Usage = D3D11_USAGE_DEFAULT;
         mVBDesc.CPUAccessFlags = 0;
@@ -51,11 +52,25 @@ namespace qo
 
     void Mesh::BindBuffer()
     {
-        UINT stride = sizeof(renderer::Vertex);
+       /* UINT stride = sizeof(renderer::Vertex);
         UINT offset = 0;
 
         GetDevice()->BindVertexBuffer(0, 1, mVertexBuffer.GetAddressOf(), stride, offset);
-        GetDevice()->BindIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+        GetDevice()->BindIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);*/
+        if (mbufferType == buffertype::Vertex)
+        {
+            UINT stride = sizeof(renderer::Vertex);
+            UINT offset = 0;
+            GetDevice()->BindVertexBuffer(0, 1, mVertexBuffer.GetAddressOf(), stride, offset);
+            GetDevice()->BindIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+        }
+        else if (mbufferType == buffertype::Texture)
+        {
+            UINT stride = sizeof(renderer::TextureVertex);
+            UINT offset = 0;
+            GetDevice()->BindVertexBuffer(0, 1, mVertexBuffer.GetAddressOf(), stride, offset);
+            GetDevice()->BindIndexBuffer(mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+        }
 
         /*Vector4 pos(0.5f, 0.2f, 0.0f, 0.0f);
         GetDevice()->BindConstantBuffer(mConstantBuffer.Get(), &pos, sizeof(Vector4));*/

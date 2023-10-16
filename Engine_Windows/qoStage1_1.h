@@ -1,10 +1,14 @@
 #pragma once
 #include "..\\Engine_SOURCE\\qoScene.h"
 #include "ArchitectureInclude.h"
+#include "qoGameObject.h"
 
 namespace qo
 {
 	class Player;
+	class LabGuard;
+	class LabTurret;
+	class Trigger;
 	class Stage1_1 : public Scene
 	{
 	public:
@@ -22,8 +26,11 @@ namespace qo
 		void Exit() override;
 
 	private:
+		static const int LabGuardCount = 7;
+		LabGuard* EnemyLabGuard[LabGuardCount];
+
 		Player* mPlayer;
-		DoorSwitch* OpenSwitch;
-		LockedDoor* Goal;
+		EventSwitch* EventButton;
+		LockedDoor* EventDoor;
 	};
 }

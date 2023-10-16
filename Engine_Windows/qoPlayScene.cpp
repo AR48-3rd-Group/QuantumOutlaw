@@ -12,6 +12,8 @@
 #include "qofloor.h"
 #include "qoRigidbody.h"
 #include "qoCamera.h"
+#include "qoLabGuard.h"
+#include "qoLabGuardScript.h"
 
 #include "qoLabTurret.h"
 #include "qoLabGuard.h"
@@ -20,13 +22,14 @@
 #include "qoHPUIScript.h"
 #include "qoHPUIBackGround.h"
 
+#include "qoSceneManager.h"
+
 namespace qo
 {
 	PlayScene::PlayScene()
 		: mPlayer(nullptr)
 	{
 	}
-
 
 	PlayScene::~PlayScene()
 	{
@@ -39,11 +42,11 @@ namespace qo
 		Transform* PlayerTransform = mPlayer->AddComponent<Transform>();
 		PlayerTransform->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		PlayerTransform->SetScale(Vector3(0.1f, 0.3f, 0.f));
-		PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
+		//PlayerTransform->SetColor(Vector4(0.f, 0.f, 1.f, 0.f));
 
 		MeshRenderer* PlayerMeshRenderer = mPlayer->AddComponent<MeshRenderer>();
-		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
-		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));	
+		PlayerMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"TextureMesh"));
+		PlayerMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"TextureShader"));	
 
 		Collider* PlayerCollider = mPlayer->AddComponent<Collider>();
 		PlayerCollider->SetScale(PlayerTransform->GetScale());
@@ -83,20 +86,20 @@ namespace qo
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::FLOOR, TRUE);
 
 		// 스위치 개체 생성
-		doorswitch = new DoorSwitch();
-		Transform* DSTransform = doorswitch->AddComponent<Transform>();
+		eventSwitch = new EventSwitch();
+		Transform* DSTransform = eventSwitch->AddComponent<Transform>();
 		DSTransform->SetPositionInPixels(-500, 200, 0);
 		DSTransform->SetScaleInPixels(400, 400, 0);
 		DSTransform->SetColor(Vector4(0.5f, 0.5f, 0.5f, 0.f));
 
-		MeshRenderer* DSMeshRenderer = doorswitch->AddComponent<MeshRenderer>();
+		MeshRenderer* DSMeshRenderer = eventSwitch->AddComponent<MeshRenderer>();
 		DSMeshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"RectangleMesh"));
 		DSMeshRenderer->SetShader(ResourceManager::Find<Shader>(L"ColorTestShader"));
 
-		Collider* DSCollider = doorswitch->AddComponent<Collider>();
+		Collider* DSCollider = eventSwitch->AddComponent<Collider>();
 		DSCollider->SetScale(DSTransform->GetScale());
 
-		AddGameObject(doorswitch, LAYER::WALL);
+		AddGameObject(eventSwitch, LAYER::WALL);
 
 		CollisionManager::CollisionLayerCheck(LAYER::PLAYER, LAYER::WALL, TRUE);
 		CollisionManager::CollisionLayerCheck(LAYER::BULLET, LAYER::WALL, TRUE);
@@ -191,7 +194,7 @@ namespace qo
 	{
 		Scene::Update();
 
-		if (doorswitch->GetSwitch())
+		if (eventSwitch->GetEventActive())
 		{
 			lockeddoor->SetLocked(false);
 		}
@@ -199,6 +202,7 @@ namespace qo
 
 	void PlayScene::LateUpdate()
 	{
+		Scene* scene = SceneManager::GetActiveScene();
 		Scene::LateUpdate();
 	}
 

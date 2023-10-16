@@ -41,6 +41,7 @@ namespace qo
 
 		if (bullet != nullptr)
 		{
+			GetComponent<Transform>()->SetColor(Vector4(1.f, 0.f, 0.f, 1.f));
 			SetEventActive(true);
 		}
 	}

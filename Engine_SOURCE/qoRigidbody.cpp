@@ -12,9 +12,10 @@ namespace qo
 		, mVelocity(math::Vector3(0.f, 0.f, 0.f))
 		, mAccelation(math::Vector3(0.f, 0.f, 0.f))
 		, mForce(math::Vector3(0.f, 0.f, 0.f))
-		, mfFriction(0.001f)
+		, mfFriction(0.5f)
 		, mCoefficient(0.002f)
 		, mbGround(false)
+		, mbActive(true)
 	{
 		mGravity = math::Vector3(0.f, 2.5f, 0.f);
 		mMaxGravity = math::Vector3(10.f, 10.f,0.f);
@@ -30,6 +31,9 @@ namespace qo
 
 	void Rigidbody::Update()
 	{
+		if (!mbActive)
+			return;
+
 		mAccelation = mForce / mfMass;
 
 		mVelocity += math::Vector3(mAccelation.x * Time::DeltaTime(), mAccelation.y * Time::DeltaTime(), 0.f);

@@ -56,5 +56,7 @@ namespace qo
 	private:
 		static Scene* mActiveScene;
 		static std::map<std::wstring, Scene*> mScenes;
+
+		static bool mbRender;
 	};
 }

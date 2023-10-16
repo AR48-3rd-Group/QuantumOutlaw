@@ -10,6 +10,10 @@
 #include "qoSuperpositionGunScript.h"
 #include "qoEntanglementGunScript.h"
 #include "qoTeleportationGunScript.h"
+#include "qoRigidbody.h"
+#include "qoSceneManager.h"
+#include "qoStage1_1.h"
+#include "qoStage1_2.h"
 
 namespace qo
 {
@@ -23,6 +27,7 @@ namespace qo
 		, mMoveSpeed(0.5f)
 		, mJumpPower(1.5f)
 		, mDashPower(1.f)
+		, mbGodMode(false)
 	{
 	}
 
@@ -98,7 +103,7 @@ namespace qo
 		// ================================
 		if (type == eGunType::Superposition)
 		{
-			SuperpositionGun* gun = new SuperpositionGun(this, 10);
+			SuperpositionGun* gun = new SuperpositionGun(this, 200);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -120,7 +125,7 @@ namespace qo
 		}
 		else if(type == eGunType::Entanglement)
 		{
-			EntanglementGun* gun = new EntanglementGun(this, 10);
+			EntanglementGun* gun = new EntanglementGun(this, 100);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -142,7 +147,7 @@ namespace qo
 		}
 		else if (type == eGunType::Teleportation)
 		{
-			TeleportationGun* gun = new TeleportationGun(this, 10);
+			TeleportationGun* gun = new TeleportationGun(this, 3);
 			Vector3 GunPos = PlayerPos + Vector3(0.2f, 0.f, 0.f);
 
 			Transform* GunTransform = gun->AddComponent<Transform>();
@@ -181,5 +186,15 @@ namespace qo
 
 	void Player::TakeHit(int DamageAmount, math::Vector3 HitDir)
 	{
+		if (mbGodMode) return;
+
+		Damaged(DamageAmount);
+
+		Rigidbody* rb = GetComponent<Rigidbody>();
+
+		if (rb != nullptr)
+		{
+			rb->AddVelocity(HitDir * 0.5f);
+		}
 	}
 }

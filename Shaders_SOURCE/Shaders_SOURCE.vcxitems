@@ -20,4 +20,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CircleVS.hlsl" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CirclePS.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)TexturePS.hlsl" />
+    <FxCompile Include="$(MSBuildThisFileDirectory)TextureVS.hlsl" />
+  </ItemGroup>
 </Project>

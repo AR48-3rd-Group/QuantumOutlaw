@@ -41,7 +41,7 @@ namespace qo
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
 		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());
-		DoorSwitch* doorSwitch = dynamic_cast<DoorSwitch*> (other->GetOwner());
+		EventSwitch* eventSwitch = dynamic_cast<EventSwitch*> (other->GetOwner());
 		
 		// SuperpositionBullet 특수효과 
 		//DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
@@ -52,8 +52,16 @@ namespace qo
 			&& floor == nullptr
 			&& wall == nullptr
 			&& lockedDoor == nullptr
-			&& doorSwitch == nullptr)
+			&& eventSwitch == nullptr)
 			return;
+
+		// Enemy 피격 처리
+		if (enemy != nullptr)
+		{
+			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			enemy->TakeHit(10, Dir);
+		}
 
 		Destroy(this);
 	}

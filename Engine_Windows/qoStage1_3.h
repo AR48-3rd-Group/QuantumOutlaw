@@ -1,15 +1,14 @@
 #pragma once
-#include "..\\Engine_SOURCE\\qoScene.h"
-#include "ArchitectureInclude.h"
+#include "qoScene.h"
 
 namespace qo
 {
 	class Player;
-	class PlayScene : public Scene
+	class Stage1_3 : public Scene
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene();
+		Stage1_3();
+		virtual ~Stage1_3();
 
 		void Initialize() override;
 		void Update() override;
@@ -20,8 +19,8 @@ namespace qo
 		void Exit() override;
 
 	private:
-		EventSwitch* eventSwitch;
-		LockedDoor* lockeddoor;
-		Player*		mPlayer;
+		Player* mPlayer;
 	};
 }
+
+

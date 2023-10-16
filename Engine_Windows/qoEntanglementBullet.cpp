@@ -64,7 +64,7 @@ namespace qo
 				Vector3 compare = enemyobj->GetComponent<Transform>()->GetPosition();
 
 				long double Distance = sqrt(pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2) +
-					pow(static_cast<long double>(first.x) - static_cast<long double>(compare.x), 2));
+					pow(static_cast<long double>(first.y) - static_cast<long double>(compare.y), 2));
 
 				if (static_cast<long double>(min) > Distance)
 				{
@@ -80,6 +80,7 @@ namespace qo
 				Transform* tr = trackerBullet->AddComponent<Transform>();
 				tr->SetPosition(first); // 총알 시작위치는 총위치로 설정
 				tr->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+				tr->SetColor(Vector4(0.f, 0.f, 0.f, 0.f));
 
 				MeshRenderer* meshRenderer = trackerBullet->AddComponent<MeshRenderer>();
 				meshRenderer->SetMesh(ResourceManager::Find<Mesh>(L"CircleMesh"));
@@ -97,6 +98,11 @@ namespace qo
 				SceneManager::GetActiveScene()->AddGameObject(trackerBullet, LAYER::BULLET);
 			}
 
+			// Enemy 충돌 처리
+			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			enemy->TakeHit(10, Dir);
+
 			Destroy(this);
 			return;
 		}
@@ -104,7 +110,7 @@ namespace qo
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
 		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());
-		DoorSwitch* doorSwitch = dynamic_cast<DoorSwitch*> (other->GetOwner());
+		EventSwitch* eventSwitch = dynamic_cast<EventSwitch*> (other->GetOwner());
 		DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
 		Barrier* barrier = dynamic_cast<Barrier*> (other->GetOwner());
 
@@ -112,7 +118,7 @@ namespace qo
 		if (floor == nullptr
 			&& wall == nullptr
 			&& lockedDoor == nullptr
-			&& doorSwitch == nullptr
+			&& eventSwitch == nullptr
 			&& destuctibleWall == nullptr
 			&& barrier == nullptr)
 			return;

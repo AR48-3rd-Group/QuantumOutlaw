@@ -13,12 +13,19 @@ namespace qo::renderer
 	Mesh* RectangleMesh = nullptr;
 	Mesh* CircleMesh = nullptr;
 	Mesh* BasicRectangleMesh = nullptr;
+	Mesh* TextureMesh = nullptr;
+	Mesh* ChamjalMesh = nullptr;
 
 	Shader* shader = nullptr;
 	Shader* ColorTestShader = nullptr;
 	Shader* CircleShader = nullptr;
 	Shader* ColorTestShader2 = nullptr;
-	
+	Shader* TextureShader = nullptr;
+	Shader* ChamjalShader = nullptr;
+	Shader* ClearShader1 = nullptr;
+	Shader* ClearShader2 = nullptr;
+	Shader* ProgressShader = nullptr;
+
 	ConstantBuffer* constantBuffers[(UINT)graphics::eCBType::End];
 
 	void SetUpStates()
@@ -49,7 +56,7 @@ namespace qo::renderer
 		indexes.push_back(1);
 		indexes.push_back(2);
 
-		TriangleMesh->CreateVertexBuffer(vertices.data(), 3);
+		TriangleMesh->CreateVertexBuffer(vertices.data(), 3, sizeof(renderer::Vertex));
 		TriangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
 		ResourceManager::Insert(L"TriangleMesh", TriangleMesh);
 
@@ -92,7 +99,7 @@ namespace qo::renderer
 		//indexes.push_back(2);
 		//indexes.push_back(1);
 
-		RectangleMesh->CreateVertexBuffer(vertices.data(), 4);
+		RectangleMesh->CreateVertexBuffer(vertices.data(), 4, sizeof(renderer::Vertex));
 		RectangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
 		ResourceManager::Insert(L"RectangleMesh", RectangleMesh);
 
@@ -123,7 +130,7 @@ namespace qo::renderer
 			indexes.push_back(i + 1);
 		}
 
-		CircleMesh->CreateVertexBuffer(vertices.data(), static_cast<UINT>(vertices.size()));
+		CircleMesh->CreateVertexBuffer(vertices.data(), static_cast<UINT>(vertices.size()), sizeof(renderer::Vertex));
 		CircleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
 		ResourceManager::Insert(L"CircleMesh", CircleMesh);
 
@@ -185,9 +192,68 @@ namespace qo::renderer
 		indexes.push_back(2);
 		indexes.push_back(1);
 
-		BasicRectangleMesh->CreateVertexBuffer(vertices.data(), 4);
+		BasicRectangleMesh->CreateVertexBuffer(vertices.data(), 4, sizeof(renderer::Vertex));
 		BasicRectangleMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
 		ResourceManager::Insert(L"BasicRectangleMesh", BasicRectangleMesh);
+
+		vertices.clear();
+		indexes.clear();
+
+		std::vector<TextureVertex> texturevertex;
+		texturevertex.resize(4);
+
+		texturevertex[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		texturevertex[0].uv = Vector2(0.f, 0.f);
+
+		texturevertex[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		texturevertex[1].uv = Vector2(1.f, 0.f);
+
+		texturevertex[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		texturevertex[2].uv = Vector2(1.f, 1.f);
+
+		texturevertex[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		texturevertex[3].uv = Vector2(0.f, 1.f);
+
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+
+		indexes.push_back(0);
+		indexes.push_back(2);
+		indexes.push_back(3);
+
+		TextureMesh->CreateVertexBuffer(texturevertex.data(), 4, sizeof(TextureVertex));
+		TextureMesh->SetBufferType(buffertype::Texture);
+		TextureMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"TextureMesh", TextureMesh);
+
+		vertices.clear();
+		indexes.clear();
+
+		texturevertex[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		texturevertex[0].uv = Vector2(0.f, 0.f);
+
+		texturevertex[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		texturevertex[1].uv = Vector2(1.f, 0.f);
+
+		texturevertex[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		texturevertex[2].uv = Vector2(1.f, 1.f);
+
+		texturevertex[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		texturevertex[3].uv = Vector2(0.f, 1.f);
+
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+
+		indexes.push_back(0);
+		indexes.push_back(2);
+		indexes.push_back(3);
+
+		ChamjalMesh->CreateVertexBuffer(texturevertex.data(), 4, sizeof(TextureVertex));
+		ChamjalMesh->SetBufferType(buffertype::Texture);
+		ChamjalMesh->CreateIndexBuffer(indexes.data(), static_cast<UINT>(indexes.size()));
+		ResourceManager::Insert(L"ChamjalMesh", ChamjalMesh);
 
 		vertices.clear();
 		indexes.clear();
@@ -229,7 +295,7 @@ namespace qo::renderer
 			ColorTestShader->GetVSCode()->GetBufferPointer()
 			, ColorTestShader->GetVSCode()->GetBufferSize()
 			, ColorTestShader->GetInputLayoutAddressOf());
-		
+
 		//
 		ColorTestShader2->Create(eShaderStage::VS, L"TriangleVS.hlsl", "ColorSetVS");
 		ColorTestShader2->Create(eShaderStage::PS, L"TrianglePS.hlsl", "PS");
@@ -244,13 +310,90 @@ namespace qo::renderer
 		// Circle Shader
 		CircleShader->Create(eShaderStage::VS, L"CircleVS.hlsl", "VS");
 		CircleShader->Create(eShaderStage::PS, L"CirclePS.hlsl", "PS");
-		CircleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST); 
+		CircleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		ResourceManager::Insert(L"CircleShader", CircleShader);
 
 		GetDevice()->CreateInputLayout(InputLayouts, 2,
 			CircleShader->GetVSCode()->GetBufferPointer()
 			, CircleShader->GetVSCode()->GetBufferSize()
 			, CircleShader->GetInputLayoutAddressOf());
+
+
+		// Texture Shader
+		TextureShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		TextureShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		TextureShader->CreateSamplerState();
+		TextureShader->ResourceViewCreate(L"..\\Resources\\NPC_Commander0.png");
+		ResourceManager::Insert(L"TextureShader", TextureShader);
+
+		D3D11_INPUT_ELEMENT_DESC inputElementDesc2[] =
+		{
+			{"POSITION",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0},
+			{"TEXCOORD",0,DXGI_FORMAT_R32G32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0}
+		};
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, TextureShader->GetVSCode()->GetBufferPointer()
+			, TextureShader->GetVSCode()->GetBufferSize()
+			, TextureShader->GetInputLayoutAddressOf());
+
+		// Chamjal Shader
+		ChamjalShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ChamjalShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ChamjalShader->CreateSamplerState();
+		ChamjalShader->ResourceViewCreate(L"..\\Resources\\Level1.png");
+		ResourceManager::Insert(L"ChamjalShader", ChamjalShader);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ChamjalShader->GetVSCode()->GetBufferPointer()
+			, ChamjalShader->GetVSCode()->GetBufferSize()
+			, ChamjalShader->GetInputLayoutAddressOf());
+
+		// Clear Image1
+		ClearShader1->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ClearShader1->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ClearShader1->CreateSamplerState();
+		ClearShader1->ResourceViewCreate(L"..\\Resources\\StageClear1-1.png");
+		ResourceManager::Insert(L"ClearShader1", ClearShader1);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ClearShader1->GetVSCode()->GetBufferPointer()
+			, ClearShader1->GetVSCode()->GetBufferSize()
+			, ClearShader1->GetInputLayoutAddressOf());
+
+		// Clear Image2
+		ClearShader2->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ClearShader2->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ClearShader2->CreateSamplerState();
+		ClearShader2->ResourceViewCreate(L"..\\Resources\\StageClear1-2.png");
+		ResourceManager::Insert(L"ClearShader2", ClearShader2);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ClearShader2->GetVSCode()->GetBufferPointer()
+			, ClearShader2->GetVSCode()->GetBufferSize()
+			, ClearShader2->GetInputLayoutAddressOf());
+
+		// Progress Image
+		ProgressShader->Create(eShaderStage::VS, L"TextureVS.hlsl", "VS");
+		ProgressShader->Create(eShaderStage::PS, L"TexturePS.hlsl", "PS");
+		ProgressShader->CreateSamplerState();
+		ProgressShader->ResourceViewCreate(L"..\\Resources\\DungeonProgress.png");
+		ResourceManager::Insert(L"ProgressShader", ProgressShader);
+
+		GetDevice()->CreateInputLayout(
+			inputElementDesc2
+			, ARRAYSIZE(inputElementDesc2)
+			, ProgressShader->GetVSCode()->GetBufferPointer()
+			, ProgressShader->GetVSCode()->GetBufferSize()
+			, ProgressShader->GetInputLayoutAddressOf());
 	}
 
 	void Initialize()
@@ -258,12 +401,19 @@ namespace qo::renderer
 		TriangleMesh = new Mesh();
 		RectangleMesh = new Mesh();
 		CircleMesh = new Mesh();
-		BasicRectangleMesh = new Mesh(); 
+		BasicRectangleMesh = new Mesh();
+		TextureMesh = new Mesh();
+		ChamjalMesh = new Mesh();
 
 		shader = new Shader();
 		ColorTestShader = new Shader();
 		CircleShader = new Shader();
 		ColorTestShader2 = new Shader();
+		TextureShader = new Shader();
+		ChamjalShader = new Shader();
+		ClearShader1 = new Shader();
+		ClearShader2 = new Shader();
+		ProgressShader = new Shader();
 
 		LoadShader();
 		SetUpStates();

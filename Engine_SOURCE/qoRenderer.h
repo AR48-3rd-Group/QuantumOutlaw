@@ -21,6 +21,12 @@ namespace qo::renderer
 		Vector4 color;
 	};
 
+	struct TextureVertex
+	{
+		Vector3 pos;
+		Vector2 uv;
+	};
+
 	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 	{
 		Vector3 pos;
@@ -43,10 +49,17 @@ namespace qo::renderer
 	extern Mesh* TriangleMesh;
 	extern Mesh* RectangleMesh;
 	extern Mesh* CircleMesh;
+	extern Mesh* TextureMesh;
+	extern Mesh* ChamjalMesh;
 	
 	extern Shader* shader;
 	extern Shader* ColorTestShader;
 	extern Shader* CircleShader;
+	extern Shader* TextureShader;
+	extern Shader* ChamjalShader;
+	extern Shader* ClearShader1;
+	extern Shader* ClearShader2;
+	extern Shader* ProgressShader;
 
 	// Basic Collider
 	extern Mesh* BasicRectangleMesh;

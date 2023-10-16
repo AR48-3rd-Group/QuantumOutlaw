@@ -23,6 +23,11 @@ namespace qo
 	void TrackerBullet::Update()
 	{
 		GameObject::Update();
+
+		if (mTarget != nullptr && mTarget->GetGameObjectState() == eState::Dead)
+		{
+			mTarget = nullptr;
+		}
 	}
 
 	void TrackerBullet::LateUpdate()
@@ -41,7 +46,7 @@ namespace qo
 		Floor* floor = dynamic_cast<Floor*> (other->GetOwner());
 		Wall* wall = dynamic_cast<Wall*> (other->GetOwner());
 		LockedDoor* lockedDoor = dynamic_cast<LockedDoor*> (other->GetOwner());
-		DoorSwitch* doorSwitch = dynamic_cast<DoorSwitch*> (other->GetOwner());
+		EventSwitch* eventSwitch = dynamic_cast<EventSwitch*> (other->GetOwner());
 		DestuctibleWall* destuctibleWall = dynamic_cast<DestuctibleWall*> (other->GetOwner());
 		Barrier* barrier = dynamic_cast<Barrier*> (other->GetOwner());
 
@@ -54,10 +59,18 @@ namespace qo
 			&& floor == nullptr
 			&& wall == nullptr
 			&& lockedDoor == nullptr
-			&& doorSwitch == nullptr
+			&& eventSwitch == nullptr
 			&& destuctibleWall == nullptr
 			&& barrier == nullptr)
 			return;
+
+		// Enemy 피격 처리
+		if (enemy != nullptr)
+		{
+			Vector3 Dir = enemy->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			enemy->TakeHit(10, Dir);
+		}
 
 		Destroy(this);
 	}
